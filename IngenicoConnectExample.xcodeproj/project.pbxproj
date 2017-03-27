@@ -1,0 +1,1162 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08D0F6431CEF3FFD00FEC674 /* ICPaymentProductInputDataTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D0F6421CEF3FFD00FEC674 /* ICPaymentProductInputDataTestCase.m */; };
+		08D0F6451CEF427400FEC674 /* paymentProduct.json in Resources */ = {isa = PBXBuildFile; fileRef = 08D0F6441CEF427400FEC674 /* paymentProduct.json */; };
+		29CEF5197E26824532029C01 /* ICPaymentProductInputData.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEF26138AC6A3824CB8AFE /* ICPaymentProductInputData.m */; };
+		29CEF72C43206D38FE5C1672 /* ICFormRowCoBrandsSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEF711BEED4F2A40288853 /* ICFormRowCoBrandsSelection.m */; };
+		29CEFBDCF697210B2060494B /* ICFormRowCoBrandsExplanation.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEF555BCA4F1D1A546CDCC /* ICFormRowCoBrandsExplanation.m */; };
+		29CEFDD0A7B51E7EA8478E0A /* ICCoBrandsSelectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEF5968DC8D58411146C55 /* ICCoBrandsSelectionTableViewCell.m */; };
+		29CEFE47E7CE615D9DA6C57B /* ICCOBrandsExplanationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEFC6ED730845B1C281F17 /* ICCOBrandsExplanationTableViewCell.m */; };
+		42974C791DC8A56300B91814 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42974C781DC8A56300B91814 /* PassKit.framework */; };
+		42974C7E1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 42974C7D1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.m */; };
+		A301867A196FBE3200EC6150 /* ICFormRowTooltip.m in Sources */ = {isa = PBXBuildFile; fileRef = A3018679196FBE3200EC6150 /* ICFormRowTooltip.m */; };
+		A3026BBC1962E88600BDE9EE /* ICSummaryTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3026BBB1962E88600BDE9EE /* ICSummaryTableHeaderView.m */; };
+		A30330B3197CEF73008B7AF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A351DCB2196296000033E23C /* Foundation.framework */; };
+		A30330B4197CEF73008B7AF0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A351DCB6196296000033E23C /* UIKit.framework */; };
+		A30330BC197CEF73008B7AF0 /* ICTableSectionConverterTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A30330BB197CEF73008B7AF0 /* ICTableSectionConverterTestCase.m */; };
+		A30330C4197CEFB2008B7AF0 /* paymentProducts.json in Resources */ = {isa = PBXBuildFile; fileRef = A30330C3197CEFB2008B7AF0 /* paymentProducts.json */; };
+		A30C8CB2196ACFEF00F1EDA3 /* ICFormRowLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C8CB1196ACFEF00F1EDA3 /* ICFormRowLabel.m */; };
+		A30C8CB6196AD17500F1EDA3 /* ICLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C8CB5196AD17500F1EDA3 /* ICLabel.m */; };
+		A30C8CB9196AD3A200F1EDA3 /* ICLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C8CB8196AD3A200F1EDA3 /* ICLabelTableViewCell.m */; };
+		A30CB1F11963E9B3000192B3 /* ICFormRowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30CB1F01963E9B3000192B3 /* ICFormRowButton.m */; };
+		A30CB1F51963F723000192B3 /* ICEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A30CB1F41963F723000192B3 /* ICEndViewController.m */; };
+		A351DCB3196296000033E23C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A351DCB2196296000033E23C /* Foundation.framework */; };
+		A351DCB5196296000033E23C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A351DCB4196296000033E23C /* CoreGraphics.framework */; };
+		A351DCB7196296000033E23C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A351DCB6196296000033E23C /* UIKit.framework */; };
+		A351DCBF196296000033E23C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCBE196296000033E23C /* main.m */; };
+		A351DCC5196296000033E23C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A351DCC4196296000033E23C /* Images.xcassets */; };
+		A351DD27196296220033E23C /* ICAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCE2196296220033E23C /* ICAppDelegate.m */; };
+		A351DD29196296220033E23C /* ICButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCE6196296220033E23C /* ICButtonTableViewCell.m */; };
+		A351DD2A196296220033E23C /* ICErrorMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCE8196296220033E23C /* ICErrorMessageTableViewCell.m */; };
+		A351DD2B196296220033E23C /* ICFormRow.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCEA196296220033E23C /* ICFormRow.m */; };
+		A351DD2C196296220033E23C /* ICFormRowList.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCEC196296220033E23C /* ICFormRowList.m */; };
+		A351DD2F196296220033E23C /* ICFormRowsConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCF2196296220033E23C /* ICFormRowsConverter.m */; };
+		A351DD30196296220033E23C /* ICFormRowSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCF4196296220033E23C /* ICFormRowSwitch.m */; };
+		A351DD31196296220033E23C /* ICFormRowTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCF6196296220033E23C /* ICFormRowTextField.m */; };
+		A351DD33196296220033E23C /* ICTooltipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCFB196296220033E23C /* ICTooltipTableViewCell.m */; };
+		A351DD34196296220033E23C /* ICPaymentProductsTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DCFE196296220033E23C /* ICPaymentProductsTableRow.m */; };
+		A351DD35196296220033E23C /* ICPaymentProductsTableSection.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD00196296220033E23C /* ICPaymentProductsTableSection.m */; };
+		A351DD36196296220033E23C /* ICPaymentProductsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD02196296220033E23C /* ICPaymentProductsViewController.m */; };
+		A351DD38196296220033E23C /* ICPaymentProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD06196296220033E23C /* ICPaymentProductTableViewCell.m */; };
+		A351DD39196296220033E23C /* ICPaymentProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD08196296220033E23C /* ICPaymentProductViewController.m */; };
+		A351DD3A196296220033E23C /* ICPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD0B196296220033E23C /* ICPickerView.m */; };
+		A351DD3B196296220033E23C /* ICPickerViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD0D196296220033E23C /* ICPickerViewTableViewCell.m */; };
+		A351DD3C196296220033E23C /* UIButton+ICPrimaryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD0F196296220033E23C /* UIButton+ICPrimaryButton.m */; };
+		A351DD3D196296220033E23C /* UIButton+ICSecondaryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD11196296220033E23C /* UIButton+ICSecondaryButton.m */; };
+		A351DD3E196296220033E23C /* ICStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD13196296220033E23C /* ICStartViewController.m */; };
+		A351DD3F196296220033E23C /* ICSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD15196296220033E23C /* ICSwitch.m */; };
+		A351DD40196296220033E23C /* ICSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD17196296220033E23C /* ICSwitchTableViewCell.m */; };
+		A351DD41196296220033E23C /* ICTableSectionConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD19196296220033E23C /* ICTableSectionConverter.m */; };
+		A351DD42196296220033E23C /* ICTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD1B196296220033E23C /* ICTableViewCell.m */; };
+		A351DD43196296220033E23C /* ICTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD1D196296220033E23C /* ICTextField.m */; };
+		A351DD44196296220033E23C /* ICTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD1F196296220033E23C /* ICTextFieldTableViewCell.m */; };
+		A351DD47196296220033E23C /* ICViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A351DD25196296220033E23C /* ICViewFactory.m */; };
+		A363FC591AA70C8200186592 /* ICAppLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A363FC261AA704DF00186592 /* ICAppLocalizable.strings */; };
+		A3BB2CED196C0E460022F63C /* ICFormRowErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB2CEC196C0E460022F63C /* ICFormRowErrorMessage.m */; };
+		A3BB2CF4196D424E0022F63C /* ICMerchantLogoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB2CF3196D424E0022F63C /* ICMerchantLogoImageView.m */; };
+		A3E12FF419F5323F008E7311 /* ICFormRowCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E12FF319F5323F008E7311 /* ICFormRowCurrency.m */; };
+		A3E12FF719F5364D008E7311 /* ICFormRowWithInfoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E12FF619F5364D008E7311 /* ICFormRowWithInfoButton.m */; };
+		A3E12FFA19F5375A008E7311 /* ICIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E12FF919F5375A008E7311 /* ICIntegerTextField.m */; };
+		A3E12FFD19F5376D008E7311 /* ICFractionalTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E12FFC19F5376D008E7311 /* ICFractionalTextField.m */; };
+		A3F7E84D19F642B400FCD812 /* ICCurrencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F7E84C19F642B400FCD812 /* ICCurrencyTableViewCell.m */; };
+		C2C083971B544E449C0E01F2 /* Pods_IngenicoConnectExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40F518CC9265D8A4329372F /* Pods_IngenicoConnectExample.framework */; };
+		E198ADFDD85AF980B0508C47 /* Pods_IngenicoConnectExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A337FD1F39A3C310B7B3F03 /* Pods_IngenicoConnectExampleTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A30330BE197CEF73008B7AF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A351DCA7196296000033E23C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A351DCAE196296000033E23C;
+			remoteInfo = IngenicoConnectDemoApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		047A08B5ABD3C444D68B9E45 /* Pods-IngenicoConnectExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IngenicoConnectExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IngenicoConnectExampleTests/Pods-IngenicoConnectExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		08D0F6421CEF3FFD00FEC674 /* ICPaymentProductInputDataTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductInputDataTestCase.m; sourceTree = "<group>"; };
+		08D0F6441CEF427400FEC674 /* paymentProduct.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = paymentProduct.json; sourceTree = "<group>"; };
+		29CEF0B4321D4EBB1EAEE71A /* ICCOBrandsExplanationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICCOBrandsExplanationTableViewCell.h; sourceTree = "<group>"; };
+		29CEF26138AC6A3824CB8AFE /* ICPaymentProductInputData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductInputData.m; sourceTree = "<group>"; };
+		29CEF555BCA4F1D1A546CDCC /* ICFormRowCoBrandsExplanation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowCoBrandsExplanation.m; sourceTree = "<group>"; };
+		29CEF5968DC8D58411146C55 /* ICCoBrandsSelectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICCoBrandsSelectionTableViewCell.m; sourceTree = "<group>"; };
+		29CEF5EEEAC44C096C5FE956 /* ICCoBrandsSelectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICCoBrandsSelectionTableViewCell.h; sourceTree = "<group>"; };
+		29CEF6BD42C6EDD563A32D57 /* ICFormRowCoBrandsSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowCoBrandsSelection.h; sourceTree = "<group>"; };
+		29CEF711BEED4F2A40288853 /* ICFormRowCoBrandsSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowCoBrandsSelection.m; sourceTree = "<group>"; };
+		29CEF88F90E345EBEAEC1817 /* ICPaymentProductInputData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductInputData.h; sourceTree = "<group>"; };
+		29CEFC2B33EE26103F2BDE0A /* ICFormRowCoBrandsExplanation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowCoBrandsExplanation.h; sourceTree = "<group>"; };
+		29CEFC6ED730845B1C281F17 /* ICCOBrandsExplanationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICCOBrandsExplanationTableViewCell.m; sourceTree = "<group>"; };
+		2A337FD1F39A3C310B7B3F03 /* Pods_IngenicoConnectExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IngenicoConnectExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F86AD3681CF00AC6369DB29 /* Pods-IngenicoConnectExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IngenicoConnectExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample.release.xcconfig"; sourceTree = "<group>"; };
+		42974C781DC8A56300B91814 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		42974C7C1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductsViewControllerTarget.h; sourceTree = "<group>"; };
+		42974C7D1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductsViewControllerTarget.m; sourceTree = "<group>"; };
+		42974C7F1DC8B2B600B91814 /* ICPaymentFinishedTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICPaymentFinishedTarget.h; sourceTree = "<group>"; };
+		6DB7C8CF1DE717BD00892346 /* IngenicoConnectExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IngenicoConnectExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		86515FA055E4DCFC274280B5 /* Pods-IngenicoConnectExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IngenicoConnectExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IngenicoConnectExampleTests/Pods-IngenicoConnectExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		953A05224E1E423E890E85DC /* Pods-IngenicoConnectExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IngenicoConnectExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample.debug.xcconfig"; sourceTree = "<group>"; };
+		A3018678196FBE3200EC6150 /* ICFormRowTooltip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowTooltip.h; sourceTree = "<group>"; };
+		A3018679196FBE3200EC6150 /* ICFormRowTooltip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowTooltip.m; sourceTree = "<group>"; };
+		A3026BBA1962E88600BDE9EE /* ICSummaryTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSummaryTableHeaderView.h; sourceTree = "<group>"; };
+		A3026BBB1962E88600BDE9EE /* ICSummaryTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSummaryTableHeaderView.m; sourceTree = "<group>"; };
+		A30330B1197CEF73008B7AF0 /* IngenicoConnectExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IngenicoConnectExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30330B7197CEF73008B7AF0 /* IngenicoConnectExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IngenicoConnectExampleTests-Info.plist"; sourceTree = "<group>"; };
+		A30330BB197CEF73008B7AF0 /* ICTableSectionConverterTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICTableSectionConverterTestCase.m; sourceTree = "<group>"; };
+		A30330C3197CEFB2008B7AF0 /* paymentProducts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = paymentProducts.json; sourceTree = "<group>"; };
+		A30C8CB0196ACFEF00F1EDA3 /* ICFormRowLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowLabel.h; sourceTree = "<group>"; };
+		A30C8CB1196ACFEF00F1EDA3 /* ICFormRowLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowLabel.m; sourceTree = "<group>"; };
+		A30C8CB4196AD17500F1EDA3 /* ICLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICLabel.h; sourceTree = "<group>"; };
+		A30C8CB5196AD17500F1EDA3 /* ICLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICLabel.m; sourceTree = "<group>"; };
+		A30C8CB7196AD3A200F1EDA3 /* ICLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICLabelTableViewCell.h; sourceTree = "<group>"; };
+		A30C8CB8196AD3A200F1EDA3 /* ICLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICLabelTableViewCell.m; sourceTree = "<group>"; };
+		A30CB1EF1963E9B3000192B3 /* ICFormRowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowButton.h; sourceTree = "<group>"; };
+		A30CB1F01963E9B3000192B3 /* ICFormRowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowButton.m; sourceTree = "<group>"; };
+		A30CB1F21963F657000192B3 /* ICPaymentRequestTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICPaymentRequestTarget.h; sourceTree = "<group>"; };
+		A30CB1F31963F723000192B3 /* ICEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICEndViewController.h; sourceTree = "<group>"; };
+		A30CB1F41963F723000192B3 /* ICEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICEndViewController.m; sourceTree = "<group>"; };
+		A30CB1F61963F89A000192B3 /* ICContinueShoppingTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICContinueShoppingTarget.h; sourceTree = "<group>"; };
+		A351DCAF196296000033E23C /* IngenicoConnectExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IngenicoConnectExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A351DCB2196296000033E23C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A351DCB4196296000033E23C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A351DCB6196296000033E23C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A351DCBE196296000033E23C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A351DCC0196296000033E23C /* IngenicoConnectExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IngenicoConnectExample-Prefix.pch"; sourceTree = "<group>"; };
+		A351DCC4196296000033E23C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A351DCE1196296220033E23C /* ICAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICAppDelegate.h; sourceTree = "<group>"; };
+		A351DCE2196296220033E23C /* ICAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICAppDelegate.m; sourceTree = "<group>"; };
+		A351DCE5196296220033E23C /* ICButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICButtonTableViewCell.h; sourceTree = "<group>"; };
+		A351DCE6196296220033E23C /* ICButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICButtonTableViewCell.m; sourceTree = "<group>"; };
+		A351DCE7196296220033E23C /* ICErrorMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICErrorMessageTableViewCell.h; sourceTree = "<group>"; };
+		A351DCE8196296220033E23C /* ICErrorMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICErrorMessageTableViewCell.m; sourceTree = "<group>"; };
+		A351DCE9196296220033E23C /* ICFormRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRow.h; sourceTree = "<group>"; };
+		A351DCEA196296220033E23C /* ICFormRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRow.m; sourceTree = "<group>"; };
+		A351DCEB196296220033E23C /* ICFormRowList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowList.h; sourceTree = "<group>"; };
+		A351DCEC196296220033E23C /* ICFormRowList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowList.m; sourceTree = "<group>"; };
+		A351DCF1196296220033E23C /* ICFormRowsConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowsConverter.h; sourceTree = "<group>"; };
+		A351DCF2196296220033E23C /* ICFormRowsConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowsConverter.m; sourceTree = "<group>"; };
+		A351DCF3196296220033E23C /* ICFormRowSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowSwitch.h; sourceTree = "<group>"; };
+		A351DCF4196296220033E23C /* ICFormRowSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowSwitch.m; sourceTree = "<group>"; };
+		A351DCF5196296220033E23C /* ICFormRowTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowTextField.h; sourceTree = "<group>"; };
+		A351DCF6196296220033E23C /* ICFormRowTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowTextField.m; sourceTree = "<group>"; };
+		A351DCFA196296220033E23C /* ICTooltipTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICTooltipTableViewCell.h; sourceTree = "<group>"; };
+		A351DCFB196296220033E23C /* ICTooltipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICTooltipTableViewCell.m; sourceTree = "<group>"; };
+		A351DCFC196296220033E23C /* ICPaymentProductSelectionTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductSelectionTarget.h; sourceTree = "<group>"; };
+		A351DCFD196296220033E23C /* ICPaymentProductsTableRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductsTableRow.h; sourceTree = "<group>"; };
+		A351DCFE196296220033E23C /* ICPaymentProductsTableRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductsTableRow.m; sourceTree = "<group>"; };
+		A351DCFF196296220033E23C /* ICPaymentProductsTableSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductsTableSection.h; sourceTree = "<group>"; };
+		A351DD00196296220033E23C /* ICPaymentProductsTableSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductsTableSection.m; sourceTree = "<group>"; };
+		A351DD01196296220033E23C /* ICPaymentProductsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductsViewController.h; sourceTree = "<group>"; };
+		A351DD02196296220033E23C /* ICPaymentProductsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductsViewController.m; sourceTree = "<group>"; };
+		A351DD05196296220033E23C /* ICPaymentProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductTableViewCell.h; sourceTree = "<group>"; };
+		A351DD06196296220033E23C /* ICPaymentProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductTableViewCell.m; sourceTree = "<group>"; };
+		A351DD07196296220033E23C /* ICPaymentProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductViewController.h; sourceTree = "<group>"; };
+		A351DD08196296220033E23C /* ICPaymentProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductViewController.m; sourceTree = "<group>"; };
+		A351DD09196296220033E23C /* ICPaymentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentType.h; sourceTree = "<group>"; };
+		A351DD0A196296220033E23C /* ICPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPickerView.h; sourceTree = "<group>"; };
+		A351DD0B196296220033E23C /* ICPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPickerView.m; sourceTree = "<group>"; };
+		A351DD0C196296220033E23C /* ICPickerViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPickerViewTableViewCell.h; sourceTree = "<group>"; };
+		A351DD0D196296220033E23C /* ICPickerViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPickerViewTableViewCell.m; sourceTree = "<group>"; };
+		A351DD0E196296220033E23C /* UIButton+ICPrimaryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ICPrimaryButton.h"; sourceTree = "<group>"; };
+		A351DD0F196296220033E23C /* UIButton+ICPrimaryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ICPrimaryButton.m"; sourceTree = "<group>"; };
+		A351DD10196296220033E23C /* UIButton+ICSecondaryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ICSecondaryButton.h"; sourceTree = "<group>"; };
+		A351DD11196296220033E23C /* UIButton+ICSecondaryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ICSecondaryButton.m"; sourceTree = "<group>"; };
+		A351DD12196296220033E23C /* ICStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICStartViewController.h; sourceTree = "<group>"; };
+		A351DD13196296220033E23C /* ICStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICStartViewController.m; sourceTree = "<group>"; };
+		A351DD14196296220033E23C /* ICSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSwitch.h; sourceTree = "<group>"; };
+		A351DD15196296220033E23C /* ICSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSwitch.m; sourceTree = "<group>"; };
+		A351DD16196296220033E23C /* ICSwitchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSwitchTableViewCell.h; sourceTree = "<group>"; };
+		A351DD17196296220033E23C /* ICSwitchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSwitchTableViewCell.m; sourceTree = "<group>"; };
+		A351DD18196296220033E23C /* ICTableSectionConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICTableSectionConverter.h; sourceTree = "<group>"; };
+		A351DD19196296220033E23C /* ICTableSectionConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICTableSectionConverter.m; sourceTree = "<group>"; };
+		A351DD1A196296220033E23C /* ICTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICTableViewCell.h; sourceTree = "<group>"; };
+		A351DD1B196296220033E23C /* ICTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICTableViewCell.m; sourceTree = "<group>"; };
+		A351DD1C196296220033E23C /* ICTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICTextField.h; sourceTree = "<group>"; };
+		A351DD1D196296220033E23C /* ICTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICTextField.m; sourceTree = "<group>"; };
+		A351DD1E196296220033E23C /* ICTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		A351DD1F196296220033E23C /* ICTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		A351DD24196296220033E23C /* ICViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICViewFactory.h; sourceTree = "<group>"; };
+		A351DD25196296220033E23C /* ICViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICViewFactory.m; sourceTree = "<group>"; };
+		A351DD26196296220033E23C /* ICViewType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICViewType.h; sourceTree = "<group>"; };
+		A363FC271AA704DF00186592 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ICAppLocalizable.strings; sourceTree = "<group>"; };
+		A3B768191962CDF6000CA526 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3BB2CEB196C0E460022F63C /* ICFormRowErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowErrorMessage.h; sourceTree = "<group>"; };
+		A3BB2CEC196C0E460022F63C /* ICFormRowErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowErrorMessage.m; sourceTree = "<group>"; };
+		A3BB2CF2196D424E0022F63C /* ICMerchantLogoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMerchantLogoImageView.h; sourceTree = "<group>"; };
+		A3BB2CF3196D424E0022F63C /* ICMerchantLogoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICMerchantLogoImageView.m; sourceTree = "<group>"; };
+		A3E12FF219F5323F008E7311 /* ICFormRowCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowCurrency.h; sourceTree = "<group>"; };
+		A3E12FF319F5323F008E7311 /* ICFormRowCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowCurrency.m; sourceTree = "<group>"; };
+		A3E12FF519F5364D008E7311 /* ICFormRowWithInfoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowWithInfoButton.h; sourceTree = "<group>"; };
+		A3E12FF619F5364D008E7311 /* ICFormRowWithInfoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowWithInfoButton.m; sourceTree = "<group>"; };
+		A3E12FF819F5375A008E7311 /* ICIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICIntegerTextField.h; sourceTree = "<group>"; };
+		A3E12FF919F5375A008E7311 /* ICIntegerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICIntegerTextField.m; sourceTree = "<group>"; };
+		A3E12FFB19F5376D008E7311 /* ICFractionalTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFractionalTextField.h; sourceTree = "<group>"; };
+		A3E12FFC19F5376D008E7311 /* ICFractionalTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFractionalTextField.m; sourceTree = "<group>"; };
+		A3F7E84B19F642B400FCD812 /* ICCurrencyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICCurrencyTableViewCell.h; sourceTree = "<group>"; };
+		A3F7E84C19F642B400FCD812 /* ICCurrencyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICCurrencyTableViewCell.m; sourceTree = "<group>"; };
+		A3FE1FA31962AEC4005FF3FA /* ICAppConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICAppConstants.h; sourceTree = "<group>"; };
+		C40F518CC9265D8A4329372F /* Pods_IngenicoConnectExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IngenicoConnectExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F519A9D21DBF5F2100E61034 /* IngenicoConnectExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IngenicoConnectExample.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30330AE197CEF73008B7AF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A30330B4197CEF73008B7AF0 /* UIKit.framework in Frameworks */,
+				A30330B3197CEF73008B7AF0 /* Foundation.framework in Frameworks */,
+				E198ADFDD85AF980B0508C47 /* Pods_IngenicoConnectExampleTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A351DCAC196296000033E23C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42974C791DC8A56300B91814 /* PassKit.framework in Frameworks */,
+				A351DCB5196296000033E23C /* CoreGraphics.framework in Frameworks */,
+				A351DCB7196296000033E23C /* UIKit.framework in Frameworks */,
+				A351DCB3196296000033E23C /* Foundation.framework in Frameworks */,
+				C2C083971B544E449C0E01F2 /* Pods_IngenicoConnectExample.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2DE41F2C9F423B7E0FBEDFC6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				953A05224E1E423E890E85DC /* Pods-IngenicoConnectExample.debug.xcconfig */,
+				3F86AD3681CF00AC6369DB29 /* Pods-IngenicoConnectExample.release.xcconfig */,
+				047A08B5ABD3C444D68B9E45 /* Pods-IngenicoConnectExampleTests.debug.xcconfig */,
+				86515FA055E4DCFC274280B5 /* Pods-IngenicoConnectExampleTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		42974C7B1DC8AB5400B91814 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				42974C7C1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.h */,
+				42974C7D1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.m */,
+			);
+			name = Targets;
+			sourceTree = "<group>";
+		};
+		A3026BB91962E86B00BDE9EE /* TableHeaderViews */ = {
+			isa = PBXGroup;
+			children = (
+				A3026BBA1962E88600BDE9EE /* ICSummaryTableHeaderView.h */,
+				A3026BBB1962E88600BDE9EE /* ICSummaryTableHeaderView.m */,
+			);
+			name = TableHeaderViews;
+			sourceTree = "<group>";
+		};
+		A30330B5197CEF73008B7AF0 /* IngenicoConnectExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				A30330BB197CEF73008B7AF0 /* ICTableSectionConverterTestCase.m */,
+				A30330B6197CEF73008B7AF0 /* Supporting Files */,
+				08D0F6421CEF3FFD00FEC674 /* ICPaymentProductInputDataTestCase.m */,
+			);
+			path = IngenicoConnectExampleTests;
+			sourceTree = "<group>";
+		};
+		A30330B6197CEF73008B7AF0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				08D0F6441CEF427400FEC674 /* paymentProduct.json */,
+				A30330C3197CEFB2008B7AF0 /* paymentProducts.json */,
+				A30330B7197CEF73008B7AF0 /* IngenicoConnectExampleTests-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A30C8CB3196AD16500F1EDA3 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				A30C8CB4196AD17500F1EDA3 /* ICLabel.h */,
+				A30C8CB5196AD17500F1EDA3 /* ICLabel.m */,
+			);
+			name = Labels;
+			sourceTree = "<group>";
+		};
+		A351DCA6196296000033E23C = {
+			isa = PBXGroup;
+			children = (
+				6DB7C8CF1DE717BD00892346 /* IngenicoConnectExample-Bridging-Header.h */,
+				A351DCB8196296000033E23C /* IngenicoConnectExample */,
+				A30330B5197CEF73008B7AF0 /* IngenicoConnectExampleTests */,
+				A351DCB1196296000033E23C /* Frameworks */,
+				A351DCB0196296000033E23C /* Products */,
+				2DE41F2C9F423B7E0FBEDFC6 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		A351DCB0196296000033E23C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A351DCAF196296000033E23C /* IngenicoConnectExample.app */,
+				A30330B1197CEF73008B7AF0 /* IngenicoConnectExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A351DCB1196296000033E23C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42974C781DC8A56300B91814 /* PassKit.framework */,
+				A351DCB2196296000033E23C /* Foundation.framework */,
+				A351DCB4196296000033E23C /* CoreGraphics.framework */,
+				A351DCB6196296000033E23C /* UIKit.framework */,
+				C40F518CC9265D8A4329372F /* Pods_IngenicoConnectExample.framework */,
+				2A337FD1F39A3C310B7B3F03 /* Pods_IngenicoConnectExampleTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A351DCB8196296000033E23C /* IngenicoConnectExample */ = {
+			isa = PBXGroup;
+			children = (
+				F519A9D21DBF5F2100E61034 /* IngenicoConnectExample.entitlements */,
+				A3FE1FA21962AE7E005FF3FA /* Constants */,
+				A3FE1F901962A076005FF3FA /* Models */,
+				A3FE1F8E1962A036005FF3FA /* Converters */,
+				A3FE1F8D19629FA0005FF3FA /* Factories */,
+				A3FE1F8A19629EFB005FF3FA /* Enumerations */,
+				A3FE1F8819629EC7005FF3FA /* Protocols */,
+				A3FE1F8519629E4C005FF3FA /* Views */,
+				A3FE1F8419629E44005FF3FA /* ViewControllers */,
+				A351DCE1196296220033E23C /* ICAppDelegate.h */,
+				A351DCE2196296220033E23C /* ICAppDelegate.m */,
+				A351DCC4196296000033E23C /* Images.xcassets */,
+				A351DCB9196296000033E23C /* Supporting Files */,
+			);
+			path = IngenicoConnectExample;
+			sourceTree = "<group>";
+		};
+		A351DCB9196296000033E23C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A363FC261AA704DF00186592 /* ICAppLocalizable.strings */,
+				A3B768191962CDF6000CA526 /* Info.plist */,
+				A351DCBE196296000033E23C /* main.m */,
+				A351DCC0196296000033E23C /* IngenicoConnectExample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A3BB2CF1196D42290022F63C /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB2CF2196D424E0022F63C /* ICMerchantLogoImageView.h */,
+				A3BB2CF3196D424E0022F63C /* ICMerchantLogoImageView.m */,
+			);
+			name = ImageViews;
+			sourceTree = "<group>";
+		};
+		A3FE1F8419629E44005FF3FA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A351DD12196296220033E23C /* ICStartViewController.h */,
+				A351DD13196296220033E23C /* ICStartViewController.m */,
+				A351DD01196296220033E23C /* ICPaymentProductsViewController.h */,
+				A351DD02196296220033E23C /* ICPaymentProductsViewController.m */,
+				A351DD07196296220033E23C /* ICPaymentProductViewController.h */,
+				A351DD08196296220033E23C /* ICPaymentProductViewController.m */,
+				A30CB1F31963F723000192B3 /* ICEndViewController.h */,
+				A30CB1F41963F723000192B3 /* ICEndViewController.m */,
+				42974C7B1DC8AB5400B91814 /* Targets */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A3FE1F8519629E4C005FF3FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB2CF1196D42290022F63C /* ImageViews */,
+				A30C8CB3196AD16500F1EDA3 /* Labels */,
+				A3026BB91962E86B00BDE9EE /* TableHeaderViews */,
+				A3FE1F8C19629F3B005FF3FA /* TextFields */,
+				A3FE1F8B19629F32005FF3FA /* PickerViews */,
+				A3FE1F8919629EE3005FF3FA /* Switches */,
+				A3FE1F8719629E5C005FF3FA /* TableViewCells */,
+				A3FE1F8619629E57005FF3FA /* Buttons */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A3FE1F8619629E57005FF3FA /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				A351DD0E196296220033E23C /* UIButton+ICPrimaryButton.h */,
+				A351DD0F196296220033E23C /* UIButton+ICPrimaryButton.m */,
+				A351DD10196296220033E23C /* UIButton+ICSecondaryButton.h */,
+				A351DD11196296220033E23C /* UIButton+ICSecondaryButton.m */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
+		A3FE1F8719629E5C005FF3FA /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A351DD1A196296220033E23C /* ICTableViewCell.h */,
+				A351DD1B196296220033E23C /* ICTableViewCell.m */,
+				A351DCFA196296220033E23C /* ICTooltipTableViewCell.h */,
+				A351DCFB196296220033E23C /* ICTooltipTableViewCell.m */,
+				A351DD05196296220033E23C /* ICPaymentProductTableViewCell.h */,
+				A351DD06196296220033E23C /* ICPaymentProductTableViewCell.m */,
+				A351DD0C196296220033E23C /* ICPickerViewTableViewCell.h */,
+				A351DD0D196296220033E23C /* ICPickerViewTableViewCell.m */,
+				A351DD16196296220033E23C /* ICSwitchTableViewCell.h */,
+				A351DD17196296220033E23C /* ICSwitchTableViewCell.m */,
+				A351DD1E196296220033E23C /* ICTextFieldTableViewCell.h */,
+				A351DD1F196296220033E23C /* ICTextFieldTableViewCell.m */,
+				A351DCE5196296220033E23C /* ICButtonTableViewCell.h */,
+				A351DCE6196296220033E23C /* ICButtonTableViewCell.m */,
+				A351DCE7196296220033E23C /* ICErrorMessageTableViewCell.h */,
+				A351DCE8196296220033E23C /* ICErrorMessageTableViewCell.m */,
+				A30C8CB7196AD3A200F1EDA3 /* ICLabelTableViewCell.h */,
+				A30C8CB8196AD3A200F1EDA3 /* ICLabelTableViewCell.m */,
+				A3F7E84B19F642B400FCD812 /* ICCurrencyTableViewCell.h */,
+				A3F7E84C19F642B400FCD812 /* ICCurrencyTableViewCell.m */,
+				29CEF5968DC8D58411146C55 /* ICCoBrandsSelectionTableViewCell.m */,
+				29CEF5EEEAC44C096C5FE956 /* ICCoBrandsSelectionTableViewCell.h */,
+				29CEFC6ED730845B1C281F17 /* ICCOBrandsExplanationTableViewCell.m */,
+				29CEF0B4321D4EBB1EAEE71A /* ICCOBrandsExplanationTableViewCell.h */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		A3FE1F8819629EC7005FF3FA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A351DCFC196296220033E23C /* ICPaymentProductSelectionTarget.h */,
+				A30CB1F21963F657000192B3 /* ICPaymentRequestTarget.h */,
+				A30CB1F61963F89A000192B3 /* ICContinueShoppingTarget.h */,
+				42974C7F1DC8B2B600B91814 /* ICPaymentFinishedTarget.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		A3FE1F8919629EE3005FF3FA /* Switches */ = {
+			isa = PBXGroup;
+			children = (
+				A351DD14196296220033E23C /* ICSwitch.h */,
+				A351DD15196296220033E23C /* ICSwitch.m */,
+			);
+			name = Switches;
+			sourceTree = "<group>";
+		};
+		A3FE1F8A19629EFB005FF3FA /* Enumerations */ = {
+			isa = PBXGroup;
+			children = (
+				A351DD09196296220033E23C /* ICPaymentType.h */,
+				A351DD26196296220033E23C /* ICViewType.h */,
+			);
+			name = Enumerations;
+			sourceTree = "<group>";
+		};
+		A3FE1F8B19629F32005FF3FA /* PickerViews */ = {
+			isa = PBXGroup;
+			children = (
+				A351DD0A196296220033E23C /* ICPickerView.h */,
+				A351DD0B196296220033E23C /* ICPickerView.m */,
+			);
+			name = PickerViews;
+			sourceTree = "<group>";
+		};
+		A3FE1F8C19629F3B005FF3FA /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				A351DD1C196296220033E23C /* ICTextField.h */,
+				A351DD1D196296220033E23C /* ICTextField.m */,
+				A3E12FF819F5375A008E7311 /* ICIntegerTextField.h */,
+				A3E12FF919F5375A008E7311 /* ICIntegerTextField.m */,
+				A3E12FFB19F5376D008E7311 /* ICFractionalTextField.h */,
+				A3E12FFC19F5376D008E7311 /* ICFractionalTextField.m */,
+			);
+			name = TextFields;
+			sourceTree = "<group>";
+		};
+		A3FE1F8D19629FA0005FF3FA /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				A351DD24196296220033E23C /* ICViewFactory.h */,
+				A351DD25196296220033E23C /* ICViewFactory.m */,
+			);
+			name = Factories;
+			sourceTree = "<group>";
+		};
+		A3FE1F8E1962A036005FF3FA /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				A3FE1F8F1962A056005FF3FA /* Tables */,
+			);
+			name = Converters;
+			sourceTree = "<group>";
+		};
+		A3FE1F8F1962A056005FF3FA /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				A351DCF1196296220033E23C /* ICFormRowsConverter.h */,
+				A351DCF2196296220033E23C /* ICFormRowsConverter.m */,
+				A351DD18196296220033E23C /* ICTableSectionConverter.h */,
+				A351DD19196296220033E23C /* ICTableSectionConverter.m */,
+			);
+			name = Tables;
+			sourceTree = "<group>";
+		};
+		A3FE1F901962A076005FF3FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A3FE1F921962A099005FF3FA /* Tables */,
+				29CEF26138AC6A3824CB8AFE /* ICPaymentProductInputData.m */,
+				29CEF88F90E345EBEAEC1817 /* ICPaymentProductInputData.h */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A3FE1F921962A099005FF3FA /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				A351DCFD196296220033E23C /* ICPaymentProductsTableRow.h */,
+				A351DCFE196296220033E23C /* ICPaymentProductsTableRow.m */,
+				A351DCFF196296220033E23C /* ICPaymentProductsTableSection.h */,
+				A351DD00196296220033E23C /* ICPaymentProductsTableSection.m */,
+				A351DCE9196296220033E23C /* ICFormRow.h */,
+				A351DCEA196296220033E23C /* ICFormRow.m */,
+				A3E12FF519F5364D008E7311 /* ICFormRowWithInfoButton.h */,
+				A3E12FF619F5364D008E7311 /* ICFormRowWithInfoButton.m */,
+				A30C8CB0196ACFEF00F1EDA3 /* ICFormRowLabel.h */,
+				A30C8CB1196ACFEF00F1EDA3 /* ICFormRowLabel.m */,
+				A351DCEB196296220033E23C /* ICFormRowList.h */,
+				A351DCEC196296220033E23C /* ICFormRowList.m */,
+				A351DCF3196296220033E23C /* ICFormRowSwitch.h */,
+				A351DCF4196296220033E23C /* ICFormRowSwitch.m */,
+				A351DCF5196296220033E23C /* ICFormRowTextField.h */,
+				A351DCF6196296220033E23C /* ICFormRowTextField.m */,
+				A3E12FF219F5323F008E7311 /* ICFormRowCurrency.h */,
+				A3E12FF319F5323F008E7311 /* ICFormRowCurrency.m */,
+				A30CB1EF1963E9B3000192B3 /* ICFormRowButton.h */,
+				A30CB1F01963E9B3000192B3 /* ICFormRowButton.m */,
+				A3BB2CEB196C0E460022F63C /* ICFormRowErrorMessage.h */,
+				A3BB2CEC196C0E460022F63C /* ICFormRowErrorMessage.m */,
+				A3018678196FBE3200EC6150 /* ICFormRowTooltip.h */,
+				A3018679196FBE3200EC6150 /* ICFormRowTooltip.m */,
+				29CEF711BEED4F2A40288853 /* ICFormRowCoBrandsSelection.m */,
+				29CEF6BD42C6EDD563A32D57 /* ICFormRowCoBrandsSelection.h */,
+				29CEF555BCA4F1D1A546CDCC /* ICFormRowCoBrandsExplanation.m */,
+				29CEFC2B33EE26103F2BDE0A /* ICFormRowCoBrandsExplanation.h */,
+			);
+			name = Tables;
+			sourceTree = "<group>";
+		};
+		A3FE1FA21962AE7E005FF3FA /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A3FE1FA31962AEC4005FF3FA /* ICAppConstants.h */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A30330B0197CEF73008B7AF0 /* IngenicoConnectExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A30330C0197CEF73008B7AF0 /* Build configuration list for PBXNativeTarget "IngenicoConnectExampleTests" */;
+			buildPhases = (
+				5DC11D7D73FB6BB79AFAE3A3 /* [CP] Check Pods Manifest.lock */,
+				A30330AD197CEF73008B7AF0 /* Sources */,
+				A30330AE197CEF73008B7AF0 /* Frameworks */,
+				A30330AF197CEF73008B7AF0 /* Resources */,
+				E1B10A2065546A13CD5DD964 /* [CP] Embed Pods Frameworks */,
+				1A0812C6B3DCE9A081B15BEB /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A30330BF197CEF73008B7AF0 /* PBXTargetDependency */,
+			);
+			name = IngenicoConnectExampleTests;
+			productName = IngenicoConnectDemoAppTests;
+			productReference = A30330B1197CEF73008B7AF0 /* IngenicoConnectExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A351DCAE196296000033E23C /* IngenicoConnectExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A351DCDB196296000033E23C /* Build configuration list for PBXNativeTarget "IngenicoConnectExample" */;
+			buildPhases = (
+				B9E6309AA247E971A4002740 /* [CP] Check Pods Manifest.lock */,
+				A351DCAB196296000033E23C /* Sources */,
+				A351DCAC196296000033E23C /* Frameworks */,
+				A351DCAD196296000033E23C /* Resources */,
+				3B33E9717F2B65EE98396D44 /* [CP] Embed Pods Frameworks */,
+				398D89903C8C38578E5C9B45 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IngenicoConnectExample;
+			productName = IngenicoConnectDemoApp;
+			productReference = A351DCAF196296000033E23C /* IngenicoConnectExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A351DCA7196296000033E23C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = IC;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Ingenico;
+				TargetAttributes = {
+					A30330B0197CEF73008B7AF0 = {
+						DevelopmentTeam = S453L3NXGS;
+						TestTargetID = A351DCAE196296000033E23C;
+					};
+					A351DCAE196296000033E23C = {
+						DevelopmentTeam = 8H8ZSPDJ95;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = A351DCAA196296000033E23C /* Build configuration list for PBXProject "IngenicoConnectExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"en-AU",
+				"ar-EG",
+				"vi-VN",
+				"ur-PK",
+				"uk-UA",
+				"tr-TR",
+				"th-TH",
+				"sv-SE",
+				"sw-KE",
+				"es-ES",
+				"es-CO",
+				"es-AR",
+				"sl-SI",
+				"ru-RU",
+				"ro-RO",
+				"pt-PT",
+				"pt-BR",
+				"pl-PL",
+				"fa-IR",
+				"nb-NO",
+				"ms-MY",
+				"lt-LT",
+				"lv-LV",
+				"ko-KR",
+				"ja-JP",
+				"it-IT",
+				"hu-HU",
+				"hi-IN",
+				"he-IL",
+				"el-GR",
+				"de-DE",
+				"de-CH",
+				"de-AT",
+				"fr-FR",
+				"fr-CA",
+				"fr-BE",
+				"nl-BE",
+				"nl-NL",
+				"fi-FI",
+				"et-EE",
+				"en-US",
+				"en-NZ",
+				"en-IE",
+				"en-CA",
+				"da-DK",
+				"cs-CZ",
+				"zh-Hans-CN",
+				"zh-Hant-HK",
+				nl,
+				fr,
+				es,
+				"en-GB",
+				pt,
+				it,
+				"zh-Hans",
+				"zh-Hant",
+				"es-MX",
+				de,
+				ja,
+				ko,
+				vi,
+				ru,
+				da,
+				fi,
+				nb,
+				sv,
+				pl,
+				tr,
+				ar,
+				ms,
+				th,
+				cs,
+				hu,
+				el,
+				uk,
+				he,
+				ro,
+			);
+			mainGroup = A351DCA6196296000033E23C;
+			productRefGroup = A351DCB0196296000033E23C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A351DCAE196296000033E23C /* IngenicoConnectExample */,
+				A30330B0197CEF73008B7AF0 /* IngenicoConnectExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A30330AF197CEF73008B7AF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08D0F6451CEF427400FEC674 /* paymentProduct.json in Resources */,
+				A30330C4197CEFB2008B7AF0 /* paymentProducts.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A351DCAD196296000033E23C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A363FC591AA70C8200186592 /* ICAppLocalizable.strings in Resources */,
+				A351DCC5196296000033E23C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A0812C6B3DCE9A081B15BEB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IngenicoConnectExampleTests/Pods-IngenicoConnectExampleTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		398D89903C8C38578E5C9B45 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B33E9717F2B65EE98396D44 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DC11D7D73FB6BB79AFAE3A3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B9E6309AA247E971A4002740 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E1B10A2065546A13CD5DD964 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IngenicoConnectExampleTests/Pods-IngenicoConnectExampleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A30330AD197CEF73008B7AF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A30330BC197CEF73008B7AF0 /* ICTableSectionConverterTestCase.m in Sources */,
+				08D0F6431CEF3FFD00FEC674 /* ICPaymentProductInputDataTestCase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A351DCAB196296000033E23C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3BB2CF4196D424E0022F63C /* ICMerchantLogoImageView.m in Sources */,
+				A351DD2A196296220033E23C /* ICErrorMessageTableViewCell.m in Sources */,
+				A351DD27196296220033E23C /* ICAppDelegate.m in Sources */,
+				A351DD3F196296220033E23C /* ICSwitch.m in Sources */,
+				A301867A196FBE3200EC6150 /* ICFormRowTooltip.m in Sources */,
+				A351DD34196296220033E23C /* ICPaymentProductsTableRow.m in Sources */,
+				A3026BBC1962E88600BDE9EE /* ICSummaryTableHeaderView.m in Sources */,
+				A351DD3D196296220033E23C /* UIButton+ICSecondaryButton.m in Sources */,
+				A351DD3C196296220033E23C /* UIButton+ICPrimaryButton.m in Sources */,
+				A351DD35196296220033E23C /* ICPaymentProductsTableSection.m in Sources */,
+				A351DD36196296220033E23C /* ICPaymentProductsViewController.m in Sources */,
+				A351DD39196296220033E23C /* ICPaymentProductViewController.m in Sources */,
+				A351DD3E196296220033E23C /* ICStartViewController.m in Sources */,
+				A351DD2B196296220033E23C /* ICFormRow.m in Sources */,
+				A351DD3B196296220033E23C /* ICPickerViewTableViewCell.m in Sources */,
+				A30C8CB9196AD3A200F1EDA3 /* ICLabelTableViewCell.m in Sources */,
+				A351DD47196296220033E23C /* ICViewFactory.m in Sources */,
+				A3E12FFA19F5375A008E7311 /* ICIntegerTextField.m in Sources */,
+				A351DD40196296220033E23C /* ICSwitchTableViewCell.m in Sources */,
+				A351DD38196296220033E23C /* ICPaymentProductTableViewCell.m in Sources */,
+				A351DD2C196296220033E23C /* ICFormRowList.m in Sources */,
+				A351DD44196296220033E23C /* ICTextFieldTableViewCell.m in Sources */,
+				A3F7E84D19F642B400FCD812 /* ICCurrencyTableViewCell.m in Sources */,
+				A30CB1F51963F723000192B3 /* ICEndViewController.m in Sources */,
+				A3BB2CED196C0E460022F63C /* ICFormRowErrorMessage.m in Sources */,
+				A351DD33196296220033E23C /* ICTooltipTableViewCell.m in Sources */,
+				A351DD42196296220033E23C /* ICTableViewCell.m in Sources */,
+				A351DD2F196296220033E23C /* ICFormRowsConverter.m in Sources */,
+				A30CB1F11963E9B3000192B3 /* ICFormRowButton.m in Sources */,
+				A3E12FFD19F5376D008E7311 /* ICFractionalTextField.m in Sources */,
+				A351DCBF196296000033E23C /* main.m in Sources */,
+				A351DD41196296220033E23C /* ICTableSectionConverter.m in Sources */,
+				A3E12FF419F5323F008E7311 /* ICFormRowCurrency.m in Sources */,
+				42974C7E1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.m in Sources */,
+				A351DD31196296220033E23C /* ICFormRowTextField.m in Sources */,
+				A351DD3A196296220033E23C /* ICPickerView.m in Sources */,
+				A30C8CB2196ACFEF00F1EDA3 /* ICFormRowLabel.m in Sources */,
+				A30C8CB6196AD17500F1EDA3 /* ICLabel.m in Sources */,
+				A351DD29196296220033E23C /* ICButtonTableViewCell.m in Sources */,
+				A351DD43196296220033E23C /* ICTextField.m in Sources */,
+				A3E12FF719F5364D008E7311 /* ICFormRowWithInfoButton.m in Sources */,
+				A351DD30196296220033E23C /* ICFormRowSwitch.m in Sources */,
+				29CEFDD0A7B51E7EA8478E0A /* ICCoBrandsSelectionTableViewCell.m in Sources */,
+				29CEF72C43206D38FE5C1672 /* ICFormRowCoBrandsSelection.m in Sources */,
+				29CEFE47E7CE615D9DA6C57B /* ICCOBrandsExplanationTableViewCell.m in Sources */,
+				29CEFBDCF697210B2060494B /* ICFormRowCoBrandsExplanation.m in Sources */,
+				29CEF5197E26824532029C01 /* ICPaymentProductInputData.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A30330BF197CEF73008B7AF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A351DCAE196296000033E23C /* IngenicoConnectExample */;
+			targetProxy = A30330BE197CEF73008B7AF0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A363FC261AA704DF00186592 /* ICAppLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A363FC271AA704DF00186592 /* en */,
+			);
+			name = ICAppLocalizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A30330C1197CEF73008B7AF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 047A08B5ABD3C444D68B9E45 /* Pods-IngenicoConnectExampleTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IngenicoConnectExample.app/IngenicoConnectExample";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IngenicoConnectExample/IngenicoConnectExample-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "IngenicoConnectExampleTests/IngenicoConnectExampleTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ingenicocollect.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = IngenicoConnectExampleTests;
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A30330C2197CEF73008B7AF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86515FA055E4DCFC274280B5 /* Pods-IngenicoConnectExampleTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IngenicoConnectExample.app/IngenicoConnectExample";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IngenicoConnectExample/IngenicoConnectExample-Prefix.pch";
+				INFOPLIST_FILE = "IngenicoConnectExampleTests/IngenicoConnectExampleTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ingenicoconnect.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = IngenicoConnectExampleTests;
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		A351DCD9196296000033E23C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "A0A13123-5845-42BE-A813-90ED61E2B2CF";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A351DCDA196296000033E23C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PROVISIONING_PROFILE = "A0A13123-5845-42BE-A813-90ED61E2B2CF";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A351DCDC196296000033E23C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 953A05224E1E423E890E85DC /* Pods-IngenicoConnectExample.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = IngenicoConnectExample/IngenicoConnectExample.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8H8ZSPDJ95;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IngenicoConnectExample/IngenicoConnectExample-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"${SRCROOT}\"",
+				);
+				INFOPLIST_FILE = IngenicoConnectExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ingenicoconnect.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = IngenicoConnectExample;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "IngenicoConnectExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "IngenicoConnectSDK/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A351DCDD196296000033E23C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F86AD3681CF00AC6369DB29 /* Pods-IngenicoConnectExample.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = IngenicoConnectExample/IngenicoConnectExample.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8H8ZSPDJ95;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IngenicoConnectExample/IngenicoConnectExample-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"${SRCROOT}\"",
+				);
+				INFOPLIST_FILE = IngenicoConnectExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ingenicoconnect.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = IngenicoConnectExample;
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "IngenicoConnectExample-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "IngenicoConnectSDK/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A30330C0197CEF73008B7AF0 /* Build configuration list for PBXNativeTarget "IngenicoConnectExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A30330C1197CEF73008B7AF0 /* Debug */,
+				A30330C2197CEF73008B7AF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A351DCAA196296000033E23C /* Build configuration list for PBXProject "IngenicoConnectExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A351DCD9196296000033E23C /* Debug */,
+				A351DCDA196296000033E23C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A351DCDB196296000033E23C /* Build configuration list for PBXNativeTarget "IngenicoConnectExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A351DCDC196296000033E23C /* Debug */,
+				A351DCDD196296000033E23C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A351DCA7196296000033E23C /* Project object */;
+}
