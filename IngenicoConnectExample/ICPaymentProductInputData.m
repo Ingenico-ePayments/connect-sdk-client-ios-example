@@ -142,10 +142,11 @@
 - (void)validate
 {
     [self.errors removeAllObjects];
+    ICPaymentRequest *request = self.paymentRequest;
     for (ICPaymentProductField *field in self.paymentItem.fields.paymentProductFields) {
         if ([self fieldIsPartOfAccountOnFile:field.identifier] == NO) {
             NSString *fieldValue = [self unmaskedValueForField:field.identifier];
-            [field validateValue:fieldValue];
+            [field validateValue:fieldValue forPaymentRequest:request];
             [self.errors addObjectsFromArray:field.errors];
         }
     }

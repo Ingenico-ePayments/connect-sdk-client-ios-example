@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		08D0F6431CEF3FFD00FEC674 /* ICPaymentProductInputDataTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 08D0F6421CEF3FFD00FEC674 /* ICPaymentProductInputDataTestCase.m */; };
 		08D0F6451CEF427400FEC674 /* paymentProduct.json in Resources */ = {isa = PBXBuildFile; fileRef = 08D0F6441CEF427400FEC674 /* paymentProduct.json */; };
+		12A77205ADDFA1555A54153F /* libPods-IngenicoConnectExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F804B342ED0415F8BA2020 /* libPods-IngenicoConnectExampleTests.a */; };
 		29CEF5197E26824532029C01 /* ICPaymentProductInputData.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEF26138AC6A3824CB8AFE /* ICPaymentProductInputData.m */; };
 		29CEF72C43206D38FE5C1672 /* ICFormRowCoBrandsSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEF711BEED4F2A40288853 /* ICFormRowCoBrandsSelection.m */; };
 		29CEFBDCF697210B2060494B /* ICFormRowCoBrandsExplanation.m in Sources */ = {isa = PBXBuildFile; fileRef = 29CEF555BCA4F1D1A546CDCC /* ICFormRowCoBrandsExplanation.m */; };
@@ -66,8 +67,8 @@
 		A3E12FFA19F5375A008E7311 /* ICIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E12FF919F5375A008E7311 /* ICIntegerTextField.m */; };
 		A3E12FFD19F5376D008E7311 /* ICFractionalTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E12FFC19F5376D008E7311 /* ICFractionalTextField.m */; };
 		A3F7E84D19F642B400FCD812 /* ICCurrencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F7E84C19F642B400FCD812 /* ICCurrencyTableViewCell.m */; };
-		C2C083971B544E449C0E01F2 /* Pods_IngenicoConnectExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40F518CC9265D8A4329372F /* Pods_IngenicoConnectExample.framework */; };
-		E198ADFDD85AF980B0508C47 /* Pods_IngenicoConnectExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A337FD1F39A3C310B7B3F03 /* Pods_IngenicoConnectExampleTests.framework */; };
+		A9E5F40D4EE3F3B0388173D9 /* libPods-IngenicoConnectExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1428DE9C3F137D33208912F8 /* libPods-IngenicoConnectExample.a */; };
+		B431CA801E6991770064AC16 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B431CA7F1E6991770064AC16 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		047A08B5ABD3C444D68B9E45 /* Pods-IngenicoConnectExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IngenicoConnectExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IngenicoConnectExampleTests/Pods-IngenicoConnectExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		08D0F6421CEF3FFD00FEC674 /* ICPaymentProductInputDataTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductInputDataTestCase.m; sourceTree = "<group>"; };
 		08D0F6441CEF427400FEC674 /* paymentProduct.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = paymentProduct.json; sourceTree = "<group>"; };
+		1428DE9C3F137D33208912F8 /* libPods-IngenicoConnectExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IngenicoConnectExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29CEF0B4321D4EBB1EAEE71A /* ICCOBrandsExplanationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICCOBrandsExplanationTableViewCell.h; sourceTree = "<group>"; };
 		29CEF26138AC6A3824CB8AFE /* ICPaymentProductInputData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICPaymentProductInputData.m; sourceTree = "<group>"; };
 		29CEF555BCA4F1D1A546CDCC /* ICFormRowCoBrandsExplanation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowCoBrandsExplanation.m; sourceTree = "<group>"; };
@@ -94,7 +96,6 @@
 		29CEF88F90E345EBEAEC1817 /* ICPaymentProductInputData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductInputData.h; sourceTree = "<group>"; };
 		29CEFC2B33EE26103F2BDE0A /* ICFormRowCoBrandsExplanation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowCoBrandsExplanation.h; sourceTree = "<group>"; };
 		29CEFC6ED730845B1C281F17 /* ICCOBrandsExplanationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICCOBrandsExplanationTableViewCell.m; sourceTree = "<group>"; };
-		2A337FD1F39A3C310B7B3F03 /* Pods_IngenicoConnectExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IngenicoConnectExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F86AD3681CF00AC6369DB29 /* Pods-IngenicoConnectExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IngenicoConnectExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample.release.xcconfig"; sourceTree = "<group>"; };
 		42974C781DC8A56300B91814 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		42974C7C1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICPaymentProductsViewControllerTarget.h; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 		A3026BBA1962E88600BDE9EE /* ICSummaryTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSummaryTableHeaderView.h; sourceTree = "<group>"; };
 		A3026BBB1962E88600BDE9EE /* ICSummaryTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSummaryTableHeaderView.m; sourceTree = "<group>"; };
 		A30330B1197CEF73008B7AF0 /* IngenicoConnectExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IngenicoConnectExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A30330B7197CEF73008B7AF0 /* IngenicoConnectExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IngenicoConnectExampleTests-Info.plist"; sourceTree = "<group>"; };
 		A30330BB197CEF73008B7AF0 /* ICTableSectionConverterTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICTableSectionConverterTestCase.m; sourceTree = "<group>"; };
 		A30330C3197CEFB2008B7AF0 /* paymentProducts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = paymentProducts.json; sourceTree = "<group>"; };
 		A30C8CB0196ACFEF00F1EDA3 /* ICFormRowLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowLabel.h; sourceTree = "<group>"; };
@@ -202,7 +202,8 @@
 		A3F7E84B19F642B400FCD812 /* ICCurrencyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICCurrencyTableViewCell.h; sourceTree = "<group>"; };
 		A3F7E84C19F642B400FCD812 /* ICCurrencyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICCurrencyTableViewCell.m; sourceTree = "<group>"; };
 		A3FE1FA31962AEC4005FF3FA /* ICAppConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICAppConstants.h; sourceTree = "<group>"; };
-		C40F518CC9265D8A4329372F /* Pods_IngenicoConnectExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IngenicoConnectExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B431CA7F1E6991770064AC16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4F804B342ED0415F8BA2020 /* libPods-IngenicoConnectExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IngenicoConnectExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F519A9D21DBF5F2100E61034 /* IngenicoConnectExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IngenicoConnectExample.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,7 +214,7 @@
 			files = (
 				A30330B4197CEF73008B7AF0 /* UIKit.framework in Frameworks */,
 				A30330B3197CEF73008B7AF0 /* Foundation.framework in Frameworks */,
-				E198ADFDD85AF980B0508C47 /* Pods_IngenicoConnectExampleTests.framework in Frameworks */,
+				12A77205ADDFA1555A54153F /* libPods-IngenicoConnectExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +226,7 @@
 				A351DCB5196296000033E23C /* CoreGraphics.framework in Frameworks */,
 				A351DCB7196296000033E23C /* UIKit.framework in Frameworks */,
 				A351DCB3196296000033E23C /* Foundation.framework in Frameworks */,
-				C2C083971B544E449C0E01F2 /* Pods_IngenicoConnectExample.framework in Frameworks */,
+				A9E5F40D4EE3F3B0388173D9 /* libPods-IngenicoConnectExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +277,7 @@
 			children = (
 				08D0F6441CEF427400FEC674 /* paymentProduct.json */,
 				A30330C3197CEFB2008B7AF0 /* paymentProducts.json */,
-				A30330B7197CEF73008B7AF0 /* IngenicoConnectExampleTests-Info.plist */,
+				B431CA7F1E6991770064AC16 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -318,8 +319,8 @@
 				A351DCB2196296000033E23C /* Foundation.framework */,
 				A351DCB4196296000033E23C /* CoreGraphics.framework */,
 				A351DCB6196296000033E23C /* UIKit.framework */,
-				C40F518CC9265D8A4329372F /* Pods_IngenicoConnectExample.framework */,
-				2A337FD1F39A3C310B7B3F03 /* Pods_IngenicoConnectExampleTests.framework */,
+				1428DE9C3F137D33208912F8 /* libPods-IngenicoConnectExample.a */,
+				C4F804B342ED0415F8BA2020 /* libPods-IngenicoConnectExampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -741,6 +742,7 @@
 			files = (
 				08D0F6451CEF427400FEC674 /* paymentProduct.json in Resources */,
 				A30330C4197CEFB2008B7AF0 /* paymentProducts.json in Resources */,
+				B431CA801E6991770064AC16 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -953,7 +955,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "IngenicoConnectExampleTests/IngenicoConnectExampleTests-Info.plist";
+				INFOPLIST_FILE = IngenicoConnectExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ingenicocollect.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = IngenicoConnectExampleTests;
@@ -978,7 +980,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IngenicoConnectExample/IngenicoConnectExample-Prefix.pch";
-				INFOPLIST_FILE = "IngenicoConnectExampleTests/IngenicoConnectExampleTests-Info.plist";
+				INFOPLIST_FILE = IngenicoConnectExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ingenicoconnect.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = IngenicoConnectExampleTests;

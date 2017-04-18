@@ -14,6 +14,7 @@
 #import "ICTableSectionConverter.h"
 #import "ICStringFormatter.h"
 #import "ICAccountOnFile.h"
+#import "ICPaymentItems.h"
 
 @interface ICTableSectionConverterTestCase : XCTestCase
 
@@ -47,7 +48,10 @@
     for (ICAccountOnFile *accountOnFile in accountsOnFile) {
         accountOnFile.stringFormatter = self.stringFormatter;
     }
-    ICPaymentProductsTableSection *tableSection = [ICTableSectionConverter paymentProductsTableSectionFromAccountsOnFile:accountsOnFile paymentProducts:paymentProducts];
+
+    ICPaymentItems *items = [[ICPaymentItems alloc] init];
+    items.paymentItems = paymentProducts.paymentProducts;
+    ICPaymentProductsTableSection *tableSection = [ICTableSectionConverter paymentProductsTableSectionFromAccountsOnFile:accountsOnFile paymentItems:items];
     ICPaymentProductsTableRow *row = tableSection.rows[0];
     XCTAssertTrue([row.name isEqualToString:@"**** **** **** 7988 Rob"] == YES, @"Unexpected title of table section");
 }
