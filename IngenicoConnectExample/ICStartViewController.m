@@ -144,7 +144,7 @@
     self.regionLabel = [self.viewFactory labelWithType:ICLabelType];
     self.regionLabel.text = NSLocalizedStringFromTable(@"Region", kICAppLocalizable, @"Region");
     self.regionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.regionControl = [[UISegmentedControl alloc] initWithItems:@[@"EU", @"US"]];
+    self.regionControl = [[UISegmentedControl alloc] initWithItems:@[@"EU", @"US", @"AMS", @"PAR"]];
     self.regionControl.selectedSegmentIndex = 0;
     self.regionControl.translatesAutoresizingMaskIntoConstraints = NO;
     [self.containerView addSubview:self.regionLabel];
@@ -298,8 +298,12 @@
     ICRegion region;
     if (self.regionControl.selectedSegmentIndex == 0) {
         region = ICRegionEU;
-    } else {
+    } else if (self.regionControl.selectedSegmentIndex == 1) {
         region = ICRegionUS;
+    } else if (self.regionControl.selectedSegmentIndex == 2) {
+        region = ICRegionAMS;
+    } else {
+        region = ICRegionPAR;
     }
     ICEnvironment environment = (ICEnvironment) [self.environmentPicker selectedRowInComponent:0];
 

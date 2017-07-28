@@ -6,7 +6,7 @@ target 'IngenicoConnectExample' do
   # use_frameworks!
 
   # Pods for IngenicoConnectExample
-  pod 'IngenicoConnectSDK', '~> 3.1'
+  pod 'IngenicoConnectSDK', '~> 3.2'
   pod 'AFNetworkActivityLogger'
   pod 'SVProgressHUD'
 
