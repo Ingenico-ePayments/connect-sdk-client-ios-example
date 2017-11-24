@@ -59,7 +59,7 @@
     textView.layer.cornerRadius = 5.0;
     textView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    UIButton *button = [self.viewFactory buttonWithType:ICPrimaryButtonType];
+    UIButton *button = [self.viewFactory buttonWithType:ICButtonTypePrimary];
     [container addSubview:button];
     NSString *continueButtonTitle = NSLocalizedStringFromTable(@"ContinueButtonTitle", kICAppLocalizable, nil);
     [button setTitle:continueButtonTitle forState:UIControlStateNormal];

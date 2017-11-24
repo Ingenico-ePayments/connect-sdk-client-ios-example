@@ -10,5 +10,14 @@
 
 @implementation ICFormRowLabel
 
+- (instancetype _Nonnull)initWithText:(nonnull NSString *)text {
+    self = [super init];
+    
+    if (self) {
+        self.text = text;
+    }
+    
+    return self;
+}
 
 @end

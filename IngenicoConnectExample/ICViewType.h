@@ -20,10 +20,6 @@ typedef enum {
     ICTextFieldType,
     ICIntegerTextFieldType,
     ICFractionalTextFieldType,
-
-    // Buttons
-    ICPrimaryButtonType,
-    ICSecondaryButtonType,
     
     // Labels
     ICLabelType,

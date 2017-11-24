@@ -12,8 +12,7 @@
 @interface ICFormRowTooltip : ICFormRow
 
 @property (strong, nonatomic) ICPaymentProductField *paymentProductField;
-@property (nonatomic, strong) NSString *tooltipIdentifier;
-@property (strong, nonatomic) UIImage *tooltipImage;
-@property (strong, nonatomic) NSString *tooltipText;
+@property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) NSString *text;
 
 @end

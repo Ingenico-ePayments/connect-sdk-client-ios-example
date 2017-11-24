@@ -30,21 +30,20 @@
     if (self != nil) {
         self.formatter = [[ICStringFormatter alloc] init];
         self.fieldValues = [[NSMutableDictionary alloc] init];
-        self.errors = [NSMutableArray new];
+        self.errors = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (ICPaymentRequest *)paymentRequest {
-    ICPaymentRequest *paymentRequest = [ICPaymentRequest new];
+    ICPaymentRequest *paymentRequest = [[ICPaymentRequest alloc] init];
 
     if ([self.paymentItem isKindOfClass:[ICPaymentProduct class]]) {
         paymentRequest.paymentProduct = (ICPaymentProduct *) self.paymentItem;
     }
     else {
-        paymentRequest.paymentProduct = [ICPaymentProduct new];
+        paymentRequest.paymentProduct = [[ICPaymentProduct alloc] init];
     }
-
     paymentRequest.accountOnFile = self.accountOnFile;
     paymentRequest.tokenize = self.tokenize;
     for (NSString *key in self.fieldValues.allKeys) {

@@ -10,4 +10,17 @@
 
 @implementation ICFormRowList
 
+
+- (instancetype _Nonnull)initWithPaymentProductField: (nonnull ICPaymentProductField *)paymentProductField {
+    self = [super init];
+    
+    if (self) {
+        self.items = [[NSMutableArray alloc]init];
+        self.paymentProductField = paymentProductField;
+    }
+    
+    return self;
+}
+
+
 @end

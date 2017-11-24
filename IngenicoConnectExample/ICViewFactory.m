@@ -14,8 +14,6 @@
 #import <IngenicoConnectExample/ICTooltipTableViewCell.h>
 #import <IngenicoConnectExample/ICPaymentProductTableViewCell.h>
 #import <IngenicoConnectExample/ICTextFieldTableViewCell.h>
-#import "UIButton+ICPrimaryButton.h"
-#import "UIButton+ICSecondaryButton.h"
 #import <IngenicoConnectExample/ICPickerViewTableViewCell.h>
 #import <IngenicoConnectExample/ICSummaryTableHeaderView.h>
 #import <IngenicoConnectExample/ICIntegerTextField.h>
@@ -26,64 +24,11 @@
 
 @implementation ICViewFactory
 
-- (ICTableViewCell *)tableViewCellWithType:(ICViewType)type reuseIdentifier:(NSString *)reuseIdentifier
+- (ICButton *)buttonWithType:(ICButtonType)type
 {
-    ICTableViewCell *cell;
-    switch (type) {
-        case ICSwitchTableViewCellType:
-            cell = [[ICSwitchTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICErrorMessageTableViewCellType:
-            cell = [[ICErrorMessageTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICTooltipTableViewCellType:
-            cell = [[ICTooltipTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICPaymentProductTableViewCellType:
-            cell = [[ICPaymentProductTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICTextFieldTableViewCellType:
-            cell = [[ICTextFieldTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICCurrencyTableViewCellType:
-            cell = [[ICCurrencyTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICPickerViewTableViewCellType:
-            cell = [[ICPickerViewTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICButtonTableViewCellType:
-            cell = [[ICButtonTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICLabelTableViewCellType:
-            cell = [[ICLabelTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICCoBrandsSelectionTableViewCellType:
-            cell = [[ICCoBrandsSelectionTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        case ICCoBrandsExplanationTableViewCellType:
-            cell = [[ICCOBrandsExplanationTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
-            break;
-        default:
-            [NSException raise:@"Invalid type of table view cell" format:@"Table view cell type %u is invalid", type];
-            break;
-    }
-    return cell;
-}
-
-- (UIButton *)buttonWithType:(ICViewType)type
-{
-    UIButton *button;
-    switch (type) {
-        case ICPrimaryButtonType:
-            button = [UIButton primaryButton];
-            break;
-        case ICSecondaryButtonType:
-            button = [UIButton secondaryButton];
-            break;
-        default:
-            [NSException raise:@"Invalid type of button" format:@"Button type %u is invalid", type];
-            break;
-    }
+    ICButton *button = [ICButton new];
+    button.type = type;
+    
     return button;
 }
 

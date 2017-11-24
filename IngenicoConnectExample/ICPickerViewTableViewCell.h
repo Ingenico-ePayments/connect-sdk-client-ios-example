@@ -8,10 +8,17 @@
 
 #import <IngenicoConnectExample/ICTableViewCell.h>
 #import <IngenicoConnectExample/ICPickerView.h>
+#import <IngenicoConnectSDK/ICValueMappingItem.h>
+#import <UIKit/UIKit.h>
+#import <UIKit/UIPickerView.h>
 
 @interface ICPickerViewTableViewCell : ICTableViewCell
 
-@property (strong, nonatomic) ICPickerView *pickerView;
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
++ (NSString *)reuseIdentifier;
+
+@property (strong, nonatomic) NSArray<ICValueMappingItem *> *items;
+@property (strong, nonatomic) NSObject<UIPickerViewDelegate> *delegate;
+@property (strong, nonatomic) NSObject<UIPickerViewDataSource> *dataSource;
+@property (assign, nonatomic) NSInteger selectedRow;
 
 @end

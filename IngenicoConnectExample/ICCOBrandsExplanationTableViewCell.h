@@ -11,6 +11,8 @@
 
 @interface ICCOBrandsExplanationTableViewCell : ICTableViewCell
 
++ (NSString *)reuseIdentifier;
+
 + (NSAttributedString *)cellString;
 
 @end

@@ -7,10 +7,21 @@
 //
 
 #import <IngenicoConnectExample/ICTableViewCell.h>
+#import <IngenicoConnectExample/ICButton.h>
 
 @interface ICButtonTableViewCell : ICTableViewCell
 
-@property (strong, nonatomic) UIButton *button;
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
++ (NSString *)reuseIdentifier;
+
+- (BOOL)isEnabled;
+- (void)setIsEnabled:(BOOL)enabled;
+
+- (ICButtonType)buttonType;
+- (void)setButtonType:(ICButtonType)type;
+
+- (NSString *)title;
+- (void)setTitle:(NSString *)title;
+
+- (void)setClickTarget:(id)target action:(SEL)action;
 
 @end

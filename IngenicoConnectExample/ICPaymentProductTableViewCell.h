@@ -10,7 +10,11 @@
 
 @interface ICPaymentProductTableViewCell : ICTableViewCell
 
++ (NSString *)reuseIdentifier;
+
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) UIImage *logo;
+@property (assign, nonatomic) BOOL shouldHaveMaximalWidth;
+@property (strong, nonatomic) UIColor *limitedBackgroundColor;
 
 @end

@@ -10,7 +10,11 @@
 
 @interface ICSwitchTableViewCell : ICTableViewCell
 
-@property (strong, nonatomic) UISwitch *switchControl;
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
++ (NSString *)reuseIdentifier;
+
+- (NSString *)title;
+- (void)setTitle:(NSString *)title;
+
+- (void)setSwitchTarget:(id)target action:(SEL)action;
 
 @end

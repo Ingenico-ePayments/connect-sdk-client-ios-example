@@ -9,11 +9,14 @@
 #import <IngenicoConnectExample/ICFormRowWithInfoButton.h>
 #import <IngenicoConnectExample/ICTextField.h>
 #import <IngenicoConnectSDK/ICPaymentProductField.h>
+#import <IngenicoConnectExample/ICFormRowField.h>
 
 @interface ICFormRowTextField : ICFormRowWithInfoButton
 
-@property (strong, nonatomic) ICTextField *textField;
-@property (strong, nonatomic) ICPaymentProductField *paymentProductField;
-@property (strong, nonatomic) UIImageView *logo;
+- (instancetype _Nonnull)initWithPaymentProductField: (nonnull ICPaymentProductField *)paymentProductField field: (nonnull ICFormRowField*)field;
+
+@property (strong, nonatomic) ICPaymentProductField * _Nonnull paymentProductField;
+@property (strong, nonatomic) UIImage * _Nullable logo;
+@property (strong, nonatomic) ICFormRowField * _Nonnull field;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <IngenicoConnectExample/ICPaymentProductsTableSection.h>
+#import "ICPaymentProductsTableSection.h"
 #import <IngenicoConnectSDK/ICBasicPaymentProducts.h>
 
 @class ICPaymentItems;

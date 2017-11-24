@@ -8,16 +8,31 @@
 
 #import <IngenicoConnectExample/ICSwitchTableViewCell.h>
 
+@interface ICSwitchTableViewCell ()
+
+@property (strong, nonatomic) UISwitch *switchControl;
+
+@end
+
 @implementation ICSwitchTableViewCell
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithReuseIdentifier:reuseIdentifier];
++ (NSString *)reuseIdentifier {
+    return @"switch-cell";
+}
+
+- (NSString *)title {
+    return self.textLabel.text;
+}
+- (void)setTitle:(NSString *)title {
+    self.textLabel.text = title;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIScrollView *scrollView = (UIScrollView *)self.contentView.superview;
-        if ([scrollView respondsToSelector:@selector(setDelaysContentTouches:)] == YES) {
-            ((UIScrollView *)self.contentView.superview).delaysContentTouches = NO;
-        }
+        self.switchControl = [[UISwitch alloc] init];
+        [self addSubview:self.switchControl];
+        self.clipsToBounds = YES;
         
         self.textLabel.font = [UIFont systemFontOfSize:12.0f];
         self.textLabel.numberOfLines = 0;
@@ -28,21 +43,24 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (self.switchControl != nil) {
-        float height = self.contentView.frame.size.height;
-        float width = self.contentView.frame.size.width;
-        float switchWidth = self.switchControl.frame.size.width;
-
-        self.switchControl.frame = CGRectMake(10, 4, 0, 0);
-        self.textLabel.frame = CGRectMake(20 +switchWidth, -4, width - switchWidth - 30, height);
-    }
+    CGFloat height = self.contentView.frame.size.height;
+    CGFloat width = [self accessoryAndMarginCompatibleWidth];
+    CGFloat leftMargin = [self accessoryCompatibleLeftMargin];
+    CGFloat switchWidth = self.switchControl.frame.size.width;
+    
+    self.switchControl.frame = CGRectMake(leftMargin, 7, 0, 0);
+    self.textLabel.frame = CGRectMake(leftMargin + 16 + switchWidth, -1, width - switchWidth, height);
 }
 
-- (void)setSwitchControl:(UISwitch *)switchControl
-{
-    [self.switchControl removeFromSuperview];
-    _switchControl = switchControl;
-    [self.contentView addSubview:switchControl];
+- (void)setSwitchTarget:(id)target action:(SEL)action {
+    [self.switchControl removeTarget: nil action: nil forControlEvents:UIControlEventAllEvents];
+    [self.switchControl addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)prepareForReuse {
+    self.title = nil;
+    [self.switchControl removeTarget: nil action: nil forControlEvents:UIControlEventAllEvents];
 }
 
 @end

@@ -12,10 +12,16 @@
 
 @property (strong, nonatomic) UILabel *separatorlabel;
 @property (strong, nonatomic) UILabel *currencyCodeLabel;
+@property (strong, nonatomic) ICIntegerTextField *integerTextField;
+@property (strong, nonatomic) ICFractionalTextField *fractionalTextField;
 
 @end
 
 @implementation ICCurrencyTableViewCell
+
++ (NSString *)reuseIdentifier {
+    return @"currency-text-field-cell";
+}
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -30,6 +36,8 @@
         
         self.currencyCodeLabel = [[UILabel alloc] init];
         [self.contentView addSubview:self.currencyCodeLabel];
+        
+        self.clipsToBounds = YES;
     }
     return self;
 }
@@ -59,18 +67,22 @@
     }
 }
 
-- (void)setIntegerTextField:(ICIntegerTextField *)integerTextField
+- (void)setIntegerField:(ICFormRowField *)integerField
 {
-    [self.integerTextField removeFromSuperview];
-    _integerTextField = integerTextField;
-    [self.contentView addSubview:integerTextField];
+    _integerField = integerField;
+    self.integerTextField.text = integerField.text;
+    self.integerTextField.placeholder = integerField.placeholder;
+    self.integerTextField.keyboardType = integerField.keyboardType;
+    self.integerTextField.secureTextEntry = integerField.isSecure;
 }
 
-- (void)setFractionalTextField:(ICFractionalTextField *)fractionalTextField
+- (void)setFractionalField:(ICFormRowField *)fractionalField
 {
-    [self.fractionalTextField removeFromSuperview];
-    _fractionalTextField = fractionalTextField;
-    [self.contentView addSubview:fractionalTextField];
+    _fractionalField = fractionalField;
+    self.fractionalTextField.text = fractionalField.text;
+    self.fractionalTextField.placeholder = fractionalField.placeholder;
+    self.fractionalTextField.keyboardType = fractionalField.keyboardType;
+    self.fractionalTextField.secureTextEntry = fractionalField.isSecure;
 }
 
 - (void)setCurrencyCode:(NSString *)currencyCode

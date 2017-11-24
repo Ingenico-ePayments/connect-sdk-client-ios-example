@@ -14,11 +14,11 @@
 #import <IngenicoConnectExample/ICTextField.h>
 #import <IngenicoConnectExample/ICPickerView.h>
 #import <IngenicoConnectExample/ICLabel.h>
+#import <IngenicoConnectExample/ICButton.h>
 
 @interface ICViewFactory : NSObject
 
-- (ICTableViewCell *)tableViewCellWithType:(ICViewType)type reuseIdentifier:(NSString *)reuseIdentifier;
-- (UIButton *)buttonWithType:(ICViewType)type;
+- (ICButton *)buttonWithType:(ICButtonType)type;
 - (ICSwitch *)switchWithType:(ICViewType)type;
 - (ICTextField *)textFieldWithType:(ICViewType)type;
 - (ICPickerView *)pickerViewWithType:(ICViewType)type;

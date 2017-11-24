@@ -30,17 +30,18 @@
 - (instancetype)init
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
-    self.sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
+
     self.view.backgroundColor = [UIColor whiteColor];
 
     self.navigationItem.titleView = [[ICMerchantLogoImageView alloc] init];
-    
+
     [self initializeHeader];
     
     self.sections = [[NSMutableArray alloc] init];
@@ -54,6 +55,8 @@
     ICPaymentProductsTableSection *productsSection = [ICTableSectionConverter paymentProductsTableSectionFromPaymentItems:self.paymentItems];
     productsSection.title = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductSelection.pageTitle", kICSDKLocalizable, self.sdkBundle, @"Title of the section that shows all available payment products.");
     [self.sections addObject:productsSection];
+    
+    [self.tableView registerClass:[ICPaymentProductTableViewCell class] forCellReuseIdentifier:[ICPaymentProductTableViewCell reuseIdentifier]];
 }
 
 - (void)initializeHeader
@@ -91,11 +94,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *reuseIdentifier = @"cell";
-    ICPaymentProductTableViewCell *cell = (ICPaymentProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (!cell) {
-        cell = (ICPaymentProductTableViewCell *)[self.viewFactory tableViewCellWithType:ICPaymentProductTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
+    ICPaymentProductTableViewCell *cell = (ICPaymentProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICPaymentProductTableViewCell reuseIdentifier]];
     
     ICPaymentProductsTableSection *section = self.sections[indexPath.section];
     ICPaymentProductsTableRow *row = section.rows[indexPath.row];

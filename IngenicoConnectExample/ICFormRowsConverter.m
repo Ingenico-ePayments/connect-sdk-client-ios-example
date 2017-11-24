@@ -15,8 +15,6 @@
 #import <IngenicoConnectExample/ICFormRowCurrency.h>
 #import <IngenicoConnectSDK/ICIINDetailsResponse.h>
 #import <IngenicoConnectExample/ICFormRowLabel.h>
-#import <IngenicoConnectExample/ICFormRowErrorMessage.h>
-#import <IngenicoConnectSDK/ICValidationError.h>
 #import <IngenicoConnectSDK/ICValidationErrorLength.h>
 #import <IngenicoConnectSDK/ICValidationErrorRange.h>
 #import <IngenicoConnectSDK/ICValidationErrorExpirationDate.h>
@@ -29,22 +27,28 @@
 
 @interface ICFormRowsConverter ()
 
-@property (strong, nonatomic) NSBundle *sdkBundle;
++ (NSBundle *)sdkBundle;
 
 @end
 
 @implementation ICFormRowsConverter
 
+static NSBundle * _sdkBundle;
++ (NSBundle *)sdkBundle {
+    if (_sdkBundle == nil) {
+        _sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
+    }
+    return _sdkBundle;
+}
+
 - (instancetype)init
 {
     self = [super init];
-    if (self != nil) {
-        self.sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
-    }
+    
     return self;
 }
 
-- (NSMutableArray *)formRowsFromInputData:(ICPaymentProductInputData *)inputData iinDetailsResponse:(ICIINDetailsResponse *)iinDetailsResponse validation:(BOOL)validation viewFactory:(ICViewFactory *)viewFactory confirmedPaymentProducts:(NSSet *)confirmedPaymentProducts {
+- (NSMutableArray *)formRowsFromInputData:(ICPaymentProductInputData *)inputData viewFactory:(ICViewFactory *)viewFactory confirmedPaymentProducts:(NSSet *)confirmedPaymentProducts {
     NSMutableArray *rows = [[NSMutableArray alloc] init];
     for (ICPaymentProductField* field in inputData.paymentItem.fields.paymentProductFields) {
         ICFormRow *row;
@@ -80,18 +84,18 @@
             }
         }
         [rows addObject:row];
-        if (validation == YES) {
-            if (field.errors.count > 0) {
-                row = [self errorFormRowWithError:field.errors.firstObject forCurrency:field.displayHints.formElement.type == ICCurrencyType];
-                [rows addObject:row];
-            } else if (iinDetailsResponse != nil && [field.identifier isEqualToString:@"cardNumber"]) {
-                ICValidationError *iinLookupError = [self errorWithIINDetails:iinDetailsResponse];
-                if (iinLookupError != nil) {
-                    row = [self errorFormRowWithError:iinLookupError forCurrency:field.displayHints.formElement.type == ICCurrencyType];
-                    [rows addObject:row];
-                }
-            }
-        }
+//        if (validation == YES) {
+//            if (field.errors.count > 0) {
+//                row = [self errorFormRowWithError:field.errors.firstObject forCurrency:field.displayHints.formElement.type == ICCurrencyType];
+//                [rows addObject:row];
+//            } else if (iinDetailsResponse != nil && [field.identifier isEqualToString:@"cardNumber"]) {
+//                ICValidationError *iinLookupError = [self errorWithIINDetails:iinDetailsResponse];
+//                if (iinLookupError != nil) {
+//                    row = [self errorFormRowWithError:iinLookupError forCurrency:field.displayHints.formElement.type == ICCurrencyType];
+//                    [rows addObject:row];
+//                }
+//            }
+//        }
     }
     return rows;
 }
@@ -106,9 +110,8 @@
     return nil;
 }
 
-- (ICFormRowErrorMessage *)errorFormRowWithError:(ICValidationError *)error forCurrency:(BOOL)forCurrency
++ (NSString *)errorMessageForError:(ICValidationError *)error withCurrency:(BOOL)forCurrency
 {
-    ICFormRowErrorMessage *row = [[ICFormRowErrorMessage alloc] init];
     Class errorClass = [error class];
     NSString *errorMessageFormat = @"gc.general.paymentProductFields.validationErrors.%@.label";
     NSString *errorMessageKey;
@@ -130,8 +133,6 @@
         ICValidationErrorRange *rangeError = (ICValidationErrorRange *)error;
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"length.between"];
         NSString *errorMessageValueWithPlaceholders = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, self.sdkBundle, nil);
-        NSString *errorMessageValueWithPlaceholder = [errorMessageValueWithPlaceholders stringByReplacingOccurrencesOfString:@"{minValue}" withString:@"\%@"];
-        errorMessageValue = [errorMessageValueWithPlaceholder stringByReplacingOccurrencesOfString:@"{maxValue}" withString:@"\%@"];
         NSString *minString;
         NSString *maxString;
         if (forCurrency == YES) {
@@ -141,72 +142,66 @@
             minString = [NSString stringWithFormat:@"%ld", (long)rangeError.minValue];
             maxString = [NSString stringWithFormat:@"%ld", (long)rangeError.maxValue];
         }
-        errorMessage = [NSString stringWithFormat:errorMessageValue, minString, maxString];
+        NSString *errorMessageValueWithPlaceholder = [errorMessageValueWithPlaceholders stringByReplacingOccurrencesOfString:@"{minValue}" withString:minString];
+        errorMessageValue = [errorMessageValueWithPlaceholder stringByReplacingOccurrencesOfString:@"{maxValue}" withString:maxString];
     } else if (errorClass == [ICValidationErrorExpirationDate class]) {
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"expirationDate"];
-        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, self.sdkBundle, nil);
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
     } else if (errorClass == [ICValidationErrorFixedList class]) {
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"fixedList"];
-        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, self.sdkBundle, nil);
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
     } else if (errorClass == [ICValidationErrorLuhn class]) {
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"luhn"];
-        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, self.sdkBundle, nil);
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
     } else if (errorClass == [ICValidationErrorAllowed class]) {
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"allowedInContext"];
-        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, self.sdkBundle, nil);
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
     } else if (errorClass == [ICValidationErrorRegularExpression class]) {
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"regularExpression"];
-        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, self.sdkBundle, nil);
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
     } else if (errorClass == [ICValidationErrorIsRequired class]) {
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"required"];
-        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, self.sdkBundle, nil);
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
     } else {
         [NSException raise:@"Invalid validation error" format:@"Validation error %@ is invalid", error];
     }
-    row.errorMessage = errorMessage;
-    return row;
+    return errorMessage;
 }
 
 - (ICFormRowTextField *)textFieldFormRowFromField:(ICPaymentProductField *)field paymentItem:(NSObject<ICPaymentItem> *)paymentItem value:(NSString *)value isEnabled:(BOOL)isEnabled confirmedPaymentProducts:(NSSet *)confirmedPaymentProducts viewFactory:(ICViewFactory *)viewFactory
 {
-    ICFormRowTextField *row = [[ICFormRowTextField alloc] init];
-    row.textField = (ICTextField *)[viewFactory textFieldWithType:ICTextFieldType];
     NSString *placeholderKey = [NSString stringWithFormat:@"gc.general.paymentProducts.%@.paymentProductFields.%@.placeholder", paymentItem.identifier, field.identifier];
-    NSString *placeholderValue = NSLocalizedStringFromTableInBundle(placeholderKey, kICSDKLocalizable, self.sdkBundle, nil);
+    NSString *placeholderValue = NSLocalizedStringFromTableInBundle(placeholderKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
     if ([placeholderKey isEqualToString:placeholderValue] == YES) {
         placeholderKey = [NSString stringWithFormat:@"gc.general.paymentProductFields.%@.placeholder", field.identifier];
-        placeholderValue = NSLocalizedStringFromTableInBundle(placeholderKey, kICSDKLocalizable, self.sdkBundle, nil);
+        placeholderValue = NSLocalizedStringFromTableInBundle(placeholderKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
     }
-    row.textField.placeholder = placeholderValue;
+    
+    UIKeyboardType keyboardType = UIKeyboardTypeDefault;
     if (field.displayHints.preferredInputType == ICIntegerKeyboard) {
-        row.textField.keyboardType = UIKeyboardTypeNumberPad;
+        keyboardType = UIKeyboardTypeNumberPad;
     } else if (field.displayHints.preferredInputType == ICEmailAddressKeyboard) {
-        row.textField.keyboardType = UIKeyboardTypeEmailAddress;
+        keyboardType = UIKeyboardTypeEmailAddress;
     } else if (field.displayHints.preferredInputType == ICPhoneNumberKeyboard) {
-        row.textField.keyboardType = UIKeyboardTypePhonePad;
+        keyboardType = UIKeyboardTypePhonePad;
     }
-    row.textField.secureTextEntry = field.displayHints.obfuscate;
-    row.textField.text = value;
-    [row.textField setEnabled:isEnabled];
-    row.textField.rightViewMode = UITextFieldViewModeAlways;
-    row.paymentProductField = field;
+    
+    ICFormRowField *formField = [[ICFormRowField alloc] initWithText:value placeholder:placeholderValue keyboardType:keyboardType isSecure:field.displayHints.obfuscate];
+    ICFormRowTextField *row = [[ICFormRowTextField alloc] initWithPaymentProductField:field field:formField];
+    row.isEnabled = isEnabled;
 
     if ([field.identifier isEqualToString:@"cardNumber"] == YES) {
         if ([confirmedPaymentProducts member:paymentItem.identifier] != nil) {
-            row.logo = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-            row.logo.contentMode = UIViewContentModeScaleAspectFit;
-            row.logo.image = paymentItem.displayHints.logoImage;
-            row.textField.rightView = row.logo;
+            row.logo = paymentItem.displayHints.logoImage;
         }
         else {
             row.logo = nil;
-            row.textField.rightView = nil;
         }
     }
 
@@ -217,39 +212,38 @@
 
 - (ICFormRowCurrency *)currencyFormRowFromField:(ICPaymentProductField *)field paymentItem:(NSObject<ICPaymentItem> *)paymentItem value:(NSString *)value isEnabled:(BOOL)isEnabled viewFactory:(ICViewFactory *)viewFactory
 {
-    ICFormRowCurrency *row = [[ICFormRowCurrency alloc] init];
-    row.integerTextField = (ICIntegerTextField *)[viewFactory textFieldWithType:ICIntegerTextFieldType];
-    row.fractionalTextField = (ICFractionalTextField *)[viewFactory textFieldWithType:ICFractionalTextFieldType];
     NSString *placeholderKey = [NSString stringWithFormat:@"gc.general.paymentProducts.%@.paymentProductFields.%@.placeholder", paymentItem.identifier, field.identifier];
-    NSString *placeholderValue = NSLocalizedStringFromTableInBundle(placeholderKey, kICSDKLocalizable, self.sdkBundle, nil);
+    NSString *placeholderValue = NSLocalizedStringFromTableInBundle(placeholderKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
     if ([placeholderKey isEqualToString:placeholderValue] == YES) {
         placeholderKey = [NSString stringWithFormat:@"gc.general.paymentProductFields.%@.placeholder", field.identifier];
-        placeholderValue = NSLocalizedStringFromTableInBundle(placeholderKey, kICSDKLocalizable, self.sdkBundle, nil);
+        placeholderValue = NSLocalizedStringFromTableInBundle(placeholderKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
     }
-    row.integerTextField.placeholder = placeholderValue;
+    
+    ICFormRowCurrency *row = [[ICFormRowCurrency alloc] init];
+    row.integerField = [[ICFormRowField alloc] init];
+    row.fractionalField = [[ICFormRowField alloc] init];
+    
+    row.integerField.placeholder = placeholderValue;
     if (field.displayHints.preferredInputType == ICIntegerKeyboard) {
-        row.integerTextField.keyboardType = UIKeyboardTypeNumberPad;
-        row.fractionalTextField.keyboardType = UIKeyboardTypeNumberPad;
+        row.integerField.keyboardType = UIKeyboardTypeNumberPad;
+        row.fractionalField.keyboardType = UIKeyboardTypeNumberPad;
     } else if (field.displayHints.preferredInputType == ICEmailAddressKeyboard) {
-        row.integerTextField.keyboardType = UIKeyboardTypeEmailAddress;
-        row.fractionalTextField.keyboardType = UIKeyboardTypeEmailAddress;
+        row.integerField.keyboardType = UIKeyboardTypeEmailAddress;
+        row.fractionalField.keyboardType = UIKeyboardTypeEmailAddress;
     } else if (field.displayHints.preferredInputType == ICPhoneNumberKeyboard) {
-        row.integerTextField.keyboardType = UIKeyboardTypePhonePad;
-        row.fractionalTextField.keyboardType = UIKeyboardTypePhonePad;
+        row.integerField.keyboardType = UIKeyboardTypePhonePad;
+        row.fractionalField.keyboardType = UIKeyboardTypePhonePad;
     }
     
     long long integerPart = [value longLongValue] / 100;
     int fractionalPart = (int) llabs([value longLongValue] % 100);
-    row.integerTextField.secureTextEntry = field.displayHints.obfuscate;
-    row.integerTextField.text = [NSString stringWithFormat:@"%lld", integerPart];
-    [row.integerTextField setEnabled:isEnabled];
-    row.integerTextField.rightViewMode = UITextFieldViewModeNever;
-    row.fractionalTextField.secureTextEntry = field.displayHints.obfuscate;
-    row.fractionalTextField.text = [NSString stringWithFormat:@"%02d", fractionalPart];
-    [row.fractionalTextField setEnabled:isEnabled];
-    row.fractionalTextField.rightViewMode = UITextFieldViewModeNever;
+    row.integerField.isSecure = field.displayHints.obfuscate;
+    row.integerField.text = [NSString stringWithFormat:@"%lld", integerPart];
+    row.fractionalField.isSecure = field.displayHints.obfuscate;
+    row.fractionalField.text = [NSString stringWithFormat:@"%02d", fractionalPart];
     row.paymentProductField = field;
 
+    row.isEnabled = isEnabled;
     [self setTooltipForFormRow:row withField:field paymentItem:paymentItem];
     
     return row;
@@ -258,57 +252,49 @@
 - (void)setTooltipForFormRow:(ICFormRowWithInfoButton *)row withField:(ICPaymentProductField *)field paymentItem:(NSObject<ICPaymentItem> *)paymentItem
 {
     if (field.displayHints.tooltip.imagePath != nil) {
-        row.showInfoButton = YES;
+        ICFormRowTooltip *tooltip = [ICFormRowTooltip new];
         NSString *tooltipTextKey = [NSString stringWithFormat:@"gc.general.paymentProducts.%@.paymentProductFields.%@.tooltipText", paymentItem.identifier, field.identifier];
-        NSString *tooltipTextValue = NSLocalizedStringFromTableInBundle(tooltipTextKey, kICSDKLocalizable, self.sdkBundle, nil);
+        NSString *tooltipTextValue = NSLocalizedStringFromTableInBundle(tooltipTextKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         if ([tooltipTextKey isEqualToString:tooltipTextValue] == YES) {
             tooltipTextKey = [NSString stringWithFormat:@"gc.general.paymentProductFields.%@.tooltipText", field.identifier];
-            tooltipTextValue = NSLocalizedStringFromTableInBundle(tooltipTextKey, kICSDKLocalizable, self.sdkBundle, nil);
+            tooltipTextValue = NSLocalizedStringFromTableInBundle(tooltipTextKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         }
-        row.tooltipText = tooltipTextValue;
-        row.tooltipImage = field.displayHints.tooltip.image;
-        row.tooltipIdentifier = field.identifier;
+        tooltip.text = tooltipTextValue;
+        tooltip.image = field.displayHints.tooltip.image;
+        row.tooltip = tooltip;
     }
 }
 
 - (ICFormRowList *)listFormRowFromField:(ICPaymentProductField *)field value:(NSString *)value isEnabled:(BOOL)isEnabled viewFactory:(ICViewFactory *)viewFactory
 {
-    ICFormRowList *row = [[ICFormRowList alloc] init];
-    ICPickerView *pickerView = (ICPickerView *)[viewFactory pickerViewWithType:ICPickerViewType];
-    [pickerView setUserInteractionEnabled:isEnabled];
-    row.pickerView = pickerView;
+    ICFormRowList *row = [[ICFormRowList alloc] initWithPaymentProductField:field];
     
     NSInteger rowIndex = 0;
-    NSMutableDictionary *nameToIdentifierMapping = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *identifierToRowMapping = [[NSMutableDictionary alloc] init];
-    NSMutableArray *displayNames = [[NSMutableArray alloc] init];
+    NSInteger selectedRow = 0;
     for (ICValueMappingItem *item in field.displayHints.formElement.valueMapping) {
-        [nameToIdentifierMapping setObject:item.value forKey:item.displayName];
-        [identifierToRowMapping setObject:[NSString stringWithFormat:@"%ld", (long)rowIndex] forKey:item.value];
-        [displayNames addObject:item.displayName];
+        if (item.value != nil && item.displayName != nil) {
+            if ([item.value isEqualToString:value]) {
+                selectedRow = rowIndex;
+            }
+            [row.items addObject:item];
+        }
         ++rowIndex;
     }
 
-    pickerView.content = displayNames;
-    row.nameToIdentifierMapping = nameToIdentifierMapping;
-    row.identifierToRowMapping = identifierToRowMapping;
-    row.selectedRow = [[identifierToRowMapping objectForKey:value] integerValue];
-    row.paymentProductFieldIdentifier = field.identifier;
+    row.selectedRow = selectedRow;
     return row;
 }
 
 - (ICFormRowLabel *)labelFormRowFromField:(ICPaymentProductField *)field paymentProduct:(NSString *)paymentProductId viewFactory:(ICViewFactory *)viewFactory
 {
     ICFormRowLabel *row = [[ICFormRowLabel alloc] init];
-    ICLabel *label = (ICLabel *)[viewFactory labelWithType:ICLabelType];
     NSString *labelKey = [NSString stringWithFormat:@"gc.general.paymentProducts.%@.paymentProductFields.%@.label", paymentProductId, field.identifier];
-    NSString *labelValue = NSLocalizedStringFromTableInBundle(labelKey, kICSDKLocalizable, self.sdkBundle, nil);
+    NSString *labelValue = NSLocalizedStringFromTableInBundle(labelKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
     if ([labelKey isEqualToString:labelValue] == YES) {
         labelKey = [NSString stringWithFormat:@"gc.general.paymentProductFields.%@.label", field.identifier];
-        labelValue = NSLocalizedStringFromTableInBundle(labelKey, kICSDKLocalizable, self.sdkBundle, nil);
+        labelValue = NSLocalizedStringFromTableInBundle(labelKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
     }
-    label.text = labelValue;
-    row.label = label;
+    row.text = labelValue;
     
     return row;
 }

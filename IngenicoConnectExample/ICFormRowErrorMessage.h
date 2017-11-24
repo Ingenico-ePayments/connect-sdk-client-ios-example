@@ -6,10 +6,8 @@
 //  Copyright © 2017 Global Collect Services. All rights reserved.
 //
 
-#import <IngenicoConnectExample/ICFormRow.h>
+#import <IngenicoConnectExample/ICFormRowLabel.h>
 
-@interface ICFormRowErrorMessage : ICFormRow
-
-@property (strong, nonatomic) NSString *errorMessage;
+@interface ICFormRowErrorMessage : ICFormRowLabel
 
 @end

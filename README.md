@@ -1,9 +1,9 @@
 Ingenico Connect iOS SDK example (Objective-C)
 =======================
 
-This example app illustrates the use of the [Ingenico Connect Objective-C iOS SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-ios) and the services provided by Ingenico ePayments on the GlobalCollect platform.
+This example app illustrates the use of the [Ingenico Connect Objective-C iOS SDK](https://github.com/Ingenico-ePayments/connect-sdk-client-ios) and the services provided by Ingenico ePayments on the Ingenico ePayments platform.
 
-See the [Ingenico Connect Developer Hub](https://developer.globalcollect.com/documentation/sdk/mobile/ios/) for more information on how to use the SDK.
+See the [Ingenico Connect Developer Hub](https://epayments.developer-ingenico.com/documentation/sdk/mobile/ios/) for more information on how to use the SDK.
 
 Prerequisites
 ------------

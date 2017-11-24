@@ -8,13 +8,15 @@
 
 #import <IngenicoConnectExample/ICFormRow.h>
 #import <IngenicoConnectExample/ICPickerView.h>
+#import <IngenicoConnectSDK/ICValueMappingItem.h>
+#import <IngenicoConnectSDK/ICPaymentProductField.h>
 
 @interface ICFormRowList : ICFormRow
 
-@property (strong, nonatomic) ICPickerView *pickerView;
-@property (strong, nonatomic) NSDictionary *nameToIdentifierMapping;
-@property (strong, nonatomic) NSDictionary *identifierToRowMapping;
-@property (strong, nonatomic) NSString *paymentProductFieldIdentifier;
+- (instancetype _Nonnull)initWithPaymentProductField: (nonnull ICPaymentProductField *)paymentProductField;
+
+@property (strong, nonatomic) NSMutableArray<ICValueMappingItem *> * _Nonnull items;
 @property (nonatomic) NSInteger selectedRow;
+@property (strong, nonatomic) ICPaymentProductField * _Nonnull paymentProductField;
 
 @end

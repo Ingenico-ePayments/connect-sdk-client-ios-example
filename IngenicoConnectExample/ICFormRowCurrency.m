@@ -9,5 +9,14 @@
 #import <IngenicoConnectExample/ICFormRowCurrency.h>
 
 @implementation ICFormRowCurrency
-
+- (instancetype)initWithPaymentProductField:(ICPaymentProductField *)paymentProductField andIntegerField:(ICFormRowField *)integerField andFractionalField:(ICFormRowField *)fractionalField
+{
+    self = [super init];
+    if (self) {
+        self.paymentProductField = paymentProductField;
+        self.integerField = integerField;
+        self.fractionalField = fractionalField;
+    }
+    return self;
+}
 @end

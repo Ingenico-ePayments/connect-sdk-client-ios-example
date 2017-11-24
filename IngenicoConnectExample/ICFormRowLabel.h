@@ -11,6 +11,10 @@
 
 @interface ICFormRowLabel : ICFormRow
 
-@property (strong, nonatomic) ICLabel *label;
+- (instancetype _Nonnull)initWithText:(nonnull NSString *)text;
+
+@property (strong, nonatomic) NSString * _Nonnull text;
+
+@property (assign, nonatomic, getter=isBold) BOOL bold;
 
 @end

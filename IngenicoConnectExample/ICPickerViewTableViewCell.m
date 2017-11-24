@@ -8,11 +8,63 @@
 
 #import <IngenicoConnectExample/ICPickerViewTableViewCell.h>
 
+@interface ICPickerViewTableViewCell ()
+
+@property (strong, nonatomic) ICPickerView *pickerView;
+
+@end
+
 @implementation ICPickerViewTableViewCell
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
++ (NSString *)reuseIdentifier {
+    return @"picker-view-cell";
+}
+
+- (void)setItems:(NSArray<ICValueMappingItem *> *)items {
+    _items = items;
+    if (items != nil) {
+        NSMutableArray *names = [[NSMutableArray alloc]initWithCapacity:items.count];
+        for (ICValueMappingItem *item in items) {
+            [names addObject:item.displayName];
+        }
+        self.pickerView.content = names;
+    }
+}
+
+- (NSObject<UIPickerViewDelegate> *)delegate {
+    return self.pickerView.delegate;
+}
+
+- (void)setDelegate:(NSObject<UIPickerViewDelegate> *)delegate {
+    self.pickerView.delegate = delegate;
+}
+
+- (NSObject<UIPickerViewDataSource> *)dataSource {
+    return self.pickerView.dataSource;
+}
+
+- (void)setDataSource:(NSObject<UIPickerViewDataSource> *)dataSource {
+    self.pickerView.dataSource = dataSource;
+}
+
+- (NSInteger)selectedRow {
+    return [self.pickerView selectedRowInComponent:0];
+}
+
+- (void)setSelectedRow:(NSInteger)selectedRow {
+    [self.pickerView selectRow:selectedRow inComponent:0 animated:false];
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithReuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    self.pickerView = [ICPickerView new];
+    
+    [self addSubview:self.pickerView];
+    
+    self.clipsToBounds = YES;
+    
     return self;
 }
 
@@ -20,16 +72,15 @@
     [super layoutSubviews];
     
     if (self.pickerView != nil) {
-        float width = self.contentView.frame.size.width;
+        CGFloat width = self.contentView.frame.size.width;
         self.pickerView.frame = CGRectMake(10, 0, width - 20, 162);
     }
 }
 
-- (void)setPickerView:(ICPickerView *)pickerView
-{
-    [self.pickerView removeFromSuperview];
-    _pickerView = pickerView;
-    [self.contentView addSubview:pickerView];
+- (void)prepareForReuse {
+    self.items = [[NSArray alloc] init];
+    self.delegate = nil;
+    self.dataSource = nil;
 }
 
 @end

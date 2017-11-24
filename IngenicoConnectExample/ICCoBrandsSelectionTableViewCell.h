@@ -13,4 +13,6 @@
 
 @interface ICCoBrandsSelectionTableViewCell : ICTableViewCell
 
++ (NSString *)reuseIdentifier;
+
 @end

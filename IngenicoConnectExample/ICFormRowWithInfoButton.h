@@ -7,12 +7,11 @@
 //
 
 #import <IngenicoConnectExample/ICFormRow.h>
+#import <IngenicoConnectExample/ICFormRowTooltip.h>
 
 @interface ICFormRowWithInfoButton : ICFormRow
 
-@property (nonatomic) BOOL showInfoButton;
-@property (nonatomic, strong) NSString *tooltipIdentifier;
-@property (strong, nonatomic) UIImage *tooltipImage;
-@property (strong, nonatomic) NSString *tooltipText;
+- (BOOL)showInfoButton;
+@property (nonatomic, strong) ICFormRowTooltip *tooltip;
 
 @end

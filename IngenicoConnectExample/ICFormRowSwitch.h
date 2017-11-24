@@ -12,7 +12,11 @@
 
 @interface ICFormRowSwitch : ICFormRowWithInfoButton
 
-@property (strong, nonatomic) ICSwitch* switchControl;
-@property (strong, nonatomic) NSString *text;
+- (instancetype _Nonnull)initWithTitle: (nonnull NSString *) title isOn: (BOOL)isOn target: (nonnull id)target action: (nonnull SEL)action;
+
+@property (nonatomic) BOOL isOn;
+@property (strong, nonatomic) NSString * _Nonnull title;
+@property (strong, nonatomic) id _Nonnull target;
+@property (assign, nonatomic) SEL _Nonnull action;
 
 @end

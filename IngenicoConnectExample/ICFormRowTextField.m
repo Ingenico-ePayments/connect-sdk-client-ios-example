@@ -10,4 +10,16 @@
 
 @implementation ICFormRowTextField
 
+- (instancetype _Nonnull)initWithPaymentProductField: (nonnull ICPaymentProductField *)paymentProductField field: (nonnull ICFormRowField*)field {
+    self = [super init];
+    
+    if (self) {
+        self.paymentProductField = paymentProductField;
+        self.field = field;
+    }
+    
+    return self;
+}
+
+
 @end

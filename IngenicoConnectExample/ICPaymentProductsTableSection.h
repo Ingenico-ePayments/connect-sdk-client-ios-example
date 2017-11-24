@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <IngenicoConnectExample/ICPaymentType.h>
+#import "ICPaymentType.h"
 
 @interface ICPaymentProductsTableSection : NSObject
 

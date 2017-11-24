@@ -14,6 +14,7 @@
 #import <IngenicoConnectSDK/ICSDKConstants.h>
 #import <IngenicoConnectExample/ICAppConstants.h>
 #import <IngenicoConnectExample/ICPaymentProductViewController.h>
+#import <IngenicoConnectExample/ICCardProductViewController.h>
 #import <IngenicoConnectExample/ICPaymentFinishedTarget.h>
 
 
@@ -22,5 +23,8 @@
 @property (weak, nonatomic) id <ICPaymentFinishedTarget> paymentFinishedTarget;
 
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController session:(ICSession *)session context:(ICPaymentContext *)context viewFactory:(ICViewFactory *)viewFactory;
+- (void)didSubmitPaymentRequest:(ICPaymentRequest *)paymentRequest success:(void (^)())succes failure:(void (^)())failure;
+
+- (void)showApplePaySheetForPaymentProduct:(ICPaymentProduct *)paymentProduct withAvailableNetworks:(ICPaymentProductNetworks *)paymentProductNetworks;
 
 @end

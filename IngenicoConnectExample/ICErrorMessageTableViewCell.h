@@ -10,6 +10,8 @@
 
 @interface ICErrorMessageTableViewCell : ICTableViewCell
 
++ (NSString *)reuseIdentifier;
+
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

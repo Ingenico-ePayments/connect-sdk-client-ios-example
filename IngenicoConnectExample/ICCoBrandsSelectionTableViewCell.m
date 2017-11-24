@@ -9,8 +9,10 @@
 #import <IngenicoConnectExample/ICCoBrandsSelectionTableViewCell.h>
 #import <IngenicoConnectSDK/ICSDKConstants.h>
 
-@implementation ICCoBrandsSelectionTableViewCell {
+@implementation ICCoBrandsSelectionTableViewCell
 
++ (NSString *)reuseIdentifier {
+    return @"co-brand-selection-cell";
 }
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
@@ -28,9 +30,17 @@
         self.textLabel.attributedText = [[NSAttributedString alloc] initWithString:cobrandsString
                                                                  attributes:underlineAttribute];
         self.textLabel.textAlignment = NSTextAlignmentRight;
+        
+        self.clipsToBounds = YES;
     }
 
     return self;
+}
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    CGFloat width = [super accessoryAndMarginCompatibleWidth];
+    CGFloat leftMargin = [super accessoryCompatibleLeftMargin];
+    self.textLabel.frame = CGRectMake(leftMargin, 4, width, self.textLabel.frame.size.height);;
 }
 
 @end

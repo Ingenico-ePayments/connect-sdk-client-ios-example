@@ -10,9 +10,9 @@
 
 @interface ICTooltipTableViewCell : ICTableViewCell
 
-@property (strong, nonatomic) UILabel *tooltipLabel;
-@property (strong, nonatomic) UIImage *tooltipImage;
++ (NSString *)reuseIdentifier;
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+@property (strong, nonatomic) NSString *label;
+@property (strong, nonatomic) UIImage *tooltipImage;
 
 @end

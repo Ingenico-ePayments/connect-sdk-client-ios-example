@@ -11,5 +11,18 @@
 @interface ICTableViewCell : UITableViewCell
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
-
+- (CGFloat)accessoryAndMarginCompatibleWidth;
+- (CGFloat)accessoryCompatibleLeftMargin;
 @end
+
+#import <IngenicoConnectExample/ICTooltipTableViewCell.h>
+#import <IngenicoConnectExample/ICPaymentProductTableViewCell.h>
+#import <IngenicoConnectExample/ICPickerViewTableViewCell.h>
+#import <IngenicoConnectExample/ICSwitchTableViewCell.h>
+#import <IngenicoConnectExample/ICTextFieldTableViewCell.h>
+#import <IngenicoConnectExample/ICButtonTableViewCell.h>
+#import <IngenicoConnectExample/ICErrorMessageTableViewCell.h>
+#import <IngenicoConnectExample/ICLabelTableViewCell.h>
+#import <IngenicoConnectExample/ICCurrencyTableViewCell.h>
+#import <IngenicoConnectExample/ICCoBrandsSelectionTableViewCell.h>
+#import <IngenicoConnectExample/ICCOBrandsExplanationTableViewCell.h>

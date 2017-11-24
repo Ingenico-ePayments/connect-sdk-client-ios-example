@@ -10,38 +10,67 @@
 
 @interface ICButtonTableViewCell ()
 
+@property (strong, nonatomic) ICButton *button;
+
 @end
 
 @implementation ICButtonTableViewCell
++ (NSString *)reuseIdentifier {
+    return @"button-cell";
+}
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
+- (ICButtonType)buttonType {
+    return self.button.type;
+}
+- (void)setButtonType:(ICButtonType)type {
+    self.button.type = type;
+}
+
+- (BOOL)isEnabled {
+    return self.button.enabled;
+}
+
+- (void)setIsEnabled:(BOOL)enabled {
+    self.button.enabled = enabled;
+}
+
+- (NSString *)title {
+    return [self.button titleForState:UIControlStateNormal];
+}
+- (void)setTitle:(NSString *)title {
+    [self.button setTitle:title forState:UIControlStateNormal];
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithReuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIScrollView *scrollView = (UIScrollView *)self.contentView.superview;
-        if ([scrollView respondsToSelector:@selector(setDelaysContentTouches:)] == YES) {
-            ((UIScrollView *)self.contentView.superview).delaysContentTouches = NO;
-        }
+        self.button = [[ICButton alloc] init];
+        [self addSubview:self.button];
+        self.buttonType = ICButtonTypePrimary;
+        self.clipsToBounds = YES;
     }
     return self;
+}
+
+
+- (void)setClickTarget:(id)target action:(SEL)action {
+    [self.button removeTarget: nil action: nil forControlEvents:UIControlEventAllEvents];
+    [self.button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (self.button != nil) {
-        float height = self.contentView.frame.size.height;
-        float width = self.contentView.frame.size.width;
+    CGFloat height = self.contentView.frame.size.height;
+    CGFloat width = [self accessoryAndMarginCompatibleWidth];
+    CGFloat leftMargin = [self accessoryCompatibleLeftMargin];
     
-        self.button.frame = CGRectMake(10, 4, width - 20, height - 8);
-    }
+    self.button.frame = CGRectMake(leftMargin, self.buttonType == ICButtonTypePrimary ? 12 : 6, width, height - 12);
 }
 
-- (void)setButton:(UIButton *)button
-{
-    [self.button removeFromSuperview];
-    _button = button;
-    [self addSubview:button];
+- (void)prepareForReuse {
+    [self.button removeTarget: nil action: nil forControlEvents:UIControlEventAllEvents];
 }
 
 @end

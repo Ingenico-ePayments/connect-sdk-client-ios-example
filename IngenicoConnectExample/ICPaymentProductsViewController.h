@@ -19,7 +19,7 @@
 @property (strong, nonatomic) ICViewFactory *viewFactory;
 @property (weak, nonatomic) id <ICPaymentProductSelectionTarget> target;
 @property (strong, nonatomic) ICPaymentItems *paymentItems;
-@property (nonatomic) NSUInteger amount;
+@property (nonatomic) NSInteger amount;
 @property (strong, nonatomic) NSString *currencyCode;
 
 @end

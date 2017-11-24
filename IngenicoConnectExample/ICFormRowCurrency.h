@@ -10,11 +10,11 @@
 #import <IngenicoConnectExample/ICIntegerTextField.h>
 #import <IngenicoConnectExample/ICFractionalTextField.h>
 #import <IngenicoConnectSDK/ICPaymentProductField.h>
-
+#import "ICFormRowField.h"
 @interface ICFormRowCurrency : ICFormRowWithInfoButton
 
-@property (strong, nonatomic) ICIntegerTextField *integerTextField;
-@property (strong, nonatomic) ICFractionalTextField *fractionalTextField;
+@property (strong, nonatomic) ICFormRowField *integerField;
+@property (strong, nonatomic) ICFormRowField *fractionalField;
 @property (strong, nonatomic) ICPaymentProductField *paymentProductField;
-
+- (instancetype)initWithPaymentProductField:(ICPaymentProductField *)paymentProductField andIntegerField:(ICFormRowField *)integerField andFractionalField:(ICFormRowField *)fractionalField;
 @end

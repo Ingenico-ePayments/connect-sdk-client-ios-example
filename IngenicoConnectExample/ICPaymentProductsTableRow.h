@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ICFormRow.h"
 
-@interface ICPaymentProductsTableRow : NSObject
+@interface ICPaymentProductsTableRow : ICFormRow
 
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSString *accountOnFileIdentifier;

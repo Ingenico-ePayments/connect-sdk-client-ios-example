@@ -10,12 +10,16 @@
 
 #import <IngenicoConnectSDK/ICPaymentRequest.h>
 #import <IngenicoConnectExample/ICViewFactory.h>
+#import <IngenicoConnectExample/ICFormRowErrorMessage.h>
+#import <IngenicoConnectSDK/ICValidationError.h>
 
 @class ICIINDetailsResponse;
 @class ICPaymentProductInputData;
 
 @interface ICFormRowsConverter : NSObject
 
-- (NSMutableArray *)formRowsFromInputData:(ICPaymentProductInputData *)inputData iinDetailsResponse:(ICIINDetailsResponse *)iinDetailsResponse validation:(BOOL)validation viewFactory:(ICViewFactory *)viewFactory confirmedPaymentProducts:(NSSet *)confirmedPaymentProducts;
++ (NSString *)errorMessageForError:(ICValidationError *)error withCurrency:(BOOL)forCurrency;
+
+- (NSMutableArray *)formRowsFromInputData:(ICPaymentProductInputData *)inputData viewFactory:(ICViewFactory *)viewFactory confirmedPaymentProducts:(NSSet *)confirmedPaymentProducts;
 
 @end

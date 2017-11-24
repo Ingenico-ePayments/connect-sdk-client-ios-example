@@ -19,39 +19,27 @@
 #import <IngenicoConnectExample/ICFormRowLabel.h>
 #import <IngenicoConnectExample/ICFormRowErrorMessage.h>
 #import <IngenicoConnectExample/ICFormRowTooltip.h>
-#import <IngenicoConnectExample/ICButtonTableViewCell.h>
-#import <IngenicoConnectExample/ICSwitchTableViewCell.h>
-#import <IngenicoConnectExample/ICTextFieldTableViewCell.h>
-#import <IngenicoConnectExample/ICCurrencyTableViewCell.h>
-#import <IngenicoConnectExample/ICPickerViewTableViewCell.h>
-#import <IngenicoConnectExample/ICLabelTableViewCell.h>
-#import <IngenicoConnectExample/ICErrorMessageTableViewCell.h>
-#import <IngenicoConnectExample/ICTooltipTableViewCell.h>
+#import <IngenicoConnectExample/ICTableViewCell.h>
 #import <IngenicoConnectExample/ICSummaryTableHeaderView.h>
 #import <IngenicoConnectExample/ICMerchantLogoImageView.h>
 #import <IngenicoConnectSDK/ICPaymentAmountOfMoney.h>
 #import <IngenicoConnectExample/ICFormRowCoBrandsSelection.h>
 #import <IngenicoConnectSDK/ICIINDetail.h>
 #import <IngenicoConnectExample/ICPaymentProductsTableRow.h>
-#import <IngenicoConnectExample/ICPaymentProductTableViewCell.h>
 #import <IngenicoConnectSDK/ICSDKConstants.h>
 #import <IngenicoConnectExample/ICFormRowCoBrandsExplanation.h>
-#import <IngenicoConnectExample/ICCOBrandsExplanationTableViewCell.h>
 #import <IngenicoConnectExample/ICPaymentProductInputData.h>
 
 @interface ICPaymentProductViewController () <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
-@property (strong, nonatomic) NSMutableArray *formRows;
 @property (strong, nonatomic) NSMutableArray *tooltipRows;
 @property (nonatomic) BOOL validation;
-@property (strong, nonatomic) NSMutableSet *confirmedPaymentProducts;
-@property (strong, nonatomic) ICPaymentProductInputData *inputData;
 @property (nonatomic) BOOL rememberPaymentDetails;
 @property (strong, nonatomic) ICSummaryTableHeaderView *header;
 @property (strong, nonatomic) UITextPosition *cursorPositionInCreditCardNumberTextField;
-@property (nonatomic) BOOL switching;
 @property (nonatomic, strong) ICIINDetailsResponse *iinDetailsResponse;
 @property (nonatomic, assign) BOOL coBrandsCollapsed;
+@property (strong, nonatomic) NSBundle *sdkBundle;
 
 @end
 
@@ -61,6 +49,12 @@
 
 {
     self = [super initWithStyle:UITableViewStylePlain];
+    
+    if (self) {
+        self.sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
+        self.context.forceBasicFlow = YES;
+    }
+    
     return self;
 }
 
@@ -91,12 +85,29 @@
     if ([self.paymentItem isKindOfClass:[ICPaymentProduct class]]) {
         ICPaymentProduct *product = (ICPaymentProduct *) self.paymentItem;
         [self.confirmedPaymentProducts addObject:product.identifier];
+        self.initialPaymentProduct = product;
     }
     
     [self initializeFormRows];
     
     self.switching = NO;
     self.coBrandsCollapsed = YES;
+    
+    [self registerReuseIdentifiers];
+}
+
+- (void)registerReuseIdentifiers {
+    [self.tableView registerClass:[ICTextFieldTableViewCell class] forCellReuseIdentifier:[ICTextFieldTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICButtonTableViewCell class] forCellReuseIdentifier:[ICButtonTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICCurrencyTableViewCell class] forCellReuseIdentifier:[ICCurrencyTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICSwitchTableViewCell class] forCellReuseIdentifier:[ICSwitchTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICLabelTableViewCell class] forCellReuseIdentifier:[ICLabelTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICPickerViewTableViewCell class] forCellReuseIdentifier:[ICPickerViewTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICErrorMessageTableViewCell class] forCellReuseIdentifier:[ICErrorMessageTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICTooltipTableViewCell class] forCellReuseIdentifier:[ICTooltipTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICPaymentProductTableViewCell class] forCellReuseIdentifier:[ICPaymentProductTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICCoBrandsSelectionTableViewCell class] forCellReuseIdentifier:[ICCoBrandsSelectionTableViewCell reuseIdentifier]];
+    [self.tableView registerClass:[ICCOBrandsExplanationTableViewCell class] forCellReuseIdentifier:[ICCOBrandsExplanationTableViewCell reuseIdentifier]];
 }
 
 - (void)initializeTapRecognizer
@@ -108,22 +119,22 @@
 
 - (void)tableViewTapped
 {
-    for (ICFormRow *element in self.formRows) {
-        if ([element class] == [ICFormRowTextField class]) {
-            ICFormRowTextField *formRowTextField = (ICFormRowTextField *)element;
-            if ([formRowTextField.textField isFirstResponder] == YES) {
-                [formRowTextField.textField resignFirstResponder];
-            }
-        } else if ([element class] == [ICFormRowCurrency class]) {
-            ICFormRowCurrency *formRowCurrency = (ICFormRowCurrency *)element;
-            if ([formRowCurrency.integerTextField isFirstResponder] == YES) {
-                [formRowCurrency.integerTextField resignFirstResponder];
-            }
-            if ([formRowCurrency.fractionalTextField isFirstResponder] == YES) {
-                [formRowCurrency.fractionalTextField resignFirstResponder];
-            }
-        }
-    }
+//    for (ICFormRow *element in self.formRows) {
+//        if ([element class] == [ICFormRowTextField class]) {
+//            ICFormRowTextField *formRowTextField = (ICFormRowTextField *)element;
+//            if ([formRowTextField.textField isFirstResponder] == YES) {
+//                [formRowTextField.textField resignFirstResponder];
+//            }
+//        } else if ([element class] == [ICFormRowCurrency class]) {
+//            ICFormRowCurrency *formRowCurrency = (ICFormRowCurrency *)element;
+//            if ([formRowCurrency.integerTextField isFirstResponder] == YES) {
+//                [formRowCurrency.integerTextField resignFirstResponder];
+//            }
+//            if ([formRowCurrency.fractionalTextField isFirstResponder] == YES) {
+//                [formRowCurrency.fractionalTextField resignFirstResponder];
+//            }
+//        }
+//    }
 }
 
 - (void)initializeHeader
@@ -143,71 +154,108 @@
 
 - (void)initializeFormRows
 {
-    [self updateFormRowsWithValidation:self.validation tooltipRows:self.tooltipRows confirmedPaymentProducts:self.confirmedPaymentProducts];
-}
-
-- (void)updateFormRowsWithValidation:(BOOL)validation tooltipRows:(NSArray *)tooltipRows confirmedPaymentProducts:(NSSet *)confirmedPaymentProducts
-{
-    ICFormRowsConverter *mapper = [[ICFormRowsConverter alloc] init];
-    NSArray *rows = [mapper formRowsFromInputData:self.inputData iinDetailsResponse:self.iinDetailsResponse validation:validation viewFactory:self.viewFactory confirmedPaymentProducts:confirmedPaymentProducts];
-    NSMutableArray *formRows = [[NSMutableArray alloc] initWithArray:rows];
-    
-    if ([self.paymentItem isKindOfClass:[ICPaymentProduct class]]) {
-        NSBundle *sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
-        ICPaymentProduct *product = (ICPaymentProduct *) self.paymentItem;
-        if (product.allowsTokenization == YES && product.autoTokenized == NO && self.accountOnFile == nil) {
-            ICFormRowSwitch *switchFormRow = [[ICFormRowSwitch alloc] init];
-            switchFormRow.switchControl = (ICSwitch *) [self.viewFactory switchWithType:ICSwitchType];
-            switchFormRow.text = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.rememberMe", kICSDKLocalizable, sdkBundle, @"Explanation of the switch for remembering payment information.");
-            switchFormRow.switchControl.on = self.rememberPaymentDetails;
-            
-            
-            switchFormRow.showInfoButton = YES;
-            switchFormRow.tooltipIdentifier = @"RememberMeTooltip";
-            switchFormRow.tooltipText = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.rememberMe.tooltip", kICSDKLocalizable, sdkBundle, nil);
-            [formRows addObject:switchFormRow];
-        }
-    }
+    ICFormRowsConverter *mapper = [ICFormRowsConverter new];
+    NSMutableArray *formRows = [mapper formRowsFromInputData: self.inputData viewFactory: self.viewFactory confirmedPaymentProducts: self.confirmedPaymentProducts];
     
     NSMutableArray *formRowsWithTooltip = [NSMutableArray new];
     for (ICFormRow *row in formRows) {
         [formRowsWithTooltip addObject:row];
-        if ([row class] == [ICFormRowTextField class]) {
-            ICFormRowTextField *textFieldRow = (ICFormRowTextField *)row;
-            
-            if ([textFieldRow.paymentProductField.identifier isEqualToString:@"cardNumber"]) {
-                textFieldRow.textField.text = [textFieldRow.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                [self addCoBrandFormsInFormRows:formRowsWithTooltip iinDetailsResponse:self.iinDetailsResponse];
-            }
-        }
-        if ([[row class] isSubclassOfClass:[ICFormRowWithInfoButton class]]) {
+        if (row != nil && [row isKindOfClass: [ICFormRowWithInfoButton class]]) {
             ICFormRowWithInfoButton *infoButtonRow = (ICFormRowWithInfoButton *)row;
-            for (ICFormRowTooltip *tooltipRow in tooltipRows) {
-                if ([tooltipRow.tooltipIdentifier isEqualToString:infoButtonRow.tooltipIdentifier]) {
-                    [formRowsWithTooltip addObject:tooltipRow];
-                }
+            if (infoButtonRow.tooltip != nil) {
+                ICFormRowTooltip *tooltipRow = infoButtonRow.tooltip;
+                [formRowsWithTooltip addObject:tooltipRow];
             }
         }
     }
     
     self.formRows = formRowsWithTooltip;
-    NSBundle *sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
     
-    ICFormRowButton *payButtonFormRow = [[ICFormRowButton alloc] init];
-    NSString *payButtonTitle = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.payButton", kICSDKLocalizable, sdkBundle, @"Title of the pay button on the payment product screen.");
-    UIButton* payButton = [self.viewFactory buttonWithType:ICPrimaryButtonType];
-    [payButton setTitle:payButtonTitle forState:UIControlStateNormal];
-    [payButton addTarget:self action:@selector(payButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    payButtonFormRow.button = payButton;
+    // Add remember me switch
+    ICFormRowSwitch *switchFormRow = [[ICFormRowSwitch alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.rememberMe", kICSDKLocalizable, self.sdkBundle, @"Explanation of the switch for remembering payment information.") isOn:self.rememberPaymentDetails target:self action: @selector(switchChanged:)];
+    switchFormRow.isEnabled = false;
+    [self.formRows addObject:switchFormRow];
+    
+    ICFormRowTooltip *switchFormRowTooltip = [ICFormRowTooltip new];
+    switchFormRowTooltip.text = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.rememberMe.tooltip", kICSDKLocalizable, self.sdkBundle, @"");
+    switchFormRow.tooltip = switchFormRowTooltip;
+    [self.formRows addObject:switchFormRowTooltip];
+    
+    // Add pay and cancel button
+    NSString *payButtonTitle = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.payButton", kICSDKLocalizable, self.sdkBundle, @"");
+    ICFormRowButton *payButtonFormRow = [[ICFormRowButton alloc] initWithTitle: payButtonTitle target: self action: @selector(payButtonTapped)];
+    payButtonFormRow.isEnabled = [self.paymentItem isKindOfClass:[ICPaymentProduct class]];
     [self.formRows addObject:payButtonFormRow];
     
-    ICFormRowButton *cancelButtonFormRow = [[ICFormRowButton alloc] init];
-    NSString *cancelButtonTitle = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.cancelButton", kICSDKLocalizable, sdkBundle, @"Title of the cancel button on the payment product screen.");
-    UIButton* cancelButton = [self.viewFactory buttonWithType:ICSecondaryButtonType];
-    [cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
-    [cancelButton addTarget:self action:@selector(cancelButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    cancelButtonFormRow.button = cancelButton;
+    NSString *cancelButtonTitle = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.cancelButton", kICSDKLocalizable, self.sdkBundle, @"");
+    ICFormRowButton *cancelButtonFormRow = [[ICFormRowButton alloc] initWithTitle: cancelButtonTitle target: self action: @selector(cancelButtonTapped)];
+    cancelButtonFormRow.buttonType = ICButtonTypeSecondary;
+    cancelButtonFormRow.isEnabled = true;
     [self.formRows addObject:cancelButtonFormRow];
+}
+
+- (void)updateFormRowsWithValidation:(BOOL)validation tooltipRows:(NSArray *)tooltipRows confirmedPaymentProducts:(NSSet *)confirmedPaymentProducts
+{
+//    ICFormRowsConverter *mapper = [[ICFormRowsConverter alloc] init];
+//    NSArray *rows = [mapper formRowsFromInputData:self.inputData iinDetailsResponse:self.iinDetailsResponse validation:validation viewFactory:self.viewFactory confirmedPaymentProducts:confirmedPaymentProducts];
+//    NSMutableArray *formRows = [[NSMutableArray alloc] initWithArray:rows];
+//    
+//    if ([self.paymentItem isKindOfClass:[ICPaymentProduct class]]) {
+//        NSBundle *sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
+//        ICPaymentProduct *product = (ICPaymentProduct *) self.paymentItem;
+//        if (product.allowsTokenization == YES && product.autoTokenized == NO && self.accountOnFile == nil) {
+//            ICFormRowSwitch *switchFormRow = [[ICFormRowSwitch alloc] init];
+//            switchFormRow.switchControl = (ICSwitch *) [self.viewFactory switchWithType:ICSwitchType];
+//            switchFormRow.text = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.rememberMe", kICSDKLocalizable, sdkBundle, @"Explanation of the switch for remembering payment information.");
+//            switchFormRow.switchControl.on = self.rememberPaymentDetails;
+//            
+//            
+//            switchFormRow.showInfoButton = YES;
+//            switchFormRow.tooltipIdentifier = @"RememberMeTooltip";
+//            switchFormRow.tooltipText = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.rememberMe.tooltip", kICSDKLocalizable, sdkBundle, nil);
+//            [formRows addObject:switchFormRow];
+//        }
+//    }
+//    
+//    NSMutableArray *formRowsWithTooltip = [NSMutableArray new];
+//    for (ICFormRow *row in formRows) {
+//        [formRowsWithTooltip addObject:row];
+//        if ([row class] == [ICFormRowTextField class]) {
+//            ICFormRowTextField *textFieldRow = (ICFormRowTextField *)row;
+//            
+//            if ([textFieldRow.paymentProductField.identifier isEqualToString:@"cardNumber"]) {
+//                textFieldRow.textField.text = [textFieldRow.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//                [self addCoBrandFormsInFormRows:formRowsWithTooltip iinDetailsResponse:self.iinDetailsResponse];
+//            }
+//        }
+//        if ([[row class] isSubclassOfClass:[ICFormRowWithInfoButton class]]) {
+//            ICFormRowWithInfoButton *infoButtonRow = (ICFormRowWithInfoButton *)row;
+//            for (ICFormRowTooltip *tooltipRow in tooltipRows) {
+//                if ([tooltipRow.tooltipIdentifier isEqualToString:infoButtonRow.tooltipIdentifier]) {
+//                    [formRowsWithTooltip addObject:tooltipRow];
+//                }
+//            }
+//        }
+//    }
+//    
+//    self.formRows = formRowsWithTooltip;
+//    NSBundle *sdkBundle = [NSBundle bundleWithPath:kICSDKBundlePath];
+//    
+//    ICFormRowButton *payButtonFormRow = [[ICFormRowButton alloc] init];
+//    NSString *payButtonTitle = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.payButton", kICSDKLocalizable, sdkBundle, @"Title of the pay button on the payment product screen.");
+//    UIButton* payButton = [self.viewFactory buttonWithType:ICPrimaryButtonType];
+//    [payButton setTitle:payButtonTitle forState:UIControlStateNormal];
+//    [payButton addTarget:self action:@selector(payButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//    payButtonFormRow.button = payButton;
+//    [self.formRows addObject:payButtonFormRow];
+//    
+//    ICFormRowButton *cancelButtonFormRow = [[ICFormRowButton alloc] init];
+//    NSString *cancelButtonTitle = NSLocalizedStringFromTableInBundle(@"gc.app.paymentProductDetails.cancelButton", kICSDKLocalizable, sdkBundle, @"Title of the cancel button on the payment product screen.");
+//    UIButton* cancelButton = [self.viewFactory buttonWithType:ICSecondaryButtonType];
+//    [cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
+//    [cancelButton addTarget:self action:@selector(cancelButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//    cancelButtonFormRow.button = cancelButton;
+//    [self.formRows addObject:cancelButtonFormRow];
 }
 
 - (void)addCoBrandFormsInFormRows:(NSMutableArray *)formRows iinDetailsResponse:(ICIINDetailsResponse *)iinDetailsResponse {
@@ -257,7 +305,7 @@
         }
         [self updateFormRows];
     }
-    else if ([paymentProductId isEqualToString:self.paymentItem.identifier] == YES) {
+    else if ([paymentProductId isEqualToString:self.paymentItem.identifier]) {
         [self updateFormRows];
     }
     else if (self.switching == NO) {
@@ -273,11 +321,40 @@
 }
 
 -(void)updateFormRows {
-    self.coBrandsCollapsed = YES;
-    [self updateFormRowsWithValidation:NO tooltipRows:self.tooltipRows confirmedPaymentProducts:self.confirmedPaymentProducts];
-    [self.tableView reloadData];
-    [self resetCardNumberTextField];
+    [self.tableView beginUpdates];
+    for (int i = 0; i < self.formRows.count; i++) {
+        ICFormRow *row = self.formRows[i];
+        if ([row isKindOfClass:[ICFormRowTextField class]]) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            if (cell != nil && [cell isKindOfClass:[ICTextFieldTableViewCell class]]) {
+                [self updateTextFieldCell: (ICTextFieldTableViewCell *)cell row: (ICFormRowTextField *)row];
+            }
+        } else if ([row isKindOfClass:[ICFormRowSwitch class]] && ((ICFormRowSwitch *)row).action == @selector(switchChanged:)) {
+            row.isEnabled = self.paymentItem != nil && [self.paymentItem isKindOfClass:[ICBasicPaymentProduct class]] && ((ICBasicPaymentProduct *)self.paymentItem).allowsTokenization && !((ICBasicPaymentProduct *)self.paymentItem).autoTokenized && self.accountOnFile == nil;
+        } else if ([row isKindOfClass:[ICFormRowButton class]] &&  ((ICFormRowButton *)row).action == @selector(payButtonTapped)) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            if (cell != nil && [cell isKindOfClass:[ICButtonTableViewCell class]]) {
+                row.isEnabled = [self.paymentItem isKindOfClass:[ICPaymentProduct class]];
+                [self updateButtonCell: (ICButtonTableViewCell *)cell row: (ICFormRowButton *)row];
+            }
+        }
+    }
+    [self.tableView endUpdates];
     
+}
+
+- (void)updateTextFieldCell:(ICTextFieldTableViewCell *)cell row: (ICFormRowTextField *)row {
+    // Add error messages for cells
+    ICValidationError *error = [row.paymentProductField.errors firstObject];
+    if (error != nil) {
+        cell.error = [ICFormRowsConverter errorMessageForError: error withCurrency: row.paymentProductField.displayHints.formElement.type == ICCurrencyType];
+    } else {
+        cell.error = nil;
+    }
+}
+    
+- (void)updateButtonCell:(ICButtonTableViewCell *)cell row:(ICFormRowButton *)row {
+    cell.isEnabled = row.isEnabled;
 }
 
 #pragma mark - Table view data source
@@ -292,36 +369,41 @@
     return self.formRows.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ICFormRow *row = self.formRows[indexPath.row];
+// TODO: indexPah argument is not used, maybe replace it with tableView
+- (ICTableViewCell *)formRowCellForRow:(ICFormRow *)row atIndexPath:(NSIndexPath *)indexPath {
     Class class = [row class];
-    ICTableViewCell *cell;
+    ICTableViewCell *cell = nil;
     if (class == [ICFormRowTextField class]) {
-        cell = [self cellForTextField:(ICFormRowTextField *)row tableView:tableView];
+        cell = [self cellForTextField:(ICFormRowTextField *)row tableView:self.tableView];
     } else if (class == [ICFormRowCurrency class]) {
-        cell = [self cellForCurrency:(ICFormRowCurrency *) row tableView:tableView];
+        cell = [self cellForCurrency:(ICFormRowCurrency *) row tableView:self.tableView];
     } else if (class == [ICFormRowSwitch class]) {
-        cell = [self cellForSwitch:(ICFormRowSwitch *)row tableView:tableView];
+        cell = [self cellForSwitch:(ICFormRowSwitch *)row tableView:self.tableView];
     } else if (class == [ICFormRowList class]) {
-        cell = [self cellForList:(ICFormRowList *)row tableView:tableView];
+        cell = [self cellForList:(ICFormRowList *)row tableView:self.tableView];
     } else if (class == [ICFormRowButton class]) {
-        cell = [self cellForButton:(ICFormRowButton *)row tableView:tableView];
+        cell = [self cellForButton:(ICFormRowButton *)row tableView:self.tableView];
     } else if (class == [ICFormRowLabel class]) {
-        cell = [self cellForLabel:(ICFormRowLabel *)row tableView:tableView];
+        cell = [self cellForLabel:(ICFormRowLabel *)row tableView:self.tableView];
     } else if (class == [ICFormRowErrorMessage class]) {
-        cell = [self cellForErrorMessage:(ICFormRowErrorMessage *)row tableView:tableView];
+        cell = [self cellForErrorMessage:(ICFormRowErrorMessage *)row tableView:self.tableView];
     } else if (class == [ICFormRowTooltip class]) {
-        cell = [self cellForTooltip:(ICFormRowTooltip *)row tableView:tableView];
+        cell = [self cellForTooltip:(ICFormRowTooltip *)row tableView:self.tableView];
     } else if (class == [ICFormRowCoBrandsSelection class]) {
-        cell = [self cellForCoBrandsSelection:(ICFormRowCoBrandsSelection *)row tableView:tableView];
+        cell = [self cellForCoBrandsSelection:(ICFormRowCoBrandsSelection *)row tableView:self.tableView];
     } else if (class == [ICFormRowCoBrandsExplanation class]) {
-        cell = [self cellForCoBrandsExplanation:(ICFormRowCoBrandsExplanation  *)row tableView:tableView];
+        cell = [self cellForCoBrandsExplanation:(ICFormRowCoBrandsExplanation  *)row tableView:self.tableView];
     } else if (class == [ICPaymentProductsTableRow class]) {
-        cell = [self cellForPaymentProduct:(ICPaymentProductsTableRow  *)row tableView:tableView];
+        cell = [self cellForPaymentProduct:(ICPaymentProductsTableRow  *)row tableView:self.tableView];
     } else {
         [NSException raise:@"Invalid form row class" format:@"Form row class %@ is invalid", class];
     }
+    return cell;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ICFormRow *row = self.formRows[indexPath.row];
+    ICTableViewCell *cell = [self formRowCellForRow:row atIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -330,146 +412,92 @@
 
 - (ICTextFieldTableViewCell *)cellForTextField:(ICFormRowTextField *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"text-field-cell";
-    ICTextFieldTableViewCell *cell = (ICTextFieldTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICTextFieldTableViewCell *)[self.viewFactory tableViewCellWithType:ICTextFieldTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
-    cell.textField = row.textField;
-    cell.textField.delegate = self;
-    if (row.showInfoButton == YES) {
-        cell.accessoryType = UITableViewCellAccessoryDetailButton;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    ICTextFieldTableViewCell *cell = (ICTextFieldTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICTextFieldTableViewCell reuseIdentifier]];
+    
+    cell.field = row.field;
+    cell.delegate = self;
+    cell.accessoryType = row.showInfoButton ? UITableViewCellAccessoryDetailButton : UITableViewCellAccessoryNone;
+    
     return cell;
 }
 
 - (ICCurrencyTableViewCell *)cellForCurrency:(ICFormRowCurrency *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"currency-text-field-cell";
-    ICCurrencyTableViewCell *cell = (ICCurrencyTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICCurrencyTableViewCell *)[self.viewFactory tableViewCellWithType:ICCurrencyTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
-    cell.integerTextField = row.integerTextField;
-    cell.integerTextField.delegate = self;
-    cell.fractionalTextField = row.fractionalTextField;
-    cell.fractionalTextField.delegate = self;
-    cell.currencyCode = self.context.amountOfMoney.currencyCode;
-    if (row.showInfoButton == YES) {
-        cell.accessoryType = UITableViewCellAccessoryDetailButton;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    ICCurrencyTableViewCell *cell = (ICCurrencyTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICCurrencyTableViewCell reuseIdentifier]];
+    cell.integerField = row.integerField;
+    cell.delegate = self;
+    cell.fractionalField = row.fractionalField;
+    cell.accessoryType = row.showInfoButton ? UITableViewCellAccessoryDetailButton : UITableViewCellAccessoryNone;
     return cell;
 }
 
 - (ICSwitchTableViewCell *)cellForSwitch:(ICFormRowSwitch *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"switch-cell";
-    ICSwitchTableViewCell *cell = (ICSwitchTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICSwitchTableViewCell *)[self.viewFactory tableViewCellWithType:ICSwitchTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
-    cell.switchControl = row.switchControl;
-    cell.textLabel.text = row.text;
-    [cell.switchControl addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-    if (row.showInfoButton == YES) {
-        cell.accessoryType = UITableViewCellAccessoryDetailButton;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+    ICSwitchTableViewCell *cell = (ICSwitchTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICSwitchTableViewCell reuseIdentifier]];
+    cell.title = row.title;
+    [cell setSwitchTarget:row.target action:row.action];
+    cell.accessoryType = row.showInfoButton ? UITableViewCellAccessoryDetailButton : UITableViewCellAccessoryNone;
     return cell;
 }
 
 - (ICPickerViewTableViewCell *)cellForList:(ICFormRowList *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"picker-view-cell";
-    ICPickerViewTableViewCell *cell = (ICPickerViewTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICPickerViewTableViewCell *)[self.viewFactory tableViewCellWithType:ICPickerViewTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
-    cell.pickerView = row.pickerView;
-    cell.pickerView.delegate = self;
-    cell.pickerView.dataSource = self;
-    [cell.pickerView selectRow:row.selectedRow inComponent:0 animated:NO];
+    ICPickerViewTableViewCell *cell = (ICPickerViewTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICPickerViewTableViewCell reuseIdentifier]];
+    cell.items = row.items;
+    cell.delegate = self;
+    cell.dataSource = self;
+    cell.selectedRow = row.selectedRow;
     return cell;
 }
 
 - (ICButtonTableViewCell *)cellForButton:(ICFormRowButton *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"button-cell";
-    ICButtonTableViewCell *cell = (ICButtonTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICButtonTableViewCell *)[self.viewFactory tableViewCellWithType:ICButtonTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
-    cell.button = row.button;
+    ICButtonTableViewCell *cell = (ICButtonTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICButtonTableViewCell reuseIdentifier]];
+    cell.buttonType = row.buttonType;
+    cell.isEnabled = row.isEnabled;
+    cell.title = row.title;
+    [cell setClickTarget:row.target action:row.action];
     return cell;
 }
 
 - (ICLabelTableViewCell *)cellForLabel:(ICFormRowLabel *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"label-cell";
-    ICLabelTableViewCell *cell = (ICLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICLabelTableViewCell *)[self.viewFactory tableViewCellWithType:ICLabelTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
-    cell.label = row.label;
+    ICLabelTableViewCell *cell = (ICLabelTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICLabelTableViewCell reuseIdentifier]];
+    cell.label = row.text;
     return cell;
 }
 
 - (ICErrorMessageTableViewCell *)cellForErrorMessage:(ICFormRowErrorMessage *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"error-cell";
-    ICErrorMessageTableViewCell *cell = (ICErrorMessageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICErrorMessageTableViewCell *)[self.viewFactory tableViewCellWithType:ICErrorMessageTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
-    cell.textLabel.text = row.errorMessage;
+    ICErrorMessageTableViewCell *cell = (ICErrorMessageTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICErrorMessageTableViewCell reuseIdentifier]];
+    cell.textLabel.text = row.text;
     return cell;
 }
 
 - (ICTooltipTableViewCell *)cellForTooltip:(ICFormRowTooltip *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"info-cell";
-    ICTooltipTableViewCell *cell = (ICTooltipTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICTooltipTableViewCell *)[self.viewFactory tableViewCellWithType:ICTooltipTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
-    cell.tooltipLabel.text = row.tooltipText;
-    cell.tooltipImage = row.tooltipImage;
+    ICTooltipTableViewCell *cell = (ICTooltipTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICTooltipTableViewCell reuseIdentifier]];
+    cell.label = row.text;
+    cell.tooltipImage = row.image;
     return cell;
 }
 
 - (ICCoBrandsSelectionTableViewCell *)cellForCoBrandsSelection:(ICFormRowCoBrandsSelection *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"co-brand-selection-cell";
-    ICCoBrandsSelectionTableViewCell *cell = (ICCoBrandsSelectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICCoBrandsSelectionTableViewCell *)[self.viewFactory tableViewCellWithType:ICCoBrandsSelectionTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
+    ICCoBrandsSelectionTableViewCell *cell = (ICCoBrandsSelectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICCoBrandsSelectionTableViewCell reuseIdentifier]];
     return cell;
 }
 
 
 - (ICCOBrandsExplanationTableViewCell *)cellForCoBrandsExplanation:(ICFormRowCoBrandsExplanation *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"co-brand-explanation-cell";
-    ICCOBrandsExplanationTableViewCell *cell = (ICCOBrandsExplanationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICCOBrandsExplanationTableViewCell *)[self.viewFactory tableViewCellWithType:ICCoBrandsExplanationTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
+    ICCOBrandsExplanationTableViewCell *cell = (ICCOBrandsExplanationTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICCOBrandsExplanationTableViewCell reuseIdentifier]];
     return cell;
 }
 
 - (ICPaymentProductTableViewCell *)cellForPaymentProduct:(ICPaymentProductsTableRow *)row tableView:(UITableView *)tableView
 {
-    NSString *reuseIdentifier = @"payment-product-selection-cell";
-    ICPaymentProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = (ICPaymentProductTableViewCell *)[self.viewFactory tableViewCellWithType:ICPaymentProductTableViewCellType reuseIdentifier:reuseIdentifier];
-    }
+    ICPaymentProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[ICPaymentProductTableViewCell reuseIdentifier]];
     cell.name = row.name;
     cell.logo = row.logo;
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -481,21 +509,37 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ICFormRow *row = self.formRows[indexPath.row];
-    Class class = [row class];
-    if (class == [ICFormRowList class]) {
+    
+    if ([row isKindOfClass:[ICFormRowList class]]) {
         return 162.5;
-    } else if (class == [ICFormRowTooltip class]) {
-        ICFormRowTooltip *tooltipRow = (ICFormRowTooltip *)row;
-        return tooltipRow.tooltipImage == nil?40:160;
-    } else if (class == [ICFormRowCoBrandsSelection class]) {
-        return 30;
-    } else if (class == [ICFormRowCoBrandsExplanation class]) {
-        NSAttributedString *cellString = [ICCOBrandsExplanationTableViewCell cellString];
-        CGRect rect = [cellString boundingRectWithSize:CGSizeMake(tableView.bounds.size.width, CGFLOAT_MAX)
-                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                               context:nil];
-        return rect.size.height + 20;
     }
+    // Rows that you can toggle
+    else if ([row isKindOfClass:[ICFormRowTooltip class]] && !row.isEnabled) {
+        return 0;
+    }
+    else if ([row isKindOfClass:[ICFormRowSwitch class]] && ((ICFormRowSwitch *)row).action == @selector(switchChanged:) && !row.isEnabled) {
+        return 0;
+    }
+    else if ([row isKindOfClass:[ICFormRowTooltip class]] && ((ICFormRowTooltip *)row).image != nil) {
+        return 145;
+    }
+    else if ([row isKindOfClass:[ICFormRowLabel class]]) {
+        CGFloat tableWidth = tableView.frame.size.width;
+        CGFloat height = [ICLabelTableViewCell cellSizeForWidth:MIN(320, tableWidth) forFormRow:(ICFormRowLabel *)row].height;
+        return height;
+    } else if ([row isKindOfClass:[ICFormRowButton class]]) {
+        return 52;
+    } else if ([row isKindOfClass:[ICFormRowTextField class]] && ((ICFormRowTextField *)row).paymentProductField.errors.count > 0) {
+        CGFloat width = tableView.bounds.size.width - 20;
+        ICFormRowTextField *textfieldRow = (ICFormRowTextField *)row;
+        if (textfieldRow.showInfoButton) {
+            width -= 48;
+        }
+        NSAttributedString *str = [[NSAttributedString alloc] initWithString: [ICFormRowsConverter errorMessageForError: [textfieldRow.paymentProductField.errors firstObject]  withCurrency: textfieldRow.paymentProductField.displayHints.formElement.type == ICCurrencyType]];
+        
+        return 44 + [str boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options: NSStringDrawingUsesLineFragmentOrigin context: nil].size.height;
+    }
+    
     return 44;
 }
 
@@ -512,34 +556,21 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    ICFormRowWithInfoButton *infoButtonRow = (ICFormRowWithInfoButton *)self.formRows[indexPath.row];
-    
-    NSMutableArray *newTooltipRows = [[NSMutableArray alloc] init];
-    BOOL found = NO;
-    for (ICFormRowTooltip *tooltipRow in self.tooltipRows) {
-        if (![tooltipRow.tooltipIdentifier isEqualToString: infoButtonRow.tooltipIdentifier]) {
-            [newTooltipRows addObject:tooltipRow];
-        } else {
-            found = YES;
-        }
+    ICFormRow *formRow = self.formRows[indexPath.row + 1];
+    if ([formRow isKindOfClass:[ICFormRowTooltip class]]) {
+        
+        formRow.isEnabled = !formRow.isEnabled;
+        
+        [tableView beginUpdates];
+        [tableView endUpdates];
     }
-    if (found == NO) {
-        ICFormRowTooltip *tooltipRow = [[ICFormRowTooltip alloc] init];
-        tooltipRow.tooltipIdentifier = infoButtonRow.tooltipIdentifier;
-        tooltipRow.tooltipImage = infoButtonRow.tooltipImage;
-        tooltipRow.tooltipText = infoButtonRow.tooltipText;
-        [newTooltipRows addObject:tooltipRow];
-    }
-    self.tooltipRows = newTooltipRows;
-    [self updateFormRowsWithValidation:self.validation tooltipRows:self.tooltipRows confirmedPaymentProducts:self.confirmedPaymentProducts];
-    [self.tableView reloadData];
 }
 
 #pragma mark TextField delegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    BOOL result;
+    BOOL result = false;
     if ([textField class] == [ICTextField class]) {
         result = [self standardTextField:(ICTextField *)textField shouldChangeCharactersInRange:range replacementString:string];
     } else if ([textField class] == [ICIntegerTextField class]) {
@@ -547,58 +578,54 @@
     } else if ([textField class] == [ICFractionalTextField class]) {
         result = [self fractionalTextField:(ICFractionalTextField *)textField shouldChangeCharactersInRange:range replacementString:string];
     }
+    
+    if (self.validation) {
+        [self validateData];
+    }
+    
     return result;
 }
-
+-(void)formatAndUpdateCharactersFromTextField:(UITextField *)textField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath {
+    ICFormRowTextField *row = (ICFormRowTextField *)self.formRows[indexPath.row];
+    NSMutableCharacterSet *trimSet = [NSMutableCharacterSet characterSetWithCharactersInString:@" /-_"];
+    NSString *formattedString = [[self.inputData maskedValueForField:row.paymentProductField.identifier cursorPosition:position] stringByTrimmingCharactersInSet: trimSet];
+    row.field.text = formattedString;
+    textField.text = formattedString;
+    *position = MIN(*position, formattedString.length);
+    UITextPosition *cursorPositionInTextField = [textField positionFromPosition:textField.beginningOfDocument offset:*position];
+    [textField setSelectedTextRange:[textField textRangeFromPosition:cursorPositionInTextField toPosition:cursorPositionInTextField]];
+}
 - (BOOL)standardTextField:(ICTextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    ICFormRowTextField *row = [self formRowWithTextField:textField];
+    if (![textField.superview isKindOfClass:[UITableViewCell class]]) {
+        return NO;
+    }
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)textField.superview];
+    if (indexPath == nil || ![self.formRows[indexPath.row] isKindOfClass:[ICFormRowTextField class]]) {
+        return NO;
+    }
+    ICFormRowTextField *row = (ICFormRowTextField *)self.formRows[indexPath.row];
+    
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     [self.inputData setValue:newString forField:row.paymentProductField.identifier];
+    row.field.text = [self.inputData maskedValueForField:row.paymentProductField.identifier];
     NSInteger cursorPosition = range.location + string.length;
-    NSMutableCharacterSet *trimSet = [NSMutableCharacterSet characterSetWithCharactersInString:@" /-_"];
-    NSString *formattedString = [[self.inputData maskedValueForField:row.paymentProductField.identifier cursorPosition:&cursorPosition] stringByTrimmingCharactersInSet: trimSet];
-    textField.text = formattedString;
-    cursorPosition = MIN(cursorPosition, formattedString.length);
-    UITextPosition *cursorPositionInTextField = [textField positionFromPosition:textField.beginningOfDocument offset:cursorPosition];
-    [textField setSelectedTextRange:[textField textRangeFromPosition:cursorPositionInTextField toPosition:cursorPositionInTextField]];
-    
-    if ([row.paymentProductField.identifier isEqualToString:@"cardNumber"]) {
-        NSString *unmasked = [self.inputData unmaskedValueForField:row.paymentProductField.identifier];
-        if (unmasked.length >= 6 && cursorPosition <= 7) {
-            unmasked = [unmasked substringToIndex:6];
-            
-            [self.session IINDetailsForPartialCreditCardNumber:unmasked context:self.context success:^(ICIINDetailsResponse *response) {
-                self.iinDetailsResponse = response;
-                if (response.status == ICSupported) {
-                    BOOL coBrandSelected = NO;
-                    for (ICIINDetail *coBrand in response.coBrands) {
-                        if ([coBrand.paymentProductId isEqualToString:self.paymentItem.identifier]) {
-                            coBrandSelected = YES;
-                        }
-                    }
-                    if (coBrandSelected == NO) {
-                        [self switchToPaymentProduct:response.paymentProductId];
-                    }
-                    else {
-                        [self switchToPaymentProduct:self.paymentItem.identifier];
-                    }
-                }
-                else {
-                    [self switchToPaymentProduct:nil];
-                }
-            }                                          failure:^(NSError *error) {
-            }];
-        }
-    }
-        return NO;
+    [self formatAndUpdateCharactersFromTextField:textField cursorPosition:&cursorPosition indexPath:indexPath];
+    return NO;
 }
 
 - (BOOL)integerTextField:(ICIntegerTextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    ICFormRowCurrency *row = [self formRowWithIntegerTextField:textField];
+    if (![textField.superview isKindOfClass:[UITableViewCell class]]) {
+        return NO;
+    }
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)textField.superview];
+    if (indexPath == nil || ![self.formRows[indexPath.row] isKindOfClass:[ICFormRowCurrency class]]) {
+        return NO;
+    }
+    ICFormRowCurrency *row = (ICFormRowCurrency *)self.formRows[indexPath.row];
     NSString *integerString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSString *fractionalString = row.fractionalTextField.text;
+    NSString *fractionalString = row.fractionalField.text;
     
     if (integerString.length > 16) {
         return NO;
@@ -615,8 +642,15 @@
 
 - (BOOL)fractionalTextField:(ICFractionalTextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    ICFormRowCurrency *row = [self formRowWithFractionalTextField:textField];
-    NSString *integerString = row.integerTextField.text;
+    if (![textField.superview isKindOfClass:[UITableViewCell class]]) {
+        return NO;
+    }
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)textField.superview];
+    if (indexPath == nil || ![self.formRows[indexPath.row] isKindOfClass:[ICFormRowCurrency class]]) {
+        return NO;
+    }
+    ICFormRowCurrency *row = (ICFormRowCurrency *)self.formRows[indexPath.row];
+    NSString *integerString = row.integerField.text;
     NSString *fractionalString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     if (fractionalString.length > 2) {
@@ -647,8 +681,8 @@
 
 - (void)updateRowWithCurrencyValue:(NSString *)currencyValue formRowCurrency:(ICFormRowCurrency *)formRowCurrency
 {
-    formRowCurrency.integerTextField.text = [currencyValue substringToIndex:currencyValue.length - 2];
-    formRowCurrency.fractionalTextField.text = [currencyValue substringFromIndex:currencyValue.length - 2];
+    formRowCurrency.integerField.text = [currencyValue substringToIndex:currencyValue.length - 2];
+    formRowCurrency.fractionalField.text = [currencyValue substringFromIndex:currencyValue.length - 2];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -656,21 +690,26 @@
     return NO;
 }
 
+- (void)validateData {
+    [self.inputData validate];
+    [self updateFormRows];
+}
+
 #pragma mark TextField delegate helper methods
 
 - (void)resetCardNumberTextField
 {
-    for (ICFormRow *row in self.formRows) {
-        if ([row class] == [ICFormRowTextField class]) {
-            ICFormRowTextField *textFieldRow = (ICFormRowTextField *)row;
-            if ([textFieldRow.paymentProductField.identifier isEqualToString:@"cardNumber"] == YES) {
-                textFieldRow.textField.rightView = textFieldRow.logo;
-                ICTextField *textField = textFieldRow.textField;
-                [textField setSelectedTextRange:[textField textRangeFromPosition:self.cursorPositionInCreditCardNumberTextField toPosition:self.cursorPositionInCreditCardNumberTextField]];
-                [textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.01f];
-            }
-        }
-    }
+//    for (ICFormRow *row in self.formRows) {
+//        if ([row class] == [ICFormRowTextField class]) {
+//            ICFormRowTextField *textFieldRow = (ICFormRowTextField *)row;
+//            if ([textFieldRow.paymentProductField.identifier isEqualToString:@"cardNumber"] == YES) {
+//                textFieldRow.textField.rightView = textFieldRow.logo;
+//                ICTextField *textField = textFieldRow.textField;
+//                [textField setSelectedTextRange:[textField textRangeFromPosition:self.cursorPositionInCreditCardNumberTextField toPosition:self.cursorPositionInCreditCardNumberTextField]];
+//                [textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.01f];
+//            }
+//        }
+//    }
 }
 
 #pragma mark Picker view delegate
@@ -694,11 +733,19 @@
 
 - (void)pickerView:(ICPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    ICFormRowList *element = [self formRowWithPickerView:pickerView];
-    NSString *name = pickerView.content[row];
-    NSString *identifier = [element.nameToIdentifierMapping objectForKey:name];
+    if (![pickerView.superview isKindOfClass:[ICPickerViewTableViewCell class]]) {
+        return;
+    }
+    ICPickerViewTableViewCell *cell = (ICPickerViewTableViewCell *)pickerView.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)pickerView.superview];
+    if (indexPath == nil || ![self.formRows[indexPath.row] isKindOfClass:[ICFormRowList class]]) {
+        return;
+    }
+    ICFormRowList *element = (ICFormRowList *)self.formRows[indexPath.row];
+    ICValueMappingItem *selectedItem = cell.items[row];
+    
     element.selectedRow = row;
-    [self.inputData setValue:identifier forField:element.paymentProductFieldIdentifier];
+    [self.inputData setValue:selectedItem.value forField:element.paymentProductField.identifier];
 }
 
 #pragma mark Button target methods
@@ -718,8 +765,7 @@
     }
     if (valid == NO) {
         self.validation = YES;
-        [self updateFormRowsWithValidation:self.validation tooltipRows:self.tooltipRows confirmedPaymentProducts:self.confirmedPaymentProducts];
-        [self.tableView reloadData];
+        [self updateFormRows];
     }
     
 }
@@ -734,59 +780,6 @@
     self.inputData.tokenize = sender.on;
 }
 
-#pragma mark Helper methods
-
-- (ICFormRowTextField *)formRowWithTextField:(ICTextField *)textField
-{
-    for (ICFormRow *row in self.formRows) {
-        if ([row class] == [ICFormRowTextField class]) {
-            ICFormRowTextField *textFieldRow = (ICFormRowTextField *)row;
-            if (textFieldRow.textField == textField) {
-                return textFieldRow;
-            }
-        }
-    }
-    return nil;
-}
-
-- (ICFormRowCurrency *)formRowWithIntegerTextField:(ICIntegerTextField *)integerTextField
-{
-    for (ICFormRow *row in self.formRows) {
-        if ([row class] == [ICFormRowCurrency class]) {
-            ICFormRowCurrency *currencyRow = (ICFormRowCurrency *)row;
-            if (currencyRow.integerTextField == integerTextField) {
-                return currencyRow;
-            }
-        }
-    }
-    return nil;
-}
-
-- (ICFormRowCurrency *)formRowWithFractionalTextField:(ICFractionalTextField *)fractionalTextField
-{
-    for (ICFormRow *row in self.formRows) {
-        if ([row class] == [ICFormRowCurrency class]) {
-            ICFormRowCurrency *currencyRow = (ICFormRowCurrency *)row;
-            if (currencyRow.fractionalTextField == fractionalTextField) {
-                return currencyRow;
-            }
-        }
-    }
-    return nil;
-}
-
-- (ICFormRowList *)formRowWithPickerView:(UIPickerView *)pickerView
-{
-    for (ICFormRow *row in self.formRows) {
-        if ([row class] == [ICFormRowList class]) {
-            ICFormRowList *listRow = (ICFormRowList *)row;
-            if (listRow.pickerView == pickerView) {
-                return listRow;
-            }
-        }
-    }
-    return nil;
-}
 
 
 @end

@@ -14,6 +14,7 @@
 #define kICClientSessionId  @"kICClientSessionId"
 #define kICCustomerId       @"kICCustomerId"
 #define kICMerchantId       @"kICMerchantId"
-#define kICApplicationIdentifier @"iOS Example Application/v1.0"
-
+#define kICBoletoBancarioId   @"1503"
+#define kICBancontactId       @"3012"
+#define kICApplicationIdentifier @"iOS Example Application/v1.3.0"
 #endif

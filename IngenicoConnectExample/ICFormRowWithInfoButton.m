@@ -10,4 +10,9 @@
 
 @implementation ICFormRowWithInfoButton
 
+- (BOOL)showInfoButton {
+    return self.tooltip != nil;
+}
+
+
 @end

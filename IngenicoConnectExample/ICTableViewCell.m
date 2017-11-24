@@ -13,6 +13,9 @@
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.clipsToBounds = YES;
+    }
     return self;
 }
 
@@ -20,6 +23,46 @@
 {
     self = [self initWithReuseIdentifier:reuseIdentifier];
     return self;
+}
+
+- (CGFloat)accessoryAndMarginCompatibleWidth {
+    if (self.accessoryType != UITableViewCellAccessoryNone) {
+        if (self.contentView.frame.size.width > CGRectGetMidX(self.frame) - 320/2 + 320)
+        {
+            return 320;
+        }
+        else {
+            return self.contentView.frame.size.width - 16;
+        }
+    }
+    else {
+        if(self.contentView.frame.size.width > CGRectGetMidX(self.frame) - 320/2 + 320 + 16 + 22 + 16) {
+            return 320;
+        }
+        else {
+            return self.contentView.frame.size.width - 16 - 16;
+        }
+    }
+}
+
+- (CGFloat)accessoryCompatibleLeftMargin {
+    if (self.accessoryType != UITableViewCellAccessoryNone) {
+        if (self.contentView.frame.size.width > CGRectGetMidX(self.frame) - 320/2 + 320)
+        {
+            return CGRectGetMidX(self.frame) - 320/2;
+        }
+        else {
+            return 16;
+        }
+    }
+    else {
+        if(self.contentView.frame.size.width > CGRectGetMidX(self.frame) - 320/2 + 320 + 16 + 22 + 16) {
+            return CGRectGetMidX(self.frame) - 320/2;
+        }
+        else {
+            return 16;
+        }
+    }
 }
 
 @end

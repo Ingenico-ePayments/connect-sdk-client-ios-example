@@ -48,6 +48,7 @@
 @property (strong, nonatomic) ICLabel *isRecurringLabel;
 @property (strong, nonatomic) ICSwitch *isRecurringSwitch;
 @property (strong, nonatomic) UIButton *payButton;
+@property (strong, nonatomic) UISwitch *groupMethodsSwitch;
 @property (strong, nonatomic) ICPaymentProductsViewControllerTarget *paymentProductsViewControllerTarget;
 
 @property (nonatomic) long amountValue;
@@ -202,14 +203,23 @@
     self.isRecurringSwitch.translatesAutoresizingMaskIntoConstraints = NO;
     [self.containerView addSubview:self.isRecurringLabel];
     [self.containerView addSubview:self.isRecurringSwitch];
+    
+    ICLabel *groupMethodsLabel = [self.viewFactory labelWithType:ICLabelType];
+    groupMethodsLabel.text = NSLocalizedStringWithDefaultValue(@"GroupMethods", kICAppLocalizable, [NSBundle bundleWithPath:kICSDKBundlePath], @"Group payment products", @"");
+    //groupMethodsLabel.text = NSLocalizedStringFromTable(@"GroupMethods", kICAppLocalizable, @"Display payment methods as group");
+    groupMethodsLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _groupMethodsSwitch = [self.viewFactory switchWithType:ICSwitchType];
+    _groupMethodsSwitch.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.containerView addSubview:groupMethodsLabel];
+    [self.containerView addSubview:_groupMethodsSwitch];
 
-    self.payButton = [self.viewFactory buttonWithType:ICPrimaryButtonType];
+    self.payButton = [self.viewFactory buttonWithType:ICButtonTypePrimary];
     [self.payButton setTitle:NSLocalizedStringFromTable(@"PayNow", kICAppLocalizable, @"Pay securely now") forState:UIControlStateNormal];
     self.payButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.payButton addTarget:self action:@selector(buyButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.containerView addSubview:self.payButton];
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(_explanation, _clientSessionIdLabel, _clientSessionIdTextField, _customerIdLabel, _customerIdTextField, _merchantIdLabel, _merchantIdTextField, _regionLabel, _regionControl, _environmentLabel, _environmentPicker, _amountLabel, _amountTextField, _countryCodeLabel, _countryCodePicker, _currencyCodeLabel, _currencyCodePicker, _isRecurringLabel, _isRecurringSwitch, _payButton);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_explanation, _clientSessionIdLabel, _clientSessionIdTextField, _customerIdLabel, _customerIdTextField, _merchantIdLabel, _merchantIdTextField, _regionLabel, _regionControl, _environmentLabel, _environmentPicker, _amountLabel, _amountTextField, _countryCodeLabel, _countryCodePicker, _currencyCodeLabel, _currencyCodePicker, _isRecurringLabel, _isRecurringSwitch, _payButton, groupMethodsLabel, _groupMethodsSwitch);
     NSDictionary *metrics = @{@"largeSpace": @"24"};
 
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_explanation]-|" options:0 metrics:nil views:views]];
@@ -229,10 +239,10 @@
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_countryCodePicker]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_currencyCodeLabel]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_currencyCodePicker]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_isRecurringLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_isRecurringSwitch]-|" options:0 metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_isRecurringLabel]-[_isRecurringSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[groupMethodsLabel]-[_groupMethodsSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_payButton]-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(largeSpace)-[_explanation(==100)]-(largeSpace)-[_clientSessionIdLabel]-[_clientSessionIdTextField]-(largeSpace)-[_customerIdLabel]-[_customerIdTextField]-(largeSpace)-[_merchantIdLabel]-[_merchantIdTextField]-(largeSpace)-[_regionLabel]-[_regionControl]-(largeSpace)-[_environmentLabel]-[_environmentPicker]-(largeSpace)-[_amountLabel]-[_amountTextField]-(largeSpace)-[_countryCodeLabel]-[_countryCodePicker]-(largeSpace)-[_currencyCodeLabel]-[_currencyCodePicker]-(largeSpace)-[_isRecurringLabel]-[_isRecurringSwitch]-(largeSpace)-[_payButton]" options:0 metrics:metrics views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(largeSpace)-[_explanation(==100)]-(largeSpace)-[_clientSessionIdLabel]-[_clientSessionIdTextField]-(largeSpace)-[_customerIdLabel]-[_customerIdTextField]-(largeSpace)-[_merchantIdLabel]-[_merchantIdTextField]-(largeSpace)-[_regionLabel]-[_regionControl]-(largeSpace)-[_environmentLabel]-[_environmentPicker]-(largeSpace)-[_amountLabel]-[_amountTextField]-(largeSpace)-[_countryCodeLabel]-[_countryCodePicker]-(largeSpace)-[_currencyCodeLabel]-[_currencyCodePicker]-(largeSpace)-[_isRecurringSwitch]-(largeSpace)-[_groupMethodsSwitch]-[_payButton]" options:0 metrics:metrics views:views]];
 }
 
 - (void)initializeTapRecognizer
@@ -342,7 +352,7 @@
     ICPaymentAmountOfMoney *amountOfMoney = [[ICPaymentAmountOfMoney alloc] initWithTotalAmount:self.amountValue currencyCode:currencyCode];
     self.context = [[ICPaymentContext alloc] initWithAmountOfMoney:amountOfMoney isRecurring:isRecurring countryCode:countryCode];
 
-    [self.session paymentItemsForContext:self.context groupPaymentProducts:YES success:^(ICPaymentItems *paymentItems) {
+    [self.session paymentItemsForContext:self.context groupPaymentProducts:self.groupMethodsSwitch.isOn success:^(ICPaymentItems *paymentItems) {
         [SVProgressHUD dismiss];
         [self showPaymentProductSelection:paymentItems];
     } failure:^(NSError *error) {
