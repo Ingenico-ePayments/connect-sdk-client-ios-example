@@ -10,7 +10,8 @@
 
 typedef enum  {
     ICButtonTypePrimary = 0,
-    ICButtonTypeSecondary = 1
+    ICButtonTypeSecondary = 1,
+    ICButtonTypeDestructive = 2
 } ICButtonType;
 
 @interface ICButton : UIButton

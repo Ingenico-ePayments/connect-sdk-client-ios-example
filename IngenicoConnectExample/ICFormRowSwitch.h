@@ -13,10 +13,10 @@
 @interface ICFormRowSwitch : ICFormRowWithInfoButton
 
 - (instancetype _Nonnull)initWithTitle: (nonnull NSString *) title isOn: (BOOL)isOn target: (nonnull id)target action: (nonnull SEL)action;
-
-@property (nonatomic) BOOL isOn;
-@property (strong, nonatomic) NSString * _Nonnull title;
-@property (strong, nonatomic) id _Nonnull target;
-@property (assign, nonatomic) SEL _Nonnull action;
-
+- (instancetype _Nonnull )initWithAttributedTitle: (nonnull NSAttributedString*) title isOn: (BOOL)isOn target: (nullable id)target action: (nullable SEL)action paymentProductField:(nullable ICPaymentProductField *)field;
+@property (nonatomic, assign) BOOL isOn;
+@property (strong, nonatomic) NSAttributedString * _Nonnull title;
+@property (strong, nonatomic) id _Nullable target;
+@property (assign, nonatomic) SEL _Nullable action;
+@property (strong, nonatomic) ICPaymentProductField * _Nullable field;
 @end

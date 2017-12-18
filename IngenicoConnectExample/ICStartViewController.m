@@ -168,7 +168,14 @@
     self.amountLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.amountTextField = [self.viewFactory textFieldWithType:ICTextFieldType];
     self.amountTextField.translatesAutoresizingMaskIntoConstraints = NO;
-    self.amountTextField.text = @"100";
+    NSInteger amount = [[NSUserDefaults standardUserDefaults] integerForKey:kICPrice];
+    if (amount == 0) {
+        self.amountTextField.text = @"100";
+    }
+    else {
+        self.amountTextField.text = [NSString stringWithFormat:@"%ld", (long)amount];
+
+    }
     [self.containerView addSubview:self.amountLabel];
     [self.containerView addSubview:self.amountTextField];
     
@@ -180,6 +187,13 @@
     self.countryCodePicker.content = self.countryCodes;
     self.countryCodePicker.dataSource = self;
     self.countryCodePicker.delegate = self;
+    NSInteger countryCode = [[NSUserDefaults standardUserDefaults] integerForKey:kICCountryCode];
+    if (countryCode == 0) {
+        [self.countryCodePicker selectRow:165 inComponent:0 animated:NO];
+    }
+    else {
+        [self.countryCodePicker selectRow:countryCode inComponent:0 animated:NO];
+    }
     [self.countryCodePicker selectRow:165 inComponent:0 animated:NO];
     [self.containerView addSubview:self.countryCodeLabel];
     [self.containerView addSubview:self.countryCodePicker];
@@ -192,7 +206,13 @@
     self.currencyCodePicker.content = self.currencyCodes;
     self.currencyCodePicker.dataSource = self;
     self.currencyCodePicker.delegate = self;
-    [self.currencyCodePicker selectRow:42 inComponent:0 animated:NO];
+    NSInteger currency = [[NSUserDefaults standardUserDefaults] integerForKey:kICCurrency];
+    if (currency == 0) {
+        [self.currencyCodePicker selectRow:42 inComponent:0 animated:NO];
+    }
+    else {
+        [self.currencyCodePicker selectRow:currency inComponent:0 animated:NO];
+    }
     [self.containerView addSubview:self.currencyCodeLabel];
     [self.containerView addSubview:self.currencyCodePicker];
     
@@ -305,6 +325,9 @@
         NSString *merchantId = self.merchantIdTextField.text;
         [StandardUserDefaults setObject:merchantId forKey:kICMerchantId];
     }
+    [StandardUserDefaults setInteger:self.amountValue forKey:kICPrice];
+    [StandardUserDefaults setInteger:[self.countryCodePicker selectedRowInComponent:0] forKey:kICCountryCode];
+    [StandardUserDefaults setInteger:[self.currencyCodePicker selectedRowInComponent:0] forKey:kICCurrency];
     ICRegion region;
     if (self.regionControl.selectedSegmentIndex == 0) {
         region = ICRegionEU;

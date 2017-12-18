@@ -9,8 +9,7 @@
 #import <IngenicoConnectExample/ICFormRowSwitch.h>
 
 @implementation ICFormRowSwitch
-
--(instancetype)initWithTitle: (nonnull NSString*) title isOn: (BOOL)isOn target: (nonnull id)target action: (nonnull SEL)action {
+-(instancetype)initWithAttributedTitle: (nonnull NSAttributedString*) title isOn: (BOOL)isOn target: (nullable id)target action: (nullable SEL)action paymentProductField:(nullable ICPaymentProductField *)field{
     self = [super init];
     
     if (self) {
@@ -18,9 +17,15 @@
         self.isOn = isOn;
         self.target = target;
         self.action = action;
+        self.field = field;
     }
     
     return self;
+
+}
+
+-(instancetype)initWithTitle: (nonnull NSString*) title isOn: (BOOL)isOn target: (nonnull id)target action: (nonnull SEL)action {
+    return [self initWithAttributedTitle:[[NSAttributedString alloc] initWithString:title] isOn:isOn target:target action:action paymentProductField:nil];
 }
 
 @end

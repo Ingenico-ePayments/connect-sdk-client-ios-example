@@ -56,7 +56,7 @@
         }
     }
     else {
-        if(self.contentView.frame.size.width > CGRectGetMidX(self.frame) - 320/2 + 320 + 16 + 22 + 16) {
+        if (self.contentView.frame.size.width > CGRectGetMidX(self.frame) - 320/2 + 320 + 16 + 22 + 16) {
             return CGRectGetMidX(self.frame) - 320/2;
         }
         else {

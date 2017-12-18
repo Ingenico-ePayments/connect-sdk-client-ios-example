@@ -7,14 +7,21 @@
 //
 
 #import <IngenicoConnectExample/ICTableViewCell.h>
-
+@class ICSwitchTableViewCell;
+@class ICSwitch;
+@protocol ICSwitchTableViewCellDelegate
+-(void)switchChanged:(ICSwitch *)aSwitch;
+@end
 @interface ICSwitchTableViewCell : ICTableViewCell
-
+@property (weak, nonatomic) NSObject<ICSwitchTableViewCellDelegate> *delegate;
+@property (strong, nonatomic) NSString *errorMessage;
+@property (assign, nonatomic, getter=isOn) BOOL on;
 + (NSString *)reuseIdentifier;
 
-- (NSString *)title;
-- (void)setTitle:(NSString *)title;
+- (NSAttributedString *)attributedTitle;
+- (void)setAttributedTitle:(NSAttributedString *)attributedTitle;
 
 - (void)setSwitchTarget:(id)target action:(SEL)action;
+
 
 @end

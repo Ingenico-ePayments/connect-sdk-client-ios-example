@@ -7,6 +7,7 @@
 //
 
 #import <IngenicoConnectExample/ICTableViewCell.h>
+#import "ICFormRowTooltip.h"
 
 @interface ICTooltipTableViewCell : ICTableViewCell
 
@@ -14,5 +15,5 @@
 
 @property (strong, nonatomic) NSString *label;
 @property (strong, nonatomic) UIImage *tooltipImage;
-
++ (CGSize)cellSizeForWidth:(CGFloat)width forFormRow:(ICFormRowTooltip *)label;
 @end

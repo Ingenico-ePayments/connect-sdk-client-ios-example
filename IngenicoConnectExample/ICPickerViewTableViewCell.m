@@ -15,7 +15,9 @@
 @end
 
 @implementation ICPickerViewTableViewCell
-
++(NSUInteger)pickerHeight {
+    return 216;
+}
 + (NSString *)reuseIdentifier {
     return @"picker-view-cell";
 }
@@ -67,13 +69,36 @@
     
     return self;
 }
+- (CGFloat)pickerLeftMarginForFitSize:(CGSize)fitsize {
+    if (self.accessoryType != UITableViewCellAccessoryNone) {
+        if (self.contentView.frame.size.width > CGRectGetMidX(self.frame) - fitsize.width/2 + fitsize.width)
+        {
+            return CGRectGetMidX(self.frame) - fitsize.width/2;
+        }
+        else {
+            return 16;
+        }
+    }
+    else {
+        if(self.contentView.frame.size.width > CGRectGetMidX(self.frame) - fitsize.width/2 + fitsize.width + 16 + 22 + 16) {
+            return CGRectGetMidX(self.frame) - fitsize.width/2;
+        }
+        else {
+            return 16;
+        }
+    }
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
     if (self.pickerView != nil) {
         CGFloat width = self.contentView.frame.size.width;
-        self.pickerView.frame = CGRectMake(10, 0, width - 20, 162);
+        CGFloat height =  [ICPickerViewTableViewCell pickerHeight];
+        CGRect frame = CGRectMake(10, 0, width - 20,height);
+        frame.size = [self.pickerView sizeThatFits:frame.size];
+        frame.origin.x = width/2 - frame.size.width/2;
+        self.pickerView.frame = frame;
     }
 }
 

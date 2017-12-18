@@ -6,10 +6,10 @@
 //  Copyright © 2017 Global Collect Services. All rights reserved.
 //
 
-#import <IngenicoConnectExample/ICFormRow.h>
+#import <IngenicoConnectExample/ICFormRowWithInfoButton.h>
 #import <IngenicoConnectExample/ICLabel.h>
 
-@interface ICFormRowLabel : ICFormRow
+@interface ICFormRowLabel : ICFormRowWithInfoButton
 
 - (instancetype _Nonnull)initWithText:(nonnull NSString *)text;
 

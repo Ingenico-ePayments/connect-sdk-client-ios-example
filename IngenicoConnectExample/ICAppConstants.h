@@ -9,12 +9,17 @@
 #ifndef IngenicoConnectExampleApp_ICAppConstants_h
 #define IngenicoConnectExampleApp_ICAppConstants_h
 
-#define kICAppLocalizable   @"ICAppLocalizable"
-#define kICPrimaryColor     [UIColor colorWithRed:0 green:0.8 blue:0 alpha:1]
-#define kICClientSessionId  @"kICClientSessionId"
-#define kICCustomerId       @"kICCustomerId"
-#define kICMerchantId       @"kICMerchantId"
-#define kICBoletoBancarioId   @"1503"
-#define kICBancontactId       @"3012"
-#define kICApplicationIdentifier @"iOS Example Application/v1.3.0"
+#define kICAppLocalizable       @"ICAppLocalizable"
+#define kICPrimaryColor         [UIColor colorWithRed:0 green:0.8 blue:0 alpha:1]
+#define kICDestructiveColor     [UIColor colorWithRed:0.8 green:0 blue:0 alpha:1]
+#define kICClientSessionId      @"kICClientSessionId"
+#define kICCustomerId           @"kICCustomerId"
+#define kICMerchantId           @"kICMerchantId"
+#define kICPrice                @"kICPrice"
+#define kICCountryCode          @"kICCountryCode"
+#define kICCurrency             @"kICCurrency"
+#define kICBoletoBancarioId     @"1503"
+#define kICBancontactId         @"3012"
+#define kICArvatoIds            [NSSet setWithArray:@[@"9000", @"9001"]]
+#define kICApplicationIdentifier @"iOS Example Application/v1.4.0"
 #endif

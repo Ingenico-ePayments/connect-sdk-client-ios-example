@@ -30,9 +30,17 @@
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
     [style setLineBreakMode:NSLineBreakByWordWrapping];
     CGSize constrainRect = CGSizeMake(width, CGFLOAT_MAX);
-    CGRect boundingBox = [text boundingRectWithSize:constrainRect options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName: [self labelFontForBold:bold], NSParagraphStyleAttributeName: style} context:nil];
+    UILabel *dummyLabel = [[UILabel alloc]init];
+    dummyLabel.numberOfLines = 0;
+    dummyLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    dummyLabel.text = text;
+    CGSize size = [dummyLabel sizeThatFits:constrainRect];
+    return size;
+    
+    //CGRect boundingBox = [text boundingRectWithSize:constrainRect options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName: [self labelFontForBold:bold], NSParagraphStyleAttributeName: style} context:nil];
     //boundingBox.size.height = ceil(boundingBox.size.height);
-    return boundingBox.size;
+    //boundingBox.size.height += 30;
+    //return boundingBox.size;
 }
 + (CGSize)cellSizeForWidth:(CGFloat)width forFormRow:(ICFormRowLabel *)label {
     CGSize labelSize = [self labelSizeForWidth:width forText:label.text bold:label.bold];
@@ -51,6 +59,7 @@
 }
 - (void)setLabel:(NSString *)label {
     self.labelView.text = label;
+    self.labelView.numberOfLines = 0;
 }
 - (BOOL) isBold {
     return _bold;
@@ -63,8 +72,8 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    self.labelView = [[ICLabel alloc]init];
     if (self) {
+        self.labelView = [[ICLabel alloc]init];
         [self addSubview:self.labelView];
         self.clipsToBounds = YES;
         self.labelView.numberOfLines = 0;

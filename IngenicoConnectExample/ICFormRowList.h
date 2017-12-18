@@ -18,5 +18,4 @@
 @property (strong, nonatomic) NSMutableArray<ICValueMappingItem *> * _Nonnull items;
 @property (nonatomic) NSInteger selectedRow;
 @property (strong, nonatomic) ICPaymentProductField * _Nonnull paymentProductField;
-
 @end

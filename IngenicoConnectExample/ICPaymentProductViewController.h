@@ -16,7 +16,9 @@
 #import <IngenicoConnectExample/ICCoBrandsSelectionTableViewCell.h>
 #import "ICFormRowTextField.h"
 #import "ICPaymentProductInputData.h"
-@interface ICPaymentProductViewController : UITableViewController
+#import "ICFormRowSwitch.h"
+#import "ICFormRowList.h"
+@interface ICPaymentProductViewController : UITableViewController <ICSwitchTableViewCellDelegate>
 
 @property (weak, nonatomic) id <ICPaymentRequestTarget> paymentRequestTarget;
 @property (strong, nonatomic) ICViewFactory *viewFactory;
@@ -29,13 +31,19 @@
 @property (strong, nonatomic) NSMutableSet *confirmedPaymentProducts;
 @property (strong, nonatomic) NSMutableArray *formRows;
 @property (strong, nonatomic) ICPaymentProductInputData *inputData;
+@property (nonatomic, readonly) BOOL validation;
 @property (nonatomic) BOOL switching;
+- (void) addExtraRows;
 - (void) registerReuseIdentifiers;
+- (void)updatePickerCell:(ICPickerViewTableViewCell *)cell row: (ICFormRowList *)list;
 - (void) updateTextFieldCell:(ICTextFieldTableViewCell *)cell row: (ICFormRowTextField *)row;
+- (void)updateSwitchCell:(ICSwitchTableViewCell *)cell row: (ICFormRowSwitch *)row;
 - (ICTextFieldTableViewCell *)cellForTextField:(ICFormRowTextField *)row tableView:(UITableView *)tableView;
 - (ICTableViewCell *)formRowCellForRow:(ICFormRow *)row atIndexPath:(NSIndexPath *)indexPath;
 -(void)switchToPaymentProduct:(NSString *)paymentProductId;
 -(void)updateFormRows;
 -(void)formatAndUpdateCharactersFromTextField:(UITextField *)texField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath;
 - (void)initializeFormRows;
+-(void)validateExceptFields:(NSSet *)fields;
+- (void)pickerView:(ICPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
 @end

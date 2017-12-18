@@ -19,6 +19,8 @@
 		42974C7E1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 42974C7D1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.m */; };
 		7321EB9F1F18AF3D006B66C4 /* ICBancontactProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7321EB9E1F18AF3D006B66C4 /* ICBancontactProductViewController.m */; };
 		733256D91EDFF6660036F267 /* ICBoletoProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 733256D81EDFF6660036F267 /* ICBoletoProductViewController.m */; };
+		7333B7261F8B7B1500B0A81F /* ICFormRowDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7333B7251F8B7B1500B0A81F /* ICFormRowDate.m */; };
+		7333B7291F8B7C6B00B0A81F /* ICDatePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7333B7281F8B7C6B00B0A81F /* ICDatePickerTableViewCell.m */; };
 		736155F81F18C47300D9DF6C /* ICExternalAppStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 736155F71F18C47300D9DF6C /* ICExternalAppStatusViewController.m */; };
 		736155FC1F18CAE800D9DF6C /* ICCheckMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 736155FB1F18CAE800D9DF6C /* ICCheckMarkView.m */; };
 		736155FF1F18CD2E00D9DF6C /* ICStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 736155FE1F18CD2E00D9DF6C /* ICStatusView.m */; };
@@ -31,6 +33,10 @@
 		73814C501F1906DE00036D6F /* ICFormRowSmallLogo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73814C4F1F1906DE00036D6F /* ICFormRowSmallLogo.m */; };
 		73814C531F190B3000036D6F /* ICSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73814C521F190B3000036D6F /* ICSeparatorView.m */; };
 		7399D4C31ECDA052005B888A /* ICCardProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7399D4C21ECDA052005B888A /* ICCardProductViewController.m */; };
+		73AABADD1F1F881600B76782 /* ICArvatoProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AABADC1F1F881600B76782 /* ICArvatoProductViewController.m */; };
+		73AC76571F33142900BA563C /* ICFormRowReadonlyReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AC76561F33142900BA563C /* ICFormRowReadonlyReview.m */; };
+		73AC765A1F3333AF00BA563C /* ICDetailedPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AC76591F3333AF00BA563C /* ICDetailedPickerViewCell.m */; };
+		73C6903E1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C6903D1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.m */; };
 		A301867A196FBE3200EC6150 /* ICFormRowTooltip.m in Sources */ = {isa = PBXBuildFile; fileRef = A3018679196FBE3200EC6150 /* ICFormRowTooltip.m */; };
 		A3026BBC1962E88600BDE9EE /* ICSummaryTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3026BBB1962E88600BDE9EE /* ICSummaryTableHeaderView.m */; };
 		A30330B3197CEF73008B7AF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A351DCB2196296000033E23C /* Foundation.framework */; };
@@ -120,6 +126,10 @@
 		7321EB9E1F18AF3D006B66C4 /* ICBancontactProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBancontactProductViewController.m; sourceTree = "<group>"; };
 		733256D71EDFF6660036F267 /* ICBoletoProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICBoletoProductViewController.h; sourceTree = "<group>"; };
 		733256D81EDFF6660036F267 /* ICBoletoProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBoletoProductViewController.m; sourceTree = "<group>"; };
+		7333B7241F8B7B1500B0A81F /* ICFormRowDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowDate.h; sourceTree = "<group>"; };
+		7333B7251F8B7B1500B0A81F /* ICFormRowDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowDate.m; sourceTree = "<group>"; };
+		7333B7271F8B7C6B00B0A81F /* ICDatePickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICDatePickerTableViewCell.h; sourceTree = "<group>"; };
+		7333B7281F8B7C6B00B0A81F /* ICDatePickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICDatePickerTableViewCell.m; sourceTree = "<group>"; };
 		736155F61F18C47300D9DF6C /* ICExternalAppStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICExternalAppStatusViewController.h; sourceTree = "<group>"; };
 		736155F71F18C47300D9DF6C /* ICExternalAppStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICExternalAppStatusViewController.m; sourceTree = "<group>"; };
 		736155FA1F18CAE800D9DF6C /* ICCheckMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICCheckMarkView.h; sourceTree = "<group>"; };
@@ -145,6 +155,14 @@
 		73814C521F190B3000036D6F /* ICSeparatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSeparatorView.m; sourceTree = "<group>"; };
 		7399D4C11ECDA052005B888A /* ICCardProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICCardProductViewController.h; sourceTree = "<group>"; };
 		7399D4C21ECDA052005B888A /* ICCardProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICCardProductViewController.m; sourceTree = "<group>"; };
+		73AABADB1F1F881600B76782 /* ICArvatoProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICArvatoProductViewController.h; sourceTree = "<group>"; };
+		73AABADC1F1F881600B76782 /* ICArvatoProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICArvatoProductViewController.m; sourceTree = "<group>"; };
+		73AC76551F33142900BA563C /* ICFormRowReadonlyReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowReadonlyReview.h; sourceTree = "<group>"; };
+		73AC76561F33142900BA563C /* ICFormRowReadonlyReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowReadonlyReview.m; sourceTree = "<group>"; };
+		73AC76581F3333AF00BA563C /* ICDetailedPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICDetailedPickerViewCell.h; sourceTree = "<group>"; };
+		73AC76591F3333AF00BA563C /* ICDetailedPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICDetailedPickerViewCell.m; sourceTree = "<group>"; };
+		73C6903C1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICReadonlyReviewTableViewCell.h; sourceTree = "<group>"; };
+		73C6903D1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICReadonlyReviewTableViewCell.m; sourceTree = "<group>"; };
 		86515FA055E4DCFC274280B5 /* Pods-IngenicoConnectExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IngenicoConnectExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IngenicoConnectExampleTests/Pods-IngenicoConnectExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		953A05224E1E423E890E85DC /* Pods-IngenicoConnectExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IngenicoConnectExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample.debug.xcconfig"; sourceTree = "<group>"; };
 		A3018678196FBE3200EC6150 /* ICFormRowTooltip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowTooltip.h; sourceTree = "<group>"; };
@@ -441,6 +459,8 @@
 				7321EB9E1F18AF3D006B66C4 /* ICBancontactProductViewController.m */,
 				736155F61F18C47300D9DF6C /* ICExternalAppStatusViewController.h */,
 				736155F71F18C47300D9DF6C /* ICExternalAppStatusViewController.m */,
+				73AABADB1F1F881600B76782 /* ICArvatoProductViewController.h */,
+				73AABADC1F1F881600B76782 /* ICArvatoProductViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -503,6 +523,12 @@
 				73814C491F18FB2400036D6F /* ICSeparatorTableViewCell.m */,
 				73814C4B1F18FB3800036D6F /* ICLogoTableViewCell.h */,
 				73814C4C1F18FB3800036D6F /* ICLogoTableViewCell.m */,
+				73C6903C1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.h */,
+				73C6903D1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.m */,
+				73AC76581F3333AF00BA563C /* ICDetailedPickerViewCell.h */,
+				73AC76591F3333AF00BA563C /* ICDetailedPickerViewCell.m */,
+				7333B7271F8B7C6B00B0A81F /* ICDatePickerTableViewCell.h */,
+				7333B7281F8B7C6B00B0A81F /* ICDatePickerTableViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -608,6 +634,8 @@
 				A351DCEA196296220033E23C /* ICFormRow.m */,
 				A3E12FF519F5364D008E7311 /* ICFormRowWithInfoButton.h */,
 				A3E12FF619F5364D008E7311 /* ICFormRowWithInfoButton.m */,
+				7333B7241F8B7B1500B0A81F /* ICFormRowDate.h */,
+				7333B7251F8B7B1500B0A81F /* ICFormRowDate.m */,
 				A30C8CB0196ACFEF00F1EDA3 /* ICFormRowLabel.h */,
 				A30C8CB1196ACFEF00F1EDA3 /* ICFormRowLabel.m */,
 				A351DCEB196296220033E23C /* ICFormRowList.h */,
@@ -638,6 +666,8 @@
 				736156081F18EFAE00D9DF6C /* ICFormRowSeparator.m */,
 				73814C4E1F1906DE00036D6F /* ICFormRowSmallLogo.h */,
 				73814C4F1F1906DE00036D6F /* ICFormRowSmallLogo.m */,
+				73AC76551F33142900BA563C /* ICFormRowReadonlyReview.h */,
+				73AC76561F33142900BA563C /* ICFormRowReadonlyReview.m */,
 			);
 			name = Tables;
 			sourceTree = "<group>";
@@ -952,10 +982,12 @@
 				A351DD27196296220033E23C /* ICAppDelegate.m in Sources */,
 				A351DD3F196296220033E23C /* ICSwitch.m in Sources */,
 				A301867A196FBE3200EC6150 /* ICFormRowTooltip.m in Sources */,
+				7333B7261F8B7B1500B0A81F /* ICFormRowDate.m in Sources */,
 				A351DD34196296220033E23C /* ICPaymentProductsTableRow.m in Sources */,
 				A3026BBC1962E88600BDE9EE /* ICSummaryTableHeaderView.m in Sources */,
 				F5FAC2391EC47B9A001351BD /* ICFormRowField.m in Sources */,
 				A351DD35196296220033E23C /* ICPaymentProductsTableSection.m in Sources */,
+				73AC76571F33142900BA563C /* ICFormRowReadonlyReview.m in Sources */,
 				A351DD36196296220033E23C /* ICPaymentProductsViewController.m in Sources */,
 				73814C501F1906DE00036D6F /* ICFormRowSmallLogo.m in Sources */,
 				A351DD39196296220033E23C /* ICPaymentProductViewController.m in Sources */,
@@ -965,7 +997,9 @@
 				A30C8CB9196AD3A200F1EDA3 /* ICLabelTableViewCell.m in Sources */,
 				A351DD47196296220033E23C /* ICViewFactory.m in Sources */,
 				A3E12FFA19F5375A008E7311 /* ICIntegerTextField.m in Sources */,
+				73AC765A1F3333AF00BA563C /* ICDetailedPickerViewCell.m in Sources */,
 				A351DD40196296220033E23C /* ICSwitchTableViewCell.m in Sources */,
+				7333B7291F8B7C6B00B0A81F /* ICDatePickerTableViewCell.m in Sources */,
 				73814C4D1F18FB3800036D6F /* ICLogoTableViewCell.m in Sources */,
 				A351DD38196296220033E23C /* ICPaymentProductTableViewCell.m in Sources */,
 				A351DD2C196296220033E23C /* ICFormRowList.m in Sources */,
@@ -989,6 +1023,7 @@
 				42974C7E1DC8ABD200B91814 /* ICPaymentProductsViewControllerTarget.m in Sources */,
 				A351DD31196296220033E23C /* ICFormRowTextField.m in Sources */,
 				A351DD3A196296220033E23C /* ICPickerView.m in Sources */,
+				73C6903E1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.m in Sources */,
 				A30C8CB2196ACFEF00F1EDA3 /* ICFormRowLabel.m in Sources */,
 				A30C8CB6196AD17500F1EDA3 /* ICLabel.m in Sources */,
 				A351DD29196296220033E23C /* ICButtonTableViewCell.m in Sources */,
@@ -1003,6 +1038,7 @@
 				29CEFE47E7CE615D9DA6C57B /* ICCOBrandsExplanationTableViewCell.m in Sources */,
 				29CEFBDCF697210B2060494B /* ICFormRowCoBrandsExplanation.m in Sources */,
 				733256D91EDFF6660036F267 /* ICBoletoProductViewController.m in Sources */,
+				73AABADD1F1F881600B76782 /* ICArvatoProductViewController.m in Sources */,
 				7399D4C31ECDA052005B888A /* ICCardProductViewController.m in Sources */,
 				29CEF5197E26824532029C01 /* ICPaymentProductInputData.m in Sources */,
 			);

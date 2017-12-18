@@ -7,7 +7,7 @@
 //
 
 #import <IngenicoConnectExample/ICTooltipTableViewCell.h>
-
+#import "ICFormRowTooltip.h"
 @interface ICTooltipTableViewCell ()
 
 @property (strong, nonatomic) UILabel *tooltipLabel;
@@ -54,12 +54,31 @@
     }
     return self;
 }
++ (CGSize)labelSizeForWidth:(CGFloat)width forText:(NSString *)text {
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
+    [style setLineBreakMode:NSLineBreakByWordWrapping];
+    CGSize constrainRect = CGSizeMake(width, CGFLOAT_MAX);
+    UILabel *dummyLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, constrainRect.width, constrainRect.height)];
+    dummyLabel.numberOfLines = 0;
+    dummyLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    dummyLabel.text = text;
+    dummyLabel.font = [UIFont systemFontOfSize:10.0f];
+    [dummyLabel sizeToFit];
+    CGSize size = dummyLabel.frame.size;
+    return size;
+}
++ (CGSize)cellSizeForWidth:(CGFloat)width forFormRow:(ICFormRowTooltip *)label {
+    CGSize labelSize = [self labelSizeForWidth:width forText:label.text];
+    labelSize.height += 8;
+    return labelSize;
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGFloat width = [self accessoryAndMarginCompatibleWidth];
     CGFloat leftMargin = [self accessoryCompatibleLeftMargin];
-    self.tooltipLabel.frame = CGRectMake(15, 0, width - 30, 40);
+    self.tooltipLabel.frame = CGRectMake(leftMargin, 0, width - 30, NSIntegerMax);
+    [self.tooltipLabel sizeToFit];
     
     if (self.tooltipImage == nil) {
         self.tooltipImageContainer.frame = CGRectMake(leftMargin, 40, 0, 0);

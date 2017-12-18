@@ -19,6 +19,7 @@
 #import "ICBoletoProductViewController.h"
 #import <ICPaymentProductGroup.h>
 #import "ICBancontactProductViewController.h"
+#import "ICArvatoProductViewController.h"
 @interface ICPaymentProductsViewControllerTarget ()
 
 @property (strong, nonatomic) ICSession *session;
@@ -277,6 +278,10 @@
     if (([paymentItem isKindOfClass:[ICPaymentProductGroup class]] && [paymentItem.identifier isEqualToString:@"cards"]) || ([paymentItem isKindOfClass:[ICPaymentProduct class]] && [((ICPaymentProduct *)paymentItem).paymentMethod isEqualToString:@"card"])) {
         paymentProductForm = [[ICCardProductViewController alloc] init];
 
+    }
+    else if ([kICArvatoIds containsObject:paymentItem.identifier])
+    {
+        paymentProductForm = [[ICArvatoProductViewController alloc]initWithPaymentItem:paymentItem Session:self.session context:self.context viewFactory:self.viewFactory accountOnFile:accountOnFile];
     }
     else if ([paymentItem.identifier isEqualToString:kICBoletoBancarioId]){
         paymentProductForm = [[ICBoletoProductViewController alloc]init];

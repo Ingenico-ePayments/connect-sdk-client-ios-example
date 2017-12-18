@@ -24,7 +24,9 @@
 @end
 
 @implementation ICPaymentProductInputData
-
+- (NSArray<NSString *> *)fields {
+    return self.fieldValues.allKeys;
+}
 - (instancetype)init {
     self = [super init];
     if (self != nil) {
@@ -63,14 +65,6 @@
     NSString *value = [self.fieldValues objectForKey:paymentProductFieldId];
     if (value == nil) {
         value = @"";
-        ICPaymentProductField *field = [self.paymentItem paymentProductFieldWithId:paymentProductFieldId];
-        for (ICValidator *validator in field.dataRestrictions.validators.validators) {
-            if ([validator class] == [ICValidatorFixedList class]) {
-                ICValidatorFixedList *fixedListValidator = (ICValidatorFixedList *) validator;
-                value = fixedListValidator.allowedValues[0];
-                [self setValue:value forField:paymentProductFieldId];
-            }
-        }
     }
     return value;
 }
@@ -120,6 +114,9 @@
     }
 }
 
+- (void)removeAllFieldValues {
+    [self.fieldValues removeAllObjects];
+}
 - (NSString *)maskForField:(NSString *)paymentProductFieldId {
     ICPaymentProductField *field = [self.paymentItem paymentProductFieldWithId:paymentProductFieldId];
     NSString *mask = field.displayHints.mask;
@@ -137,18 +134,48 @@
     }
     return unmaskedFieldValues;
 }
-
-- (void)validate
+- (void)validateExceptFields:(NSSet *)exceptionFields
 {
     [self.errors removeAllObjects];
     ICPaymentRequest *request = self.paymentRequest;
     for (ICPaymentProductField *field in self.paymentItem.fields.paymentProductFields) {
+        if ([[self unmaskedValueForField:field.identifier] isEqualToString:@""]) {
+            BOOL hasFixedValidator = NO;
+            for (ICValidator *validator in field.dataRestrictions.validators.validators) {
+                if ([validator isKindOfClass:[ICValidatorFixedList class]]) {
+                    // It's not possible to choose an empty string with a picker
+                    // If it is neccessary to choose an invalid value here (placeholder, see ArvatoViewController), choose a different value from ""
+                    hasFixedValidator = true;
+                    ICValidatorFixedList *fixedListValidator = (ICValidatorFixedList *) validator;
+                    NSString *value = fixedListValidator.allowedValues[0];
+                    [self setValue:value forField:field.identifier];
+                }
+            }
+            // It's not possible to choose an empty string with a date picker
+            // If not set, we assume the first is chosen
+            if (!hasFixedValidator && field.type == ICDateString) {
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                formatter.dateFormat = @"yyyyMMdd";
+                [self setValue: [formatter stringFromDate: [NSDate date]] forField: field.identifier];
+            }
+
+        }
+
+
         if ([self fieldIsPartOfAccountOnFile:field.identifier] == NO) {
+            if ([exceptionFields containsObject:field.identifier]) {
+                continue;
+            }
             NSString *fieldValue = [self unmaskedValueForField:field.identifier];
             [field validateValue:fieldValue forPaymentRequest:request];
             [self.errors addObjectsFromArray:field.errors];
+            
         }
     }
+}
+- (void)validate
+{
+    [self validateExceptFields:[NSSet set]];
 }
 
 @end

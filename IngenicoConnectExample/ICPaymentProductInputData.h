@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSObject<ICPaymentItem> *paymentItem;
 @property (strong, nonatomic) ICAccountOnFile *accountOnFile;
 @property (nonatomic) BOOL tokenize;
+@property (nonatomic, readonly, strong) NSArray *fields;
 @property (strong, nonatomic) NSMutableArray *errors;
 
 - (ICPaymentRequest *)paymentRequest;
@@ -29,5 +30,6 @@
 - (NSString *)maskedValueForField:(NSString *)paymentProductFieldId cursorPosition:(NSInteger *)cursorPosition;
 - (NSString *)unmaskedValueForField:(NSString *)paymentProductFieldId;
 - (void)validate;
-
+- (void)validateExceptFields:(NSSet *)exceptionFields;
+- (void)removeAllFieldValues;
 @end

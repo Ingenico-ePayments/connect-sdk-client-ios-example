@@ -38,6 +38,13 @@
             self.backgroundColor = [UIColor clearColor];
             self.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
             break;
+        case ICButtonTypeDestructive:
+            [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+            self.backgroundColor = kICDestructiveColor;
+            self.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
+            break;
+
     }
 }
 
