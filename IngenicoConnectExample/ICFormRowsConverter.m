@@ -26,6 +26,8 @@
 #import <IngenicoConnectSDK/ICValueMappingItem.h>
 #import <IngenicoConnectSDK/ICValidationErrorAllowed.h>
 #import <IngenicoConnectSDK/ICValidationErrorEmailAddress.h>
+#import <IngenicoConnectSDK/ICValidationErrorTermsAndConditions.h>
+
 #import "ICFormRowDate.h"
 @interface ICFormRowsConverter ()
 
@@ -179,6 +181,10 @@ static NSBundle * _sdkBundle;
 
     } else if (errorClass == [ICValidationErrorRegularExpression class]) {
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"regularExpression"];
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
+        errorMessage = errorMessageValue;
+    } else if (errorClass == [ICValidationErrorTermsAndConditions class]) {
+        errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"termsAndConditions"];
         errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
     } else if (errorClass == [ICValidationErrorIsRequired class]) {

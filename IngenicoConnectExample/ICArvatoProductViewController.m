@@ -22,6 +22,7 @@
 #import "ICReadonlyReviewTableViewCell.h"
 #import "ICFormRowCurrency.h"
 #import "ICFormRowDate.h"
+#import <IngenicoConnectSDK/ICValidationErrorTermsAndConditions.h>
 @interface ICArvatoProductViewController ()
 @property (nonatomic, assign) NSInteger failCount;
 @property (nonatomic, assign) BOOL didFind;
@@ -306,7 +307,9 @@
             [self.inputData setValue:formRowList.items[selectedRow].value forField:@"installmentId"];
         }
     }
-
+    if ([[self.inputData unmaskedValueForField:@"termsAndConditions"] length] == 0) {
+        [self.inputData setValue:@"false" forField:@"termsAndConditions"];
+    }
     
 
     self.formRows = newFormRows;
@@ -406,6 +409,30 @@
     cell.percentFormatter = percentFormatter;
     cell.selectedRow = row.selectedRow;
     return cell;
+}
+- (void)updateSwitchCell:(ICSwitchTableViewCell *)cell row: (ICFormRowSwitch *)row {
+    // Add error messages for cells
+    if (row.field == nil) {
+        return;
+    }
+    ICValidationError *error = [row.field.errors firstObject];
+    if ([[[row field] identifier] isEqualToString:@"termsAndConditions"]) {
+        NSInteger errorNum = [row.field.errors indexOfObjectPassingTest:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[ICValidationErrorTermsAndConditions class]]) {
+                *stop = YES;
+                return YES;
+            }
+            return NO;
+        }];
+        if (errorNum != NSNotFound) {
+            error = row.field.errors[errorNum];
+        }
+    }
+    if (error != nil) {
+        cell.errorMessage = [ICFormRowsConverter errorMessageForError: error withCurrency: NO];
+    } else {
+        cell.errorMessage = nil;
+    }
 }
 
 - (void) addExtraRows
