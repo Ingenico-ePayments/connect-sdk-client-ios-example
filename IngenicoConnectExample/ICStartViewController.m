@@ -33,12 +33,12 @@
 @property (strong, nonatomic) ICTextField *clientSessionIdTextField;
 @property (strong, nonatomic) ICLabel *customerIdLabel;
 @property (strong, nonatomic) ICTextField *customerIdTextField;
+@property (strong, nonatomic) ICLabel *baseURLLabel;
+@property (strong, nonatomic) ICTextField *baseURLTextField;
+@property (strong, nonatomic) ICLabel *assetsBaseURLLabel;
+@property (strong, nonatomic) ICTextField *assetsBaseURLTextField;
 @property (strong, nonatomic) ICLabel *merchantIdLabel;
 @property (strong, nonatomic) ICTextField *merchantIdTextField;
-@property (strong, nonatomic) ICLabel *regionLabel;
-@property (strong, nonatomic) UISegmentedControl *regionControl;
-@property (strong, nonatomic) ICLabel *environmentLabel;
-@property (strong, nonatomic) ICPickerView *environmentPicker;
 @property (strong, nonatomic) ICLabel *amountLabel;
 @property (strong, nonatomic) ICTextField *amountTextField;
 @property (strong, nonatomic) ICLabel *countryCodeLabel;
@@ -78,30 +78,21 @@
     self.countryCodes = [[kICCountryCodes componentsSeparatedByString:@", "] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     self.currencyCodes = [[kICCurrencyCodes componentsSeparatedByString:@", "] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
-    NSInteger viewHeight = 1500;
-    
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollView.delaysContentTouches = NO;
-    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, viewHeight);
-    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    //self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, viewHeight);
+    //self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.scrollView];
     
-    UIView *superContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, viewHeight)];
+    UIView *superContainerView = [[UIView alloc] init];
     superContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    superContainerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.scrollView addSubview:superContainerView];
     
     self.containerView = [[UIView alloc] init];
     self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
     [superContainerView addSubview:self.containerView];
 
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:viewHeight];
-    [self.containerView addConstraint:constraint];
-    constraint = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320];
-    [self.containerView addConstraint:constraint];
-    constraint = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:superContainerView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-    [superContainerView addConstraint:constraint];
-    constraint = [NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superContainerView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    [superContainerView addConstraint:constraint];
 
     self.explanation = [[UITextView alloc] init];
     self.explanation.translatesAutoresizingMaskIntoConstraints = NO;
@@ -110,6 +101,7 @@
     self.explanation.backgroundColor = [UIColor colorWithRed:0.85 green:0.94 blue:0.97 alpha:1];
     self.explanation.textColor = [UIColor colorWithRed:0 green:0.58 blue:0.82 alpha:1];
     self.explanation.layer.cornerRadius = 5.0;
+    self.explanation.scrollEnabled = NO;
     [self.containerView addSubview:self.explanation];
 
     self.clientSessionIdLabel = [self.viewFactory labelWithType:ICLabelType];
@@ -132,6 +124,27 @@
     [self.containerView addSubview:self.customerIdLabel];
     [self.containerView addSubview:self.customerIdTextField];
     
+    self.baseURLLabel = [self.viewFactory labelWithType:ICLabelType];
+    self.baseURLLabel.text = NSLocalizedStringFromTable(@"BaseURL", kICAppLocalizable, @"Client session identifier");
+    self.baseURLLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.baseURLTextField = [self.viewFactory textFieldWithType:ICTextFieldType];
+    self.baseURLTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.baseURLTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.baseURLTextField.text = [StandardUserDefaults objectForKey:kICBaseURL];
+    [self.containerView addSubview:self.baseURLLabel];
+    [self.containerView addSubview:self.baseURLTextField];
+    
+    self.assetsBaseURLLabel = [self.viewFactory labelWithType:ICLabelType];
+    self.assetsBaseURLLabel.text = NSLocalizedStringFromTable(@"AssetsBaseURL", kICAppLocalizable, @"Customer identifier");
+    self.assetsBaseURLLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.assetsBaseURLTextField = [self.viewFactory textFieldWithType:ICTextFieldType];
+    self.assetsBaseURLTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.assetsBaseURLTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.assetsBaseURLTextField.text = [StandardUserDefaults objectForKey:kICAssetsBaseURL];
+    [self.containerView addSubview:self.assetsBaseURLLabel];
+    [self.containerView addSubview:self.assetsBaseURLTextField];
+
+    
     self.merchantIdLabel = [self.viewFactory labelWithType:ICLabelType];
     self.merchantIdLabel.text = NSLocalizedStringFromTable(@"MerchantIdentifier", kICAppLocalizable, @"Merchant identifier");
     self.merchantIdLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -141,27 +154,6 @@
     self.merchantIdTextField.text = [StandardUserDefaults objectForKey:kICMerchantId];
     [self.containerView addSubview:self.merchantIdLabel];
     [self.containerView addSubview:self.merchantIdTextField];
-
-    self.regionLabel = [self.viewFactory labelWithType:ICLabelType];
-    self.regionLabel.text = NSLocalizedStringFromTable(@"Region", kICAppLocalizable, @"Region");
-    self.regionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.regionControl = [[UISegmentedControl alloc] initWithItems:@[@"EU", @"US", @"AMS", @"PAR"]];
-    self.regionControl.selectedSegmentIndex = 0;
-    self.regionControl.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.containerView addSubview:self.regionLabel];
-    [self.containerView addSubview:self.regionControl];
-    
-    self.environmentLabel = [self.viewFactory labelWithType:ICLabelType];
-    self.environmentLabel.text = NSLocalizedStringFromTable(@"Environment", kICAppLocalizable, @"Environment");
-    self.environmentLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.environmentPicker = [self.viewFactory pickerViewWithType:ICPickerViewType];
-    self.environmentPicker.translatesAutoresizingMaskIntoConstraints = NO;
-    self.environmentPicker.content = @[@"Production", @"Pre-production", @"Sandbox"];
-    self.environmentPicker.dataSource = self;
-    self.environmentPicker.delegate = self;
-    [self.environmentPicker selectRow:2 inComponent:0 animated:NO];
-    [self.containerView addSubview:self.environmentLabel];
-    [self.containerView addSubview:self.environmentPicker];
     
     self.amountLabel = [self.viewFactory labelWithType:ICLabelType];
     self.amountLabel.text = NSLocalizedStringFromTable(@"AmountInCents", kICAppLocalizable, @"Amount in cents");
@@ -239,20 +231,20 @@
     [self.payButton addTarget:self action:@selector(buyButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.containerView addSubview:self.payButton];
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(_explanation, _clientSessionIdLabel, _clientSessionIdTextField, _customerIdLabel, _customerIdTextField, _merchantIdLabel, _merchantIdTextField, _regionLabel, _regionControl, _environmentLabel, _environmentPicker, _amountLabel, _amountTextField, _countryCodeLabel, _countryCodePicker, _currencyCodeLabel, _currencyCodePicker, _isRecurringLabel, _isRecurringSwitch, _payButton, groupMethodsLabel, _groupMethodsSwitch);
-    NSDictionary *metrics = @{@"largeSpace": @"24"};
+    NSDictionary *views = NSDictionaryOfVariableBindings(_explanation, _clientSessionIdLabel, _clientSessionIdTextField, _customerIdLabel, _customerIdTextField, _baseURLLabel, _baseURLTextField, _assetsBaseURLLabel, _assetsBaseURLTextField, _merchantIdLabel, _merchantIdTextField, _amountLabel, _amountTextField, _countryCodeLabel, _countryCodePicker, _currencyCodeLabel, _currencyCodePicker, _isRecurringLabel, _isRecurringSwitch, _payButton, groupMethodsLabel, _groupMethodsSwitch, _containerView, _scrollView, superContainerView);
+    NSDictionary *metrics = @{@"fieldSeparator": @"24", @"groupSeparator": @"72"};
 
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_explanation]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_clientSessionIdLabel]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_clientSessionIdTextField]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_customerIdLabel]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_customerIdTextField]-|" options:0 metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_baseURLLabel]-|" options:0 metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_baseURLTextField]-|" options:0 metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_assetsBaseURLLabel]-|" options:0 metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_assetsBaseURLTextField]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_merchantIdLabel]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_merchantIdTextField]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_regionLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_regionControl]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_environmentLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_environmentPicker]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_amountLabel]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_amountTextField]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_countryCodeLabel]-|" options:0 metrics:nil views:views]];
@@ -262,7 +254,18 @@
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_isRecurringLabel]-[_isRecurringSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[groupMethodsLabel]-[_groupMethodsSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_payButton]-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(largeSpace)-[_explanation(==100)]-(largeSpace)-[_clientSessionIdLabel]-[_clientSessionIdTextField]-(largeSpace)-[_customerIdLabel]-[_customerIdTextField]-(largeSpace)-[_merchantIdLabel]-[_merchantIdTextField]-(largeSpace)-[_regionLabel]-[_regionControl]-(largeSpace)-[_environmentLabel]-[_environmentPicker]-(largeSpace)-[_amountLabel]-[_amountTextField]-(largeSpace)-[_countryCodeLabel]-[_countryCodePicker]-(largeSpace)-[_currencyCodeLabel]-[_currencyCodePicker]-(largeSpace)-[_isRecurringSwitch]-(largeSpace)-[_groupMethodsSwitch]-[_payButton]" options:0 metrics:metrics views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_explanation]-(fieldSeparator)-[_clientSessionIdLabel]-[_clientSessionIdTextField]-(fieldSeparator)-[_customerIdLabel]-[_customerIdTextField]-(fieldSeparator)-[_baseURLLabel]-[_baseURLTextField]-(fieldSeparator)-[_assetsBaseURLLabel]-[_assetsBaseURLTextField]-(fieldSeparator)-[_merchantIdLabel]-[_merchantIdTextField]-(groupSeparator)-[_amountLabel]-[_amountTextField]-(fieldSeparator)-[_countryCodeLabel]-[_countryCodePicker]-(fieldSeparator)-[_currencyCodeLabel]-[_currencyCodePicker]-(fieldSeparator)-[_isRecurringSwitch]-(fieldSeparator)-[_groupMethodsSwitch]-(fieldSeparator)-[_payButton]-|" options:0 metrics:metrics views:views]];
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    superContainerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addConstraints:@[[NSLayoutConstraint constraintWithItem:superContainerView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0], [NSLayoutConstraint constraintWithItem:superContainerView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]]];
+    [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[superContainerView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
+    [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[superContainerView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_scrollView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]|" options:0 metrics:nil views:views]];
+    [superContainerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_containerView]|" options:0 metrics:nil views:views]];
+    [superContainerView addConstraint:[NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
 }
 
 - (void)initializeTapRecognizer
@@ -304,6 +307,51 @@
     return string;
 }
 
+- (BOOL)checkURL:(NSString *)url
+{
+    NSMutableArray<NSString *> *components;
+    if (@available(iOS 7.0, *)) {
+        NSURLComponents *finalComponents = [NSURLComponents componentsWithString:url];
+        components = [[finalComponents.path componentsSeparatedByString:@"/"] filteredArrayUsingPredicate:
+                      [NSPredicate predicateWithFormat:@"length > 0"]].mutableCopy;
+    }
+    else {
+        components = [[[NSURL URLWithString:url].path componentsSeparatedByString:@"/"] filteredArrayUsingPredicate:
+                      [NSPredicate predicateWithFormat:@"length > 0"]].mutableCopy;
+    }
+    
+    
+    NSArray<NSString *> *versionComponents = [kICAPIVersion componentsSeparatedByString:@"/"];
+    switch (components.count) {
+        case 0: {
+            components = versionComponents.mutableCopy;
+            break;
+        }
+        case 1: {
+            if (![components[0] isEqualToString:versionComponents[0]]) {
+                return NO;
+            }
+            [components addObject:versionComponents[1]];
+            break;
+        }
+        case 2: {
+            if (![components[0] isEqualToString:versionComponents[0]]) {
+                return NO;
+            }
+            if (![components[1] isEqualToString:versionComponents[1]]) {
+                return NO;
+            }
+            break;
+        }
+        default: {
+            return NO;
+            break;
+        }
+    }
+    return YES;
+}
+
+
 #pragma mark -
 #pragma mark Button actions
 
@@ -321,6 +369,11 @@
     [StandardUserDefaults setObject:clientSessionId forKey:kICClientSessionId];
     NSString *customerId = self.customerIdTextField.text;
     [StandardUserDefaults setObject:customerId forKey:kICCustomerId];
+    NSString *baseURL = self.baseURLTextField.text;
+    [StandardUserDefaults setObject:baseURL forKey:kICBaseURL];
+    NSString *assetsBaseURL = self.assetsBaseURLTextField.text;
+    [StandardUserDefaults setObject:assetsBaseURL forKey:kICAssetsBaseURL];
+
     if (self.merchantIdTextField.text != nil) {
         NSString *merchantId = self.merchantIdTextField.text;
         [StandardUserDefaults setObject:merchantId forKey:kICMerchantId];
@@ -328,17 +381,6 @@
     [StandardUserDefaults setInteger:self.amountValue forKey:kICPrice];
     [StandardUserDefaults setInteger:[self.countryCodePicker selectedRowInComponent:0] forKey:kICCountryCode];
     [StandardUserDefaults setInteger:[self.currencyCodePicker selectedRowInComponent:0] forKey:kICCurrency];
-    ICRegion region;
-    if (self.regionControl.selectedSegmentIndex == 0) {
-        region = ICRegionEU;
-    } else if (self.regionControl.selectedSegmentIndex == 1) {
-        region = ICRegionUS;
-    } else if (self.regionControl.selectedSegmentIndex == 2) {
-        region = ICRegionAMS;
-    } else {
-        region = ICRegionPAR;
-    }
-    ICEnvironment environment = (ICEnvironment) [self.environmentPicker selectedRowInComponent:0];
 
     // ***************************************************************************
     //
@@ -354,8 +396,28 @@
     // supporting objects.
     //
     // ***************************************************************************
+    if (![self checkURL:baseURL]) {
+        [SVProgressHUD dismiss];
+        NSMutableArray<NSString *> *components;
+        if (@available(iOS 7.0, *)) {
+            NSURLComponents *finalComponents = [NSURLComponents componentsWithString:baseURL];
+            components = [[finalComponents.path componentsSeparatedByString:@"/"] filteredArrayUsingPredicate:
+                          [NSPredicate predicateWithFormat:@"length > 0"]].mutableCopy;
+        }
+        else {
+            components = [[[NSURL URLWithString:baseURL].path componentsSeparatedByString:@"/"] filteredArrayUsingPredicate:
+                          [NSPredicate predicateWithFormat:@"length > 0"]].mutableCopy;
+        }
+        NSArray<NSString *> *versionComponents = [kICAPIVersion componentsSeparatedByString:@"/"];
+        NSString *alertReason = [NSString stringWithFormat: @"This version of the connectSDK is only compatible with %@ , you supplied: '%@'",
+                                 [versionComponents componentsJoinedByString: @"/"],
+                                 [components componentsJoinedByString: @"/"]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"InvalidBaseURLTitle", kICAppLocalizable, @"Title of the connection error dialog.") message:NSLocalizedStringFromTable(alertReason, kICAppLocalizable, nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
 
-    self.session = [ICSession sessionWithClientSessionId:clientSessionId customerId:customerId region:region environment:environment appIdentifier:kICApplicationIdentifier];
+    self.session = [ICSession sessionWithClientSessionId:clientSessionId customerId:customerId baseURL:baseURL assetBaseURL:assetsBaseURL appIdentifier:kICApplicationIdentifier];
 
     NSString *countryCode = [self.countryCodes objectAtIndex:[self.countryCodePicker selectedRowInComponent:0]];
     NSString *currencyCode = [self.currencyCodes objectAtIndex:[self.currencyCodePicker selectedRowInComponent:0]];

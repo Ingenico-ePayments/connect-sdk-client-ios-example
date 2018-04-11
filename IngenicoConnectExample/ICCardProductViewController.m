@@ -168,6 +168,7 @@
         [self.tableView beginUpdates];
         NSArray<ICFormRow *> *oldFormRows = self.formRows;
         [self initializeFormRows];
+        [self addExtraRows];
         
         NSInteger oldCardNumberIndex = 0;
         for (ICFormRow *fr in oldFormRows) {

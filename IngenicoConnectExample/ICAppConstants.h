@@ -14,6 +14,8 @@
 #define kICDestructiveColor     [UIColor colorWithRed:0.8 green:0 blue:0 alpha:1]
 #define kICClientSessionId      @"kICClientSessionId"
 #define kICCustomerId           @"kICCustomerId"
+#define kICBaseURL              @"kICBaseURL"
+#define kICAssetsBaseURL        @"kICAssetsBaseURL"
 #define kICMerchantId           @"kICMerchantId"
 #define kICPrice                @"kICPrice"
 #define kICCountryCode          @"kICCountryCode"
@@ -21,5 +23,5 @@
 #define kICBoletoBancarioId     @"1503"
 #define kICBancontactId         @"3012"
 #define kICArvatoIds            [NSSet setWithArray:@[@"9000", @"9001"]]
-#define kICApplicationIdentifier @"iOS Example Application/v1.5.0"
+#define kICApplicationIdentifier @"iOS Example Application/v1.6.0"
 #endif

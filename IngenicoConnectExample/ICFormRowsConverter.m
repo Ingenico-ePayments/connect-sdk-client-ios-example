@@ -17,6 +17,7 @@
 #import <IngenicoConnectSDK/ICIINDetailsResponse.h>
 #import <IngenicoConnectExample/ICFormRowLabel.h>
 #import <IngenicoConnectSDK/ICValidationErrorLength.h>
+#import <IngenicoConnectSDK/ICValidationErrorIBAN.h>
 #import <IngenicoConnectSDK/ICValidationErrorRange.h>
 #import <IngenicoConnectSDK/ICValidationErrorExpirationDate.h>
 #import <IngenicoConnectSDK/ICValidationErrorFixedList.h>
@@ -178,7 +179,10 @@ static NSBundle * _sdkBundle;
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"emailAddress"];
         errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
-
+    } else if (errorClass == [ICValidationErrorIBAN class]) {
+        errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"regularExpression"];
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
+        errorMessage = errorMessageValue;
     } else if (errorClass == [ICValidationErrorRegularExpression class]) {
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"regularExpression"];
         errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
