@@ -139,30 +139,35 @@
     [self.errors removeAllObjects];
     ICPaymentRequest *request = self.paymentRequest;
     for (ICPaymentProductField *field in self.paymentItem.fields.paymentProductFields) {
-        if ([[self unmaskedValueForField:field.identifier] isEqualToString:@""]) {
-            BOOL hasFixedValidator = NO;
-            for (ICValidator *validator in field.dataRestrictions.validators.validators) {
-                if ([validator isKindOfClass:[ICValidatorFixedList class]]) {
-                    // It's not possible to choose an empty string with a picker
-                    // If it is neccessary to choose an invalid value here (placeholder, see ArvatoViewController), choose a different value from ""
-                    hasFixedValidator = true;
-                    ICValidatorFixedList *fixedListValidator = (ICValidatorFixedList *) validator;
-                    NSString *value = fixedListValidator.allowedValues[0];
-                    [self setValue:value forField:field.identifier];
+        if (![self fieldIsPartOfAccountOnFile:field.identifier]) {
+            if ([[self unmaskedValueForField:field.identifier] isEqualToString:@""]) {
+                BOOL hasFixedValidator = NO;
+                for (ICValidator *validator in field.dataRestrictions.validators.validators) {
+                    if ([validator isKindOfClass:[ICValidatorFixedList class]]) {
+                        // It's not possible to choose an empty string with a picker
+                        // If it is neccessary to choose an invalid value here (placeholder, see ArvatoViewController), choose a different value from ""
+                        // Except if it is on the accountOnFile
+                        hasFixedValidator = true;
+                        ICValidatorFixedList *fixedListValidator = (ICValidatorFixedList *) validator;
+                        NSString *value = fixedListValidator.allowedValues[0];
+                        [self setValue:value forField:field.identifier];
+                    }
+                }
+                // It's not possible to choose an empty string with a date picker
+                // If not set, we assume the first is chosen
+                // Except if it is on the accountOnFile
+                if (!hasFixedValidator && field.type == ICDateString) {
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                    formatter.dateFormat = @"yyyyMMdd";
+                    [self setValue: [formatter stringFromDate: [NSDate date]] forField: field.identifier];
+                }
+                // It's not possible to choose an empty boolean with a switch
+                // If not set, we assume false is chosen
+                // Except if it is on the accountOnFile
+                if (!hasFixedValidator && field.type == ICBooleanString) {
+                    [self setValue: @"false" forField: field.identifier];
                 }
             }
-            // It's not possible to choose an empty string with a date picker
-            // If not set, we assume the first is chosen
-            if (!hasFixedValidator && field.type == ICDateString) {
-                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                formatter.dateFormat = @"yyyyMMdd";
-                [self setValue: [formatter stringFromDate: [NSDate date]] forField: field.identifier];
-            }
-
-        }
-
-
-        if ([self fieldIsPartOfAccountOnFile:field.identifier] == NO) {
             if ([exceptionFields containsObject:field.identifier]) {
                 continue;
             }

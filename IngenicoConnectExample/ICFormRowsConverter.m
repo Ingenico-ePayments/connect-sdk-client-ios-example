@@ -258,7 +258,7 @@ static NSBundle * _sdkBundle;
     ICFormRowDate *row = [[ICFormRowDate alloc] init];
     row.paymentProductField = field;
     row.isEnabled = isEnabled;
-    
+    row.value = value;
     return row;
 }
 
@@ -335,6 +335,7 @@ static NSBundle * _sdkBundle;
     }
 
     row.selectedRow = selectedRow;
+    row.isEnabled = isEnabled;
     return row;
 }
 - (NSString *)labelStringFormRowFromField:(ICPaymentProductField *)field paymentProduct:(NSString *)paymentProductId {

@@ -16,7 +16,12 @@
 @end
 
 @implementation ICTextFieldTableViewCell
-
+-(void)setReadonly:(BOOL)readonly {
+    self.textField.enabled = !readonly;
+}
+-(BOOL)readonly {
+    return !self.textField.enabled;
+}
 + (NSString *)reuseIdentifier {
     return @"text-field-cell";
 }

@@ -11,4 +11,6 @@
 #import <IngenicoConnectSDK/ICPaymentProductField.h>
 @interface ICFormRowDate : ICFormRow
 @property (strong, nonatomic) ICPaymentProductField * _Nonnull paymentProductField;
+@property (strong, nonatomic) NSString *value;
+@property (strong, nonatomic) NSDate *date;
 @end

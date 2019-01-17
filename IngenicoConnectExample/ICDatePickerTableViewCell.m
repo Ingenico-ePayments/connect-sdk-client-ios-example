@@ -24,6 +24,7 @@
         [self.datePicker setDatePickerMode:UIDatePickerModeDate];
         [self.datePicker addTarget:self action:@selector(didPickNewDate:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:self.datePicker];
+        self.date = [NSDate date];
     }
     return self;
 }
@@ -31,6 +32,19 @@
     if (self.delegate) {
         [self.delegate datePicker:sender selectedNewDate:sender.date];
     }
+}
+-(void)setDate:(NSDate *)date {
+    self.datePicker.date = date;
+    self->_date = date;
+}
+-(NSDate *)date {
+    return self->_date;
+}
+-(BOOL)readonly {
+    return !self.datePicker.isEnabled;
+}
+-(void)setReadonly:(BOOL)readonly {
+    self.datePicker.enabled = !readonly;
 }
 - (void)layoutSubviews {
     [super layoutSubviews];

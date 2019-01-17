@@ -13,7 +13,9 @@
 #import <UIKit/UIKit.h>
 #import <UIKit/UIPickerView.h>
 
-@interface ICPickerViewTableViewCell : ICTableViewCell
+@interface ICPickerViewTableViewCell : ICTableViewCell {
+    BOOL _readonly;
+}
 
 + (NSString *)reuseIdentifier;
 
@@ -21,5 +23,6 @@
 @property (strong, nonatomic) NSObject<UIPickerViewDelegate> *delegate;
 @property (strong, nonatomic) NSObject<UIPickerViewDataSource> *dataSource;
 @property (assign, nonatomic) NSInteger selectedRow;
+@property (assign, nonatomic) BOOL readonly;
 +(NSUInteger)pickerHeight;
 @end

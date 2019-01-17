@@ -10,13 +10,16 @@
 #import <IngenicoConnectExample/ICIntegerTextField.h>
 #import <IngenicoConnectExample/ICFractionalTextField.h>
 #import "ICFormRowField.h"
-@interface ICCurrencyTableViewCell : ICTableViewCell
+@interface ICCurrencyTableViewCell : ICTableViewCell {
+    BOOL _readonly;
+}
 
 + (NSString *)reuseIdentifier;
 
 @property (strong, nonatomic) ICFormRowField * integerField;
 @property (strong, nonatomic) ICFormRowField * fractionalField;
 @property (strong, nonatomic) NSString * currencyCode;
+@property (assign, nonatomic) BOOL readonly;
 @property(nonatomic,weak) id<UITextFieldDelegate> delegate;
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (void)setIntegerField:(ICFormRowField *)integerField;

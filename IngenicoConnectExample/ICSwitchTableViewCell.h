@@ -12,10 +12,11 @@
 @protocol ICSwitchTableViewCellDelegate
 -(void)switchChanged:(ICSwitch *)aSwitch;
 @end
-@interface ICSwitchTableViewCell : ICTableViewCell
+@interface ICSwitchTableViewCell : ICTableViewCell 
 @property (weak, nonatomic) NSObject<ICSwitchTableViewCellDelegate> *delegate;
 @property (strong, nonatomic) NSString *errorMessage;
 @property (assign, nonatomic, getter=isOn) BOOL on;
+@property (assign, nonatomic) BOOL readonly;
 + (NSString *)reuseIdentifier;
 
 - (NSAttributedString *)attributedTitle;

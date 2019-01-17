@@ -177,7 +177,7 @@
                     ICPaymentRequest *request = [[ICPaymentRequest alloc] init];
                     request.paymentProduct = (ICPaymentProduct *)self.paymentItem;
                     request.accountOnFile = self.accountOnFile;
-                    request.tokenize = NO;
+                    request.tokenize = self.inputData.tokenize;
                     [self.paymentRequestTarget didSubmitPaymentRequest:request];
                 }];
                 break;

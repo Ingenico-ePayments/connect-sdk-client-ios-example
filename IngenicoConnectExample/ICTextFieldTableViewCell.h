@@ -25,5 +25,5 @@
 - (void)setDelegate:(NSObject<UITextFieldDelegate> *)delegate;
 
 @property (strong, nonatomic) ICFormRowField *field;
-
+@property (assign, nonatomic) BOOL readonly;
 @end

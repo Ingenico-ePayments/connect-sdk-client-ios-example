@@ -21,7 +21,14 @@
 + (NSString *)reuseIdentifier {
     return @"picker-view-cell";
 }
-
+-(void)setReadonly:(BOOL)readonly {
+    self->_readonly = readonly;
+    self->_pickerView.userInteractionEnabled = !readonly;
+    self->_pickerView.alpha = readonly ? 0.6f : 1.0f;
+}
+-(BOOL)readonly {
+    return self->_readonly;
+}
 - (void)setItems:(NSArray<ICValueMappingItem *> *)items {
     _items = items;
     if (items != nil) {

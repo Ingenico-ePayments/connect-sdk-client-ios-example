@@ -11,8 +11,12 @@
 @protocol ICDatePickerTableViewCellDelegate
 -(void)datePicker:(UIDatePicker *)datePicker selectedNewDate:(NSDate *)newDate;
 @end
-@interface ICDatePickerTableViewCell : ICTableViewCell
+@interface ICDatePickerTableViewCell : ICTableViewCell {
+    NSDate *_date;
+}
 +(NSString *)reuseIdentifier;
 @property (nonatomic, weak) NSObject<ICDatePickerTableViewCellDelegate> *delegate;
 +(NSUInteger)pickerHeight;
+@property (nonatomic, assign) BOOL readonly;
+@property (nonatomic, strong) NSDate *date;
 @end

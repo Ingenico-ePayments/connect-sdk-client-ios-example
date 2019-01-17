@@ -20,7 +20,12 @@
 + (NSString *)reuseIdentifier {
     return @"switch-cell";
 }
-
+-(BOOL)readonly {
+    return !self.switchControl.isEnabled;
+}
+-(void)setReadonly:(BOOL)readonly {
+    self.switchControl.enabled = !readonly;
+}
 -(NSAttributedString *)attributedTitle {
     return self.textView.attributedText;
 }

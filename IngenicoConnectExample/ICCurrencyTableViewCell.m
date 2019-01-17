@@ -41,7 +41,14 @@
     }
     return self;
 }
-
+-(BOOL)readonly {
+    return self->_readonly;
+}
+-(void)setReadonly:(BOOL)readonly {
+    self->_integerTextField.enabled = !readonly;
+    self->_fractionalTextField.enabled = !readonly;
+    self->_readonly = readonly;
+}
 - (void)layoutSubviews {
     [super layoutSubviews];
 
@@ -74,6 +81,7 @@
     self.integerTextField.placeholder = integerField.placeholder;
     self.integerTextField.keyboardType = integerField.keyboardType;
     self.integerTextField.secureTextEntry = integerField.isSecure;
+    self.integerTextField.textAlignment = NSTextAlignmentRight;
 }
 
 - (void)setFractionalField:(ICFormRowField *)fractionalField

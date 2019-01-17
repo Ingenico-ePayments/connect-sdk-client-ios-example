@@ -84,6 +84,7 @@
     
     self.inputData = [ICPaymentProductInputData new];
     self.inputData.paymentItem = self.paymentItem;
+    self.inputData.accountOnFile = self.accountOnFile;
     if ([self.paymentItem isKindOfClass:[ICPaymentProduct class]]) {
         ICPaymentProduct *product = (ICPaymentProduct *) self.paymentItem;
         [self.confirmedPaymentProducts addObject:product.identifier];
@@ -368,6 +369,7 @@
     cell.delegate = self;
     cell.accessoryType = row.showInfoButton ? UITableViewCellAccessoryDetailButton : UITableViewCellAccessoryNone;
     cell.field = row.field;
+    cell.readonly = !row.isEnabled;
     if (error != nil) {
         cell.error = [ICFormRowsConverter errorMessageForError: error withCurrency: row.paymentProductField.displayHints.formElement.type == ICCurrencyType];
     } else {
@@ -463,6 +465,7 @@
     
     cell.field = row.field;
     cell.delegate = self;
+    cell.readonly = !row.isEnabled;
     ICValidationError *error = [row.paymentProductField.errors firstObject];
     if (error != nil && self.validation) {
         cell.error = [ICFormRowsConverter errorMessageForError: error withCurrency: row.paymentProductField.displayHints.formElement.type == ICCurrencyType];
@@ -476,7 +479,8 @@
     ICDatePickerTableViewCell *cell = (ICDatePickerTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[ICDatePickerTableViewCell reuseIdentifier]];
     
     cell.delegate = self;
-    
+    cell.readonly = !row.isEnabled;
+    cell.date = row.date;
     return cell;
 }
 
@@ -486,6 +490,7 @@
     cell.integerField = row.integerField;
     cell.delegate = self;
     cell.fractionalField = row.fractionalField;
+    cell.readonly = !row.isEnabled;
     cell.accessoryType = row.showInfoButton ? UITableViewCellAccessoryDetailButton : UITableViewCellAccessoryNone;
     return cell;
 }
@@ -512,6 +517,7 @@
     cell.delegate = self;
     cell.dataSource = self;
     cell.selectedRow = row.selectedRow;
+    cell.readonly = !row.isEnabled;
     return cell;
 }
 
