@@ -23,21 +23,28 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - IngenicoConnectSDK (2.0.0):
+  - IngenicoConnectSDK (3.19.1):
     - AFNetworking (~> 2.5.3)
   - SVProgressHUD (2.0.3)
 
 DEPENDENCIES:
   - AFNetworkActivityLogger
-  - IngenicoConnectSDK
+  - IngenicoConnectSDK (~> 3.19)
   - SVProgressHUD
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworkActivityLogger
+    - AFNetworking
+    - IngenicoConnectSDK
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
-  IngenicoConnectSDK: 7e05be9fab14ea39609535e6d8b628772b85f115
+  IngenicoConnectSDK: c333a3ebb1db02d7d2f497b903637175d9ecb3cf
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
 
-PODFILE CHECKSUM: 1462d05b0052ad42b5b9389520c6f57306bbdacd
+PODFILE CHECKSUM: 05f262becb1b3f2489ce42785e08e62e6d3180e6
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.6.0

@@ -691,8 +691,6 @@
 				A30330AD197CEF73008B7AF0 /* Sources */,
 				A30330AE197CEF73008B7AF0 /* Frameworks */,
 				A30330AF197CEF73008B7AF0 /* Resources */,
-				E1B10A2065546A13CD5DD964 /* [CP] Embed Pods Frameworks */,
-				1A0812C6B3DCE9A081B15BEB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -712,7 +710,6 @@
 				A351DCAB196296000033E23C /* Sources */,
 				A351DCAC196296000033E23C /* Frameworks */,
 				A351DCAD196296000033E23C /* Resources */,
-				3B33E9717F2B65EE98396D44 /* [CP] Embed Pods Frameworks */,
 				398D89903C8C38578E5C9B45 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -739,7 +736,7 @@
 						TestTargetID = A351DCAE196296000033E23C;
 					};
 					A351DCAE196296000033E23C = {
-						DevelopmentTeam = 8H8ZSPDJ95;
+						DevelopmentTeam = UTWYEN5FS2;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -755,6 +752,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				"en-AU",
 				"ar-EG",
@@ -868,49 +866,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1A0812C6B3DCE9A081B15BEB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IngenicoConnectExampleTests/Pods-IngenicoConnectExampleTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		398D89903C8C38578E5C9B45 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample-resources.sh",
+				"${PODS_ROOT}/IngenicoConnectSDK/IngenicoConnectSDK/IngenicoConnectSDK.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IngenicoConnectSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3B33E9717F2B65EE98396D44 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5DC11D7D73FB6BB79AFAE3A3 /* [CP] Check Pods Manifest.lock */ = {
@@ -919,13 +892,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IngenicoConnectExampleTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B9E6309AA247E971A4002740 /* [CP] Check Pods Manifest.lock */ = {
@@ -934,28 +910,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IngenicoConnectExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E1B10A2065546A13CD5DD964 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IngenicoConnectExampleTests/Pods-IngenicoConnectExampleTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1203,7 +1167,7 @@
 				CODE_SIGN_ENTITLEMENTS = IngenicoConnectExample/IngenicoConnectExample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8H8ZSPDJ95;
+				DEVELOPMENT_TEAM = UTWYEN5FS2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IngenicoConnectExample/IngenicoConnectExample-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1214,7 +1178,7 @@
 				INFOPLIST_FILE = IngenicoConnectExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ingenicoconnect.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ingenicoconnect.iOSExampleApp;
 				PRODUCT_NAME = IngenicoConnectExample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "IngenicoConnectExample-Bridging-Header.h";
@@ -1235,7 +1199,7 @@
 				CODE_SIGN_ENTITLEMENTS = IngenicoConnectExample/IngenicoConnectExample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 8H8ZSPDJ95;
+				DEVELOPMENT_TEAM = UTWYEN5FS2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IngenicoConnectExample/IngenicoConnectExample-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1246,7 +1210,7 @@
 				INFOPLIST_FILE = IngenicoConnectExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ingenicoconnect.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ingenicoconnect.iOSExampleApp;
 				PRODUCT_NAME = IngenicoConnectExample;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "IngenicoConnectExample-Bridging-Header.h";

@@ -48,14 +48,19 @@
     }
     paymentRequest.accountOnFile = self.accountOnFile;
     paymentRequest.tokenize = self.tokenize;
-    for (NSString *key in self.fieldValues.allKeys) {
-        NSString *value = self.fieldValues[key];
+    NSDictionary *unmaskedValues = [self unmaskedFieldValues];
+    for (NSString *key in unmaskedValues.allKeys) {
+        // Check that the value in the field is not the same as in the Account on file.
+        // If it is the same, it should not be added to the Payment Request.
+        if (self.accountOnFile != nil && [[self.accountOnFile.attributes valueForField:key] isEqualToString:unmaskedValues[key]]) {
+            continue;
+        }
+        NSString *value = unmaskedValues[key];
         [paymentRequest setValue:value forField:key];
     }
 
     return paymentRequest;
 }
-
 
 - (void)setValue:(NSString *)value forField:(NSString *)paymentProductFieldId {
     [self.fieldValues setObject:value forKey:paymentProductFieldId];
@@ -107,16 +112,10 @@
     }
 }
 
-- (void)setAccountOnFile:(ICAccountOnFile *)accountOnFile {
-    _accountOnFile = accountOnFile;
-    for (ICAccountOnFileAttribute *attribute in accountOnFile.attributes.attributes) {
-        [self.fieldValues setObject:attribute.value forKey:attribute.key];
-    }
-}
-
 - (void)removeAllFieldValues {
     [self.fieldValues removeAllObjects];
 }
+
 - (NSString *)maskForField:(NSString *)paymentProductFieldId {
     ICPaymentProductField *field = [self.paymentItem paymentProductFieldWithId:paymentProductFieldId];
     NSString *mask = field.displayHints.mask;
@@ -134,6 +133,7 @@
     }
     return unmaskedFieldValues;
 }
+
 - (void)validateExceptFields:(NSSet *)exceptionFields
 {
     [self.errors removeAllObjects];
@@ -178,6 +178,7 @@
         }
     }
 }
+
 - (void)validate
 {
     [self validateExceptFields:[NSSet set]];
