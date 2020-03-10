@@ -10,6 +10,7 @@
 
 #import <IngenicoConnectExample/ICAppDelegate.h>
 #import <IngenicoConnectExample/ICStartViewController.h>
+#import <AFNetworkActivityLogger.h>
 
 @implementation ICAppDelegate
 
@@ -19,7 +20,7 @@
     // Uncomment the following two statement to enable logging of requests and responses
     //[[AFNetworkActivityLogger sharedLogger] startLogging];
     //[[AFNetworkActivityLogger sharedLogger] setLevel:AFLoggerLevelDebug];
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];

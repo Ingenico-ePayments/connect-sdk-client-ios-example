@@ -86,12 +86,17 @@ typedef enum {
 -(void)updateTextFieldCell:(ICTextFieldTableViewCell *)cell row:(ICFormRowTextField *)row {
     [super updateTextFieldCell:cell row:row];
     ICValidatorBoletoBancarioRequiredness *validator = [self firstBoletoBancarioRequirednessValidatorForFieldRow: row];
-    if (validator.fiscalNumberLength < self.switchLength) {
-        row.isEnabled = self.fiscalNumberType == ICFiscalNumberTypePersonal;
-    } else {
-        row.isEnabled = self.fiscalNumberType == ICFiscalNumberTypeCompany;
+    if (validator != nil) {
+        if (validator.fiscalNumberLength < self.switchLength) {
+            row.isEnabled = self.fiscalNumberType == ICFiscalNumberTypePersonal;
+            cell.readonly = !row.isEnabled;
+        } else {
+            row.isEnabled = self.fiscalNumberType == ICFiscalNumberTypeCompany;
+            cell.readonly = !row.isEnabled;
+        }
     }
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ICFormRow *row = [self.formRows objectAtIndex:indexPath.row];
