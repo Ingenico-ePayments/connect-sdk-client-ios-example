@@ -873,7 +873,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IngenicoConnectExample/Pods-IngenicoConnectExample-resources.sh",
-				"${PODS_ROOT}/../../ios-sdk/IngenicoConnectSDK/IngenicoConnectSDK.bundle",
+				"${PODS_ROOT}/IngenicoConnectSDK/IngenicoConnectSDK/IngenicoConnectSDK.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
