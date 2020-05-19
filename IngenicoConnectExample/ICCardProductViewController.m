@@ -22,6 +22,7 @@
 @property (nonatomic, strong) ICIINDetailsResponse *iinDetailsResponse;
 @property (strong, nonatomic) NSBundle *sdkBundle;
 @property (strong, nonatomic) NSArray<ICIINDetail *> *cobrands;
+@property (strong, nonatomic) NSString *previousEnteredCreditCardNumber;
 @end
 
 @implementation ICCardProductViewController
@@ -113,8 +114,7 @@
     ICFormRowTextField *row = [self.formRows objectAtIndex:indexPath.row];
     if ([row.paymentProductField.identifier isEqualToString:@"cardNumber"]) {
         NSString *unmasked = [self.inputData unmaskedValueForField:row.paymentProductField.identifier];
-        if (unmasked.length >= 6 && *position <= 7) {
-            unmasked = [unmasked substringToIndex:6];
+        if (unmasked.length >= 6 && [self oneOfFirst8DigitsChangedInText:unmasked]) {
             
             [self.session IINDetailsForPartialCreditCardNumber:unmasked context:self.context success:^(ICIINDetailsResponse *response) {
                 self.iinDetailsResponse = response;
@@ -144,9 +144,21 @@
                 
             }];
         }
+        _previousEnteredCreditCardNumber = unmasked;
     }
-
 }
+
+-(Boolean)oneOfFirst8DigitsChangedInText:(NSString *)currentEnteredCreditCardNumber {
+    // Add some padding, so we are sure there are 8 characters to compare.
+    NSString *currentPadded = [currentEnteredCreditCardNumber stringByAppendingString: @"xxxxxxxx"];
+    NSString *previousPadded = [_previousEnteredCreditCardNumber stringByAppendingString:@"xxxxxxxx"];
+
+    NSString *currentFirst8 = [currentPadded substringWithRange:NSMakeRange(0, 8)];
+    NSString *previousFirst8 = [previousPadded substringWithRange:NSMakeRange(0, 8)];
+
+    return ![currentFirst8 isEqualToString:previousFirst8];
+}
+
 -(void)initializeFormRows {
     [super initializeFormRows];
     NSArray<ICFormRow *> *newFormRows = [self coBrandFormsWithIINDetailsResponse:self.cobrands];
