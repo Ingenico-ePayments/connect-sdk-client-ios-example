@@ -1,5 +1,5 @@
 PODS:
-  - IngenicoConnectSDK (5.1.0):
+  - IngenicoConnectSDK (5.3.0):
     - AFNetworking (~> 3.0)
   - SVProgressHUD (2.2.5)
 

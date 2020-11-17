@@ -28,6 +28,7 @@
 #import <IngenicoConnectSDK/ICValidationErrorAllowed.h>
 #import <IngenicoConnectSDK/ICValidationErrorEmailAddress.h>
 #import <IngenicoConnectSDK/ICValidationErrorTermsAndConditions.h>
+#import <IngenicoConnectSDK/ICResidentIdNumberError.h>
 
 #import "ICFormRowDate.h"
 @interface ICFormRowsConverter ()
@@ -195,7 +196,11 @@ static NSBundle * _sdkBundle;
         errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"required"];
         errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
         errorMessage = errorMessageValue;
-    } else {
+    } else if (errorClass == [ICResidentIdNumberError class]) {
+        errorMessageKey = [NSString stringWithFormat:errorMessageFormat, @"residentIdNumber"];
+        errorMessageValue = NSLocalizedStringFromTableInBundle(errorMessageKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil);
+        errorMessage = errorMessageValue;
+    }  else {
         [NSException raise:@"Invalid validation error" format:@"Validation error %@ is invalid", error];
     }
     return errorMessage;

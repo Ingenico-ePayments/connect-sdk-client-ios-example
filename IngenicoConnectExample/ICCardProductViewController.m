@@ -61,10 +61,17 @@
     
     if ([row.paymentProductField.identifier isEqualToString:@"cardNumber"]) {
         if([self.confirmedPaymentProducts containsObject:self.paymentItem.identifier]) {
-            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+            CGFloat size = cell.frame.size.height * 0.8;
+            CGFloat padding = cell.frame.size.height * 0.1;
+
+            UIView *outerView = [[UIView alloc]initWithFrame:CGRectMake(padding, padding, size, size)];
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, size, size)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
+            [outerView addSubview:imageView];
+            outerView.contentMode = UIViewContentModeScaleAspectFit;
+            
             imageView.image = row.logo;
-            cell.rightView = imageView;
+            cell.rightView = outerView;
         }
 
     }

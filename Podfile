@@ -6,7 +6,7 @@ target 'IngenicoConnectExample' do
   # use_frameworks!
 
   # Pods for IngenicoConnectExample
-  pod 'IngenicoConnectSDK', '~> 5.1'
+  pod 'IngenicoConnectSDK', '~> 5.3'
   pod 'SVProgressHUD'
 
   target 'IngenicoConnectExampleTests' do

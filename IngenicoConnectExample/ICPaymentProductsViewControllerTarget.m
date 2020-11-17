@@ -338,7 +338,13 @@
     [self generateSummaryItems];
     
     PKPaymentRequest *paymentRequest = [[PKPaymentRequest alloc] init];
-    [paymentRequest setCountryCode:self.context.countryCode];
+
+    if (paymentProduct.acquirerCountry != nil) {
+        [paymentRequest setCountryCode:paymentProduct.acquirerCountry];
+    } else {
+        [paymentRequest setCountryCode:self.context.countryCode];
+    }
+
     [paymentRequest setCurrencyCode:self.context.amountOfMoney.currencyCode];
     [paymentRequest setSupportedNetworks:paymentProductNetworks.paymentProductNetworks];
     [paymentRequest setPaymentSummaryItems:self.summaryItems];
