@@ -16,12 +16,14 @@
     if (self) {
         self.clipsToBounds = YES;
     }
+    [self.contentView setUserInteractionEnabled: YES];
     return self;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [self initWithReuseIdentifier:reuseIdentifier];
+    [self.contentView setUserInteractionEnabled: YES];
     return self;
 }
 
