@@ -13,7 +13,8 @@
 #import <IngenicoConnectExample/ICPaymentRequestTarget.h>
 #import <IngenicoConnectExample/ICContinueShoppingTarget.h>
 #import <IngenicoConnectExample/ICPaymentFinishedTarget.h>
+#import <IngenicoConnectExample/ICParseJsonTarget.h>
 
-@interface ICStartViewController : UIViewController <ICContinueShoppingTarget, ICPaymentFinishedTarget>
+@interface ICStartViewController : UIViewController <ICContinueShoppingTarget, ICPaymentFinishedTarget, ICParseJsonTarget>
 
 @end

@@ -416,7 +416,7 @@
         //
         // ***************************************************************************
         
-        [self.paymentFinishedTarget didFinishPayment];
+        [self.paymentFinishedTarget didFinishPayment:preparedPaymentRequest];
         
         if (succes != nil) {
             succes();

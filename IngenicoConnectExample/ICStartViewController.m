@@ -16,8 +16,10 @@
 #import <IngenicoConnectExample/ICViewFactory.h>
 #import <IngenicoConnectExample/ICPaymentProductsViewController.h>
 #import <IngenicoConnectExample/ICPaymentProductViewController.h>
+#import <IngenicoConnectExample/ICJsonDialogViewController.h>
 #import <IngenicoConnectExample/ICEndViewController.h>
 #import <IngenicoConnectExample/ICPaymentProductsViewControllerTarget.h>
+#import <IngenicoConnectExample/ICStartPaymentParsedJsonData.h>
 
 #import <IngenicoConnectSDK/ICPaymentAmountOfMoney.h>
 #import <IngenicoConnectSDK/ICPaymentProductGroup.h>
@@ -27,6 +29,7 @@
 
 @property (strong, nonatomic) UIView *containerView;
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIView *parsableFieldsContainer;
 
 @property (strong, nonatomic) UITextView *explanation;
 @property (strong, nonatomic) ICLabel *clientSessionIdLabel;
@@ -37,6 +40,7 @@
 @property (strong, nonatomic) ICTextField *baseURLTextField;
 @property (strong, nonatomic) ICLabel *assetsBaseURLLabel;
 @property (strong, nonatomic) ICTextField *assetsBaseURLTextField;
+@property (strong, nonatomic) UIButton *jsonButton;
 @property (strong, nonatomic) ICLabel *merchantIdLabel;
 @property (strong, nonatomic) ICTextField *merchantIdTextField;
 @property (strong, nonatomic) ICLabel *amountLabel;
@@ -48,6 +52,7 @@
 @property (strong, nonatomic) ICLabel *isRecurringLabel;
 @property (strong, nonatomic) ICSwitch *isRecurringSwitch;
 @property (strong, nonatomic) UIButton *payButton;
+@property (strong, nonatomic) ICLabel *groupMethodsLabel;
 @property (strong, nonatomic) UISwitch *groupMethodsSwitch;
 @property (strong, nonatomic) ICPaymentProductsViewControllerTarget *paymentProductsViewControllerTarget;
 
@@ -59,6 +64,8 @@
 
 @property (strong, nonatomic) NSArray *countryCodes;
 @property (strong, nonatomic) NSArray *currencyCodes;
+
+@property (strong, nonatomic) ICJsonDialogViewController *jsonDialogViewController;
 
 @end
 
@@ -74,14 +81,14 @@
     }
     
     self.viewFactory = [[ICViewFactory alloc] init];
+    self.jsonDialogViewController = [[ICJsonDialogViewController alloc] init];
     
     self.countryCodes = [[kICCountryCodes componentsSeparatedByString:@", "] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     self.currencyCodes = [[kICCurrencyCodes componentsSeparatedByString:@", "] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollView.delaysContentTouches = NO;
-    //self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, viewHeight);
-    //self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.scrollView];
     
     UIView *superContainerView = [[UIView alloc] init];
@@ -104,6 +111,12 @@
     self.explanation.scrollEnabled = NO;
     [self.containerView addSubview:self.explanation];
 
+    self.parsableFieldsContainer = [[UIView alloc] init];
+    self.parsableFieldsContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    self.parsableFieldsContainer.layer.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2].CGColor;
+    self.parsableFieldsContainer.layer.cornerRadius = 10;
+    [self.containerView addSubview:self.parsableFieldsContainer];
+
     self.clientSessionIdLabel = [self.viewFactory labelWithType:ICLabelType];
     self.clientSessionIdLabel.text = NSLocalizedStringFromTable(@"ClientSessionIdentifier", kICAppLocalizable, @"Client session identifier");
     self.clientSessionIdLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -111,9 +124,11 @@
     self.clientSessionIdTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.clientSessionIdTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.clientSessionIdTextField.text = [StandardUserDefaults objectForKey:kICClientSessionId];
-    [self.containerView addSubview:self.clientSessionIdLabel];
-    [self.containerView addSubview:self.clientSessionIdTextField];
-    
+    self.clientSessionIdTextField.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2];
+
+    [self.parsableFieldsContainer addSubview:self.clientSessionIdLabel];
+    [self.parsableFieldsContainer addSubview:self.clientSessionIdTextField];
+
     self.customerIdLabel = [self.viewFactory labelWithType:ICLabelType];
     self.customerIdLabel.text = NSLocalizedStringFromTable(@"CustomerIdentifier", kICAppLocalizable, @"Customer identifier");
     self.customerIdLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -121,8 +136,10 @@
     self.customerIdTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.customerIdTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.customerIdTextField.text = [StandardUserDefaults objectForKey:kICCustomerId];
-    [self.containerView addSubview:self.customerIdLabel];
-    [self.containerView addSubview:self.customerIdTextField];
+    self.customerIdTextField.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2];
+
+    [self.parsableFieldsContainer addSubview:self.customerIdLabel];
+    [self.parsableFieldsContainer addSubview:self.customerIdTextField];
     
     self.baseURLLabel = [self.viewFactory labelWithType:ICLabelType];
     self.baseURLLabel.text = NSLocalizedStringFromTable(@"BaseURL", kICAppLocalizable, @"Client session identifier");
@@ -131,8 +148,10 @@
     self.baseURLTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.baseURLTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.baseURLTextField.text = [StandardUserDefaults objectForKey:kICBaseURL];
-    [self.containerView addSubview:self.baseURLLabel];
-    [self.containerView addSubview:self.baseURLTextField];
+    self.baseURLTextField.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2];
+
+    [self.parsableFieldsContainer addSubview:self.baseURLLabel];
+    [self.parsableFieldsContainer addSubview:self.baseURLTextField];
     
     self.assetsBaseURLLabel = [self.viewFactory labelWithType:ICLabelType];
     self.assetsBaseURLLabel.text = NSLocalizedStringFromTable(@"AssetsBaseURL", kICAppLocalizable, @"Customer identifier");
@@ -141,10 +160,20 @@
     self.assetsBaseURLTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.assetsBaseURLTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.assetsBaseURLTextField.text = [StandardUserDefaults objectForKey:kICAssetsBaseURL];
-    [self.containerView addSubview:self.assetsBaseURLLabel];
-    [self.containerView addSubview:self.assetsBaseURLTextField];
+    self.assetsBaseURLTextField.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2];
 
-    
+    [self.parsableFieldsContainer addSubview:self.assetsBaseURLLabel];
+    [self.parsableFieldsContainer addSubview:self.assetsBaseURLTextField];
+
+    self.jsonButton = [self.viewFactory buttonWithType:ICButtonTypeSecondary];
+    self.jsonButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.jsonButton.backgroundColor = [UIColor lightGrayColor];
+    [self.jsonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.jsonButton setTitle:NSLocalizedStringFromTable(@"Paste", kICAppLocalizable, nil) forState:UIControlStateNormal];
+    [self.jsonButton addTarget:self action:@selector(presentJsonDialog) forControlEvents:UIControlEventTouchUpInside];
+    [self.parsableFieldsContainer addSubview:self.jsonButton];
+
+
     self.merchantIdLabel = [self.viewFactory labelWithType:ICLabelType];
     self.merchantIdLabel.text = NSLocalizedStringFromTable(@"MerchantIdentifier", kICAppLocalizable, @"Merchant identifier");
     self.merchantIdLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -186,7 +215,7 @@
     else {
         [self.countryCodePicker selectRow:countryCode inComponent:0 animated:NO];
     }
-    [self.countryCodePicker selectRow:165 inComponent:0 animated:NO];
+    [self.countryCodePicker selectRow:166 inComponent:0 animated:NO];
     [self.containerView addSubview:self.countryCodeLabel];
     [self.containerView addSubview:self.countryCodePicker];
     
@@ -216,14 +245,14 @@
     [self.containerView addSubview:self.isRecurringLabel];
     [self.containerView addSubview:self.isRecurringSwitch];
     
-    ICLabel *groupMethodsLabel = [self.viewFactory labelWithType:ICLabelType];
-    groupMethodsLabel.text = NSLocalizedStringWithDefaultValue(@"GroupMethods", kICAppLocalizable, [NSBundle bundleWithPath:kICSDKBundlePath], @"Group payment products", @"");
+    self.groupMethodsLabel = [self.viewFactory labelWithType:ICLabelType];
+    self.groupMethodsLabel.text = NSLocalizedStringWithDefaultValue(@"GroupMethods", kICAppLocalizable, [NSBundle bundleWithPath:kICSDKBundlePath], @"Group payment products", @"");
     //groupMethodsLabel.text = NSLocalizedStringFromTable(@"GroupMethods", kICAppLocalizable, @"Display payment methods as group");
-    groupMethodsLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _groupMethodsSwitch = [self.viewFactory switchWithType:ICSwitchType];
-    _groupMethodsSwitch.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.containerView addSubview:groupMethodsLabel];
-    [self.containerView addSubview:_groupMethodsSwitch];
+    self.groupMethodsLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.groupMethodsSwitch = [self.viewFactory switchWithType:ICSwitchType];
+    self.groupMethodsSwitch.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.containerView addSubview:self.groupMethodsLabel];
+    [self.containerView addSubview:self.groupMethodsSwitch];
 
     self.payButton = [self.viewFactory buttonWithType:ICButtonTypePrimary];
     [self.payButton setTitle:NSLocalizedStringFromTable(@"PayNow", kICAppLocalizable, @"Pay securely now") forState:UIControlStateNormal];
@@ -231,18 +260,24 @@
     [self.payButton addTarget:self action:@selector(buyButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.containerView addSubview:self.payButton];
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(_explanation, _clientSessionIdLabel, _clientSessionIdTextField, _customerIdLabel, _customerIdTextField, _baseURLLabel, _baseURLTextField, _assetsBaseURLLabel, _assetsBaseURLTextField, _merchantIdLabel, _merchantIdTextField, _amountLabel, _amountTextField, _countryCodeLabel, _countryCodePicker, _currencyCodeLabel, _currencyCodePicker, _isRecurringLabel, _isRecurringSwitch, _payButton, groupMethodsLabel, _groupMethodsSwitch, _containerView, _scrollView, superContainerView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_explanation, _clientSessionIdLabel, _clientSessionIdTextField, _customerIdLabel, _customerIdTextField, _baseURLLabel, _baseURLTextField, _assetsBaseURLLabel, _assetsBaseURLTextField, _jsonButton, _merchantIdLabel, _merchantIdTextField, _amountLabel, _amountTextField, _countryCodeLabel, _countryCodePicker, _currencyCodeLabel, _currencyCodePicker, _isRecurringLabel, _isRecurringSwitch, _payButton, _groupMethodsLabel, _groupMethodsSwitch, _parsableFieldsContainer, _containerView, _scrollView, superContainerView);
     NSDictionary *metrics = @{@"fieldSeparator": @"24", @"groupSeparator": @"72"};
 
+    // ParsableFieldsContainer Constraints
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_clientSessionIdLabel]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_clientSessionIdTextField]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_customerIdLabel]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_customerIdTextField]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_baseURLLabel]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_baseURLTextField]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_assetsBaseURLLabel]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_assetsBaseURLTextField]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[_jsonButton(>=120)]-|" options:0 metrics:nil views:views]];
+    [self.parsableFieldsContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_clientSessionIdLabel]-[_clientSessionIdTextField]-(fieldSeparator)-[_customerIdLabel]-[_customerIdTextField]-(fieldSeparator)-[_baseURLLabel]-[_baseURLTextField]-(fieldSeparator)-[_assetsBaseURLLabel]-[_assetsBaseURLTextField]-(fieldSeparator)-[_jsonButton]-|" options:0 metrics:metrics views:views]];
+
+    // ContainerView constraints
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_explanation]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_clientSessionIdLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_clientSessionIdTextField]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_customerIdLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_customerIdTextField]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_baseURLLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_baseURLTextField]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_assetsBaseURLLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_assetsBaseURLTextField]-|" options:0 metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_parsableFieldsContainer]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_merchantIdLabel]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_merchantIdTextField]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_amountLabel]-|" options:0 metrics:nil views:views]];
@@ -252,12 +287,10 @@
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_currencyCodeLabel]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_currencyCodePicker]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_isRecurringLabel]-[_isRecurringSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[groupMethodsLabel]-[_groupMethodsSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_groupMethodsLabel]-[_groupMethodsSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_payButton]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_explanation]-(fieldSeparator)-[_clientSessionIdLabel]-[_clientSessionIdTextField]-(fieldSeparator)-[_customerIdLabel]-[_customerIdTextField]-(fieldSeparator)-[_baseURLLabel]-[_baseURLTextField]-(fieldSeparator)-[_assetsBaseURLLabel]-[_assetsBaseURLTextField]-(fieldSeparator)-[_merchantIdLabel]-[_merchantIdTextField]-(groupSeparator)-[_amountLabel]-[_amountTextField]-(fieldSeparator)-[_countryCodeLabel]-[_countryCodePicker]-(fieldSeparator)-[_currencyCodeLabel]-[_currencyCodePicker]-(fieldSeparator)-[_isRecurringSwitch]-(fieldSeparator)-[_groupMethodsSwitch]-(fieldSeparator)-[_payButton]-|" options:0 metrics:metrics views:views]];
-    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
-    superContainerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_explanation]-(fieldSeparator)-[_parsableFieldsContainer]-(fieldSeparator)-[_merchantIdLabel]-[_merchantIdTextField]-(groupSeparator)-[_amountLabel]-[_amountTextField]-(fieldSeparator)-[_countryCodeLabel]-[_countryCodePicker]-(fieldSeparator)-[_currencyCodeLabel]-[_currencyCodePicker]-(fieldSeparator)-[_isRecurringSwitch]-(fieldSeparator)-[_groupMethodsSwitch]-(fieldSeparator)-[_payButton]-|" options:0 metrics:metrics views:views]];
+
     [self.view addConstraints:@[[NSLayoutConstraint constraintWithItem:superContainerView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0], [NSLayoutConstraint constraintWithItem:superContainerView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]]];
     [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[superContainerView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[superContainerView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
@@ -461,6 +494,12 @@
     [SVProgressHUD dismiss];
 }
 
+- (void)presentJsonDialog
+{
+    self.jsonDialogViewController.callback = self;
+    [self presentViewController:self.jsonDialogViewController animated:YES completion:nil];
+}
+
 #pragma mark -
 #pragma mark Continue shopping target
 
@@ -472,13 +511,30 @@
 #pragma mark -
 #pragma mark Payment finished target
 
-- (void)didFinishPayment {
+- (void)didFinishPayment:(ICPreparedPaymentRequest *)preparedPaymentRequest {
     ICEndViewController *end = [[ICEndViewController alloc] init];
     end.target = self;
     end.viewFactory = self.viewFactory;
+    end.preparedPaymentRequest = preparedPaymentRequest;
     [self.navigationController pushViewController:end animated:YES];
 }
 
 #pragma mark -
+#pragma mark Parse Json target
+- (void)success:(ICStartPaymentParsedJsonData *)data {
+    if (data.clientApiUrl != nil) {
+        self.baseURLTextField.text = data.clientApiUrl;
+    }
+    if (data.assetUrl != nil) {
+        self.assetsBaseURLTextField.text = data.assetUrl;
+    }
+    if (data.clientSessionId != nil) {
+        self.clientSessionIdTextField.text = data.clientSessionId;
+    }
+    if (data.customerId != nil) {
+        self.customerIdTextField.text = data.customerId;
+    }
+}
 
+#pragma mark -
 @end

@@ -87,6 +87,8 @@
 		A3F7E84D19F642B400FCD812 /* ICCurrencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F7E84C19F642B400FCD812 /* ICCurrencyTableViewCell.m */; };
 		A9E5F40D4EE3F3B0388173D9 /* libPods-IngenicoConnectExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1428DE9C3F137D33208912F8 /* libPods-IngenicoConnectExample.a */; };
 		B431CA801E6991770064AC16 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B431CA7F1E6991770064AC16 /* Info.plist */; };
+		E9BB365853118C3D6D389EF7 /* ICStartPaymentParsedJsonData.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BB34482BA4392A542CB38F /* ICStartPaymentParsedJsonData.m */; };
+		E9BB3AC5A61AB73DA9DD98BF /* ICJsonDialogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BB3D7A974964BBDD9E9644 /* ICJsonDialogViewController.m */; };
 		F59206F71EC48A9A0000B141 /* ICButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F59206F61EC48A9A0000B141 /* ICButton.m */; };
 		F5FAC2391EC47B9A001351BD /* ICFormRowField.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FAC2381EC47B9A001351BD /* ICFormRowField.m */; };
 /* End PBXBuildFile section */
@@ -261,6 +263,11 @@
 		A3FE1FA31962AEC4005FF3FA /* ICAppConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICAppConstants.h; sourceTree = "<group>"; };
 		B431CA7F1E6991770064AC16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4F804B342ED0415F8BA2020 /* libPods-IngenicoConnectExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IngenicoConnectExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9BB324177C7E5E5173C7EC4 /* ICJsonDialogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICJsonDialogViewController.h; sourceTree = "<group>"; };
+		E9BB34482BA4392A542CB38F /* ICStartPaymentParsedJsonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICStartPaymentParsedJsonData.m; sourceTree = "<group>"; };
+		E9BB381A2D7BDCBA3B6560C4 /* ICStartPaymentParsedJsonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICStartPaymentParsedJsonData.h; sourceTree = "<group>"; };
+		E9BB39D6B6DBCE1F6134D324 /* ICParseJsonTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICParseJsonTarget.h; sourceTree = "<group>"; };
+		E9BB3D7A974964BBDD9E9644 /* ICJsonDialogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICJsonDialogViewController.m; sourceTree = "<group>"; };
 		F519A9D21DBF5F2100E61034 /* IngenicoConnectExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IngenicoConnectExample.entitlements; sourceTree = "<group>"; };
 		F59206F51EC48A9A0000B141 /* ICButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICButton.h; sourceTree = "<group>"; };
 		F59206F61EC48A9A0000B141 /* ICButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICButton.m; sourceTree = "<group>"; };
@@ -461,6 +468,8 @@
 				736155F71F18C47300D9DF6C /* ICExternalAppStatusViewController.m */,
 				73AABADB1F1F881600B76782 /* ICArvatoProductViewController.h */,
 				73AABADC1F1F881600B76782 /* ICArvatoProductViewController.m */,
+				E9BB3D7A974964BBDD9E9644 /* ICJsonDialogViewController.m */,
+				E9BB324177C7E5E5173C7EC4 /* ICJsonDialogViewController.h */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -540,6 +549,7 @@
 				A30CB1F21963F657000192B3 /* ICPaymentRequestTarget.h */,
 				A30CB1F61963F89A000192B3 /* ICContinueShoppingTarget.h */,
 				42974C7F1DC8B2B600B91814 /* ICPaymentFinishedTarget.h */,
+				E9BB39D6B6DBCE1F6134D324 /* ICParseJsonTarget.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -619,6 +629,8 @@
 				A3FE1F921962A099005FF3FA /* Tables */,
 				29CEF26138AC6A3824CB8AFE /* ICPaymentProductInputData.m */,
 				29CEF88F90E345EBEAEC1817 /* ICPaymentProductInputData.h */,
+				E9BB34482BA4392A542CB38F /* ICStartPaymentParsedJsonData.m */,
+				E9BB381A2D7BDCBA3B6560C4 /* ICStartPaymentParsedJsonData.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1005,6 +1017,8 @@
 				73AABADD1F1F881600B76782 /* ICArvatoProductViewController.m in Sources */,
 				7399D4C31ECDA052005B888A /* ICCardProductViewController.m in Sources */,
 				29CEF5197E26824532029C01 /* ICPaymentProductInputData.m in Sources */,
+				E9BB365853118C3D6D389EF7 /* ICStartPaymentParsedJsonData.m in Sources */,
+				E9BB3AC5A61AB73DA9DD98BF /* ICJsonDialogViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

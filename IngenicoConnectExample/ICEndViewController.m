@@ -34,7 +34,7 @@
     
     [self.view addSubview:container];
     
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:container attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:250];
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:container attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:750];
     [container addConstraint:constraint];
     constraint = [NSLayoutConstraint constraintWithItem:container attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:280];
     [container addConstraint:constraint];
@@ -65,8 +65,25 @@
     [button setTitle:continueButtonTitle forState:UIControlStateNormal];
     [button addTarget:self action:@selector(continueButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     button.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    NSDictionary *viewMapping = NSDictionaryOfVariableBindings(label, textView, button);
+
+    _resultButton = [self.viewFactory buttonWithType:ICButtonTypeSecondary];
+    [container addSubview:_resultButton];
+    NSString *resultButtonTitle = NSLocalizedStringFromTable(@"EncryptedDataResultLabel", kICAppLocalizable, nil);
+    [_resultButton setTitle:resultButtonTitle forState:UIControlStateNormal];
+    [_resultButton addTarget:self action:@selector(resultButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    _resultButton.translatesAutoresizingMaskIntoConstraints = NO;
+
+    _encryptedText = [[UITextView alloc] init];
+    [container addSubview:_encryptedText];
+    _encryptedText.textAlignment = NSTextAlignmentLeft;
+    _encryptedText.text = _preparedPaymentRequest.encryptedFields;
+    _encryptedText.editable = NO;
+    _encryptedText.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    _encryptedText.translatesAutoresizingMaskIntoConstraints = NO;
+    [_encryptedText setHidden:YES];
+
+
+    NSDictionary *viewMapping = NSDictionaryOfVariableBindings(label, textView, button, _resultButton, _encryptedText);
     
     NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]-|" options:0 metrics:nil views:viewMapping];
     [container addConstraints:constraints];
@@ -74,7 +91,11 @@
     [container addConstraints:constraints];
     constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[button]-|" options:0 metrics:nil views:viewMapping];
     [container addConstraints:constraints];
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[label]-(20)-[textView(115)]-(20)-[button]" options:0 metrics:nil views:viewMapping];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[_resultButton]-|" options:0 metrics:nil views:viewMapping];
+    [container addConstraints:constraints];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[_encryptedText]-|" options:0 metrics:nil views:viewMapping];
+    [container addConstraints:constraints];
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[label]-(20)-[textView(115)]-(20)-[button]-(20)-[_resultButton]-(50)-[_encryptedText(250)]" options:0 metrics:nil views:viewMapping];
     [container addConstraints:constraints];
 }
 
@@ -83,4 +104,16 @@
     [self.target didSelectContinueShopping];
 }
 
+- (void)resultButtonTapped
+{
+    if ([_encryptedText isHidden] == YES) {
+        NSString *resultButtonTitle = NSLocalizedStringFromTable(@"CopyEncryptedDataLabel", kICAppLocalizable, nil);
+        [_resultButton setTitle:resultButtonTitle forState:UIControlStateNormal];
+        [_encryptedText setHidden:NO];
+        [_encryptedText setScrollEnabled:YES];
+    } else {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = _encryptedText.text;
+    }
+}
 @end
