@@ -686,9 +686,9 @@
     
     return result;
 }
--(void)formatAndUpdateCharactersFromTextField:(UITextField *)textField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath {
+-(void)formatAndUpdateCharactersFromTextField:(UITextField *)textField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath trimSet:(NSMutableCharacterSet *)trimSet {
     ICFormRowTextField *row = (ICFormRowTextField *)self.formRows[indexPath.row];
-    NSMutableCharacterSet *trimSet = [NSMutableCharacterSet characterSetWithCharactersInString:@" /-_"];
+
     NSString *formattedString = [[self.inputData maskedValueForField:row.paymentProductField.identifier cursorPosition:position] stringByTrimmingCharactersInSet: trimSet];
     row.field.text = formattedString;
     textField.text = formattedString;
@@ -711,7 +711,7 @@
     [self.inputData setValue:newString forField:row.paymentProductField.identifier];
     row.field.text = [self.inputData maskedValueForField:row.paymentProductField.identifier];
     NSInteger cursorPosition = range.location + string.length;
-    [self formatAndUpdateCharactersFromTextField:textField cursorPosition:&cursorPosition indexPath:indexPath];
+    [self formatAndUpdateCharactersFromTextField:textField cursorPosition:&cursorPosition indexPath:indexPath trimSet: [NSMutableCharacterSet characterSetWithCharactersInString:@" /-_"]];
     return NO;
 }
 

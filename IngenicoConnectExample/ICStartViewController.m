@@ -229,7 +229,7 @@
     self.currencyCodePicker.delegate = self;
     NSInteger currency = [[NSUserDefaults standardUserDefaults] integerForKey:kICCurrency];
     if (currency == 0) {
-        [self.currencyCodePicker selectRow:42 inComponent:0 animated:NO];
+        [self.currencyCodePicker selectRow:43 inComponent:0 animated:NO];
     }
     else {
         [self.currencyCodePicker selectRow:currency inComponent:0 animated:NO];

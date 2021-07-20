@@ -116,9 +116,15 @@
     }
 }
 
--(void)formatAndUpdateCharactersFromTextField:(UITextField *)texField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath {
-    [super formatAndUpdateCharactersFromTextField:texField cursorPosition:position indexPath:indexPath];
+-(void)formatAndUpdateCharactersFromTextField:(UITextField *)texField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath trimSet:(NSMutableCharacterSet *)trimSet  {
     ICFormRowTextField *row = [self.formRows objectAtIndex:indexPath.row];
+    
+    if ([row.paymentProductField.identifier isEqualToString:@"cardholderName"]) {
+        [super formatAndUpdateCharactersFromTextField:texField cursorPosition:position indexPath:indexPath trimSet:[NSMutableCharacterSet characterSetWithCharactersInString:@"?`~!@#$%^&*()_+=[]{}|\\;:\"<>£¥•,€"]];
+    } else {
+        [super formatAndUpdateCharactersFromTextField:texField cursorPosition:position indexPath:indexPath trimSet:[NSMutableCharacterSet characterSetWithCharactersInString:@" /-_"]];
+    }
+    
     if ([row.paymentProductField.identifier isEqualToString:@"cardNumber"]) {
         NSString *unmasked = [self.inputData unmaskedValueForField:row.paymentProductField.identifier];
         if (unmasked.length >= 6 && [self oneOfFirst8DigitsChangedInText:unmasked]) {

@@ -55,9 +55,9 @@ typedef enum {
         return [validator isKindOfClass:[ICValidatorBoletoBancarioRequiredness class]];
     }]].firstObject;
 }
--(void)formatAndUpdateCharactersFromTextField:(UITextField *)textField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath
+-(void)formatAndUpdateCharactersFromTextField:(UITextField *)textField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath trimSet:(NSMutableCharacterSet *)trimSet
 {
-    [super formatAndUpdateCharactersFromTextField:textField cursorPosition:position indexPath:indexPath];
+    [super formatAndUpdateCharactersFromTextField:textField cursorPosition:position indexPath:indexPath trimSet:[NSMutableCharacterSet characterSetWithCharactersInString:@" /-_"]];
     ICFormRow *row = [self.formRows objectAtIndex:indexPath.row];
     if ([row isKindOfClass:[ICFormRowTextField class]]) {
         ICFormRowTextField *textRow = (ICFormRowTextField *)row;

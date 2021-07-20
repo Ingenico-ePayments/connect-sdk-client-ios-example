@@ -42,7 +42,7 @@
 - (ICTableViewCell *)formRowCellForRow:(ICFormRow *)row atIndexPath:(NSIndexPath *)indexPath;
 -(void)switchToPaymentProduct:(NSString *)paymentProductId;
 -(void)updateFormRows;
--(void)formatAndUpdateCharactersFromTextField:(UITextField *)texField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath;
+-(void)formatAndUpdateCharactersFromTextField:(UITextField *)texField cursorPosition:(NSInteger *)position indexPath:(NSIndexPath *)indexPath trimSet:(NSMutableCharacterSet *)trimSet;
 - (void)initializeFormRows;
 -(void)validateExceptFields:(NSSet *)fields;
 - (void)pickerView:(ICPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
