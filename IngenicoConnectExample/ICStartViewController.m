@@ -46,9 +46,9 @@
 @property (strong, nonatomic) ICLabel *amountLabel;
 @property (strong, nonatomic) ICTextField *amountTextField;
 @property (strong, nonatomic) ICLabel *countryCodeLabel;
-@property (strong, nonatomic) ICPickerView *countryCodePicker;
+@property (strong, nonatomic) ICTextField *countryCodeTextField;
 @property (strong, nonatomic) ICLabel *currencyCodeLabel;
-@property (strong, nonatomic) ICPickerView *currencyCodePicker;
+@property (strong, nonatomic) ICTextField *currencyCodeTextField;
 @property (strong, nonatomic) ICLabel *isRecurringLabel;
 @property (strong, nonatomic) ICSwitch *isRecurringSwitch;
 @property (strong, nonatomic) UIButton *payButton;
@@ -61,9 +61,6 @@
 @property (strong, nonatomic) ICViewFactory *viewFactory;
 @property (strong, nonatomic) ICSession *session;
 @property (strong, nonatomic) ICPaymentContext *context;
-
-@property (strong, nonatomic) NSArray *countryCodes;
-@property (strong, nonatomic) NSArray *currencyCodes;
 
 @property (strong, nonatomic) ICJsonDialogViewController *jsonDialogViewController;
 
@@ -82,9 +79,6 @@
     
     self.viewFactory = [[ICViewFactory alloc] init];
     self.jsonDialogViewController = [[ICJsonDialogViewController alloc] init];
-    
-    self.countryCodes = [[kICCountryCodes componentsSeparatedByString:@", "] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    self.currencyCodes = [[kICCurrencyCodes componentsSeparatedByString:@", "] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollView.delaysContentTouches = NO;
@@ -203,39 +197,22 @@
     self.countryCodeLabel = [self.viewFactory labelWithType:ICLabelType];
     self.countryCodeLabel.text = NSLocalizedStringFromTable(@"CountryCode", kICAppLocalizable, @"Country code");
     self.countryCodeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.countryCodePicker = [self.viewFactory pickerViewWithType:ICPickerViewType];
-    self.countryCodePicker.translatesAutoresizingMaskIntoConstraints = NO;
-    self.countryCodePicker.content = self.countryCodes;
-    self.countryCodePicker.dataSource = self;
-    self.countryCodePicker.delegate = self;
-    NSInteger countryCode = [[NSUserDefaults standardUserDefaults] integerForKey:kICCountryCode];
-    if (countryCode == 0) {
-        [self.countryCodePicker selectRow:165 inComponent:0 animated:NO];
-    }
-    else {
-        [self.countryCodePicker selectRow:countryCode inComponent:0 animated:NO];
-    }
-    [self.countryCodePicker selectRow:166 inComponent:0 animated:NO];
+    self.countryCodeTextField = [self.viewFactory textFieldWithType:ICTextFieldType];
+    self.countryCodeTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.countryCodeTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.countryCodeTextField.text = [StandardUserDefaults objectForKey:kICCountryCode];
     [self.containerView addSubview:self.countryCodeLabel];
-    [self.containerView addSubview:self.countryCodePicker];
+    [self.containerView addSubview:self.countryCodeTextField];
     
     self.currencyCodeLabel = [self.viewFactory labelWithType:ICLabelType];
     self.currencyCodeLabel.text = NSLocalizedStringFromTable(@"CurrencyCode", kICAppLocalizable, @"Currency code");
     self.currencyCodeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.currencyCodePicker = [self.viewFactory pickerViewWithType:ICPickerViewType];
-    self.currencyCodePicker.translatesAutoresizingMaskIntoConstraints = NO;
-    self.currencyCodePicker.content = self.currencyCodes;
-    self.currencyCodePicker.dataSource = self;
-    self.currencyCodePicker.delegate = self;
-    NSInteger currency = [[NSUserDefaults standardUserDefaults] integerForKey:kICCurrency];
-    if (currency == 0) {
-        [self.currencyCodePicker selectRow:43 inComponent:0 animated:NO];
-    }
-    else {
-        [self.currencyCodePicker selectRow:currency inComponent:0 animated:NO];
-    }
+    self.currencyCodeTextField = [self.viewFactory textFieldWithType:ICTextFieldType];
+    self.currencyCodeTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.currencyCodeTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.currencyCodeTextField.text = [StandardUserDefaults objectForKey:kICCurrency];
     [self.containerView addSubview:self.currencyCodeLabel];
-    [self.containerView addSubview:self.currencyCodePicker];
+    [self.containerView addSubview:self.currencyCodeTextField];
     
     self.isRecurringLabel = [self.viewFactory labelWithType:ICLabelType];
     self.isRecurringLabel.text = NSLocalizedStringFromTable(@"RecurringPayment", kICAppLocalizable, @"Payment is recurring");
@@ -260,7 +237,7 @@
     [self.payButton addTarget:self action:@selector(buyButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.containerView addSubview:self.payButton];
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(_explanation, _clientSessionIdLabel, _clientSessionIdTextField, _customerIdLabel, _customerIdTextField, _baseURLLabel, _baseURLTextField, _assetsBaseURLLabel, _assetsBaseURLTextField, _jsonButton, _merchantIdLabel, _merchantIdTextField, _amountLabel, _amountTextField, _countryCodeLabel, _countryCodePicker, _currencyCodeLabel, _currencyCodePicker, _isRecurringLabel, _isRecurringSwitch, _payButton, _groupMethodsLabel, _groupMethodsSwitch, _parsableFieldsContainer, _containerView, _scrollView, superContainerView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_explanation, _clientSessionIdLabel, _clientSessionIdTextField, _customerIdLabel, _customerIdTextField, _baseURLLabel, _baseURLTextField, _assetsBaseURLLabel, _assetsBaseURLTextField, _jsonButton, _merchantIdLabel, _merchantIdTextField, _amountLabel, _amountTextField, _countryCodeLabel, _countryCodeTextField, _currencyCodeLabel, _currencyCodeTextField, _isRecurringLabel, _isRecurringSwitch, _payButton, _groupMethodsLabel, _groupMethodsSwitch, _parsableFieldsContainer, _containerView, _scrollView, superContainerView);
     NSDictionary *metrics = @{@"fieldSeparator": @"24", @"groupSeparator": @"72"};
 
     // ParsableFieldsContainer Constraints
@@ -283,13 +260,13 @@
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_amountLabel]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_amountTextField]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_countryCodeLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_countryCodePicker]-|" options:0 metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_countryCodeTextField]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_currencyCodeLabel]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_currencyCodePicker]-|" options:0 metrics:nil views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_currencyCodeTextField]-|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_isRecurringLabel]-[_isRecurringSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_groupMethodsLabel]-[_groupMethodsSwitch]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_payButton]-|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_explanation]-(fieldSeparator)-[_parsableFieldsContainer]-(fieldSeparator)-[_merchantIdLabel]-[_merchantIdTextField]-(groupSeparator)-[_amountLabel]-[_amountTextField]-(fieldSeparator)-[_countryCodeLabel]-[_countryCodePicker]-(fieldSeparator)-[_currencyCodeLabel]-[_currencyCodePicker]-(fieldSeparator)-[_isRecurringSwitch]-(fieldSeparator)-[_groupMethodsSwitch]-(fieldSeparator)-[_payButton]-|" options:0 metrics:metrics views:views]];
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_explanation]-(fieldSeparator)-[_parsableFieldsContainer]-(fieldSeparator)-[_merchantIdLabel]-[_merchantIdTextField]-(groupSeparator)-[_amountLabel]-[_amountTextField]-(fieldSeparator)-[_countryCodeLabel]-[_countryCodeTextField]-(fieldSeparator)-[_currencyCodeLabel]-[_currencyCodeTextField]-(fieldSeparator)-[_isRecurringSwitch]-(fieldSeparator)-[_groupMethodsSwitch]-(fieldSeparator)-[_payButton]-|" options:0 metrics:metrics views:views]];
 
     [self.view addConstraints:@[[NSLayoutConstraint constraintWithItem:superContainerView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0], [NSLayoutConstraint constraintWithItem:superContainerView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]]];
     [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[superContainerView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
@@ -321,25 +298,6 @@
 }
 
 #pragma mark -
-#pragma mark Picker view delegate
-
-- (NSInteger)numberOfComponentsInPickerView:(ICPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(ICPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return pickerView.content.count;
-}
-
-- (NSAttributedString *)pickerView:(ICPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    NSString *item = pickerView.content[row];
-    NSAttributedString *string = [[NSAttributedString alloc] initWithString:item];
-    return string;
-}
-
 - (BOOL)checkURL:(NSString *)url
 {
     NSMutableArray<NSString *> *components;
@@ -412,9 +370,11 @@
         [StandardUserDefaults setObject:merchantId forKey:kICMerchantId];
     }
     [StandardUserDefaults setInteger:self.amountValue forKey:kICPrice];
-    [StandardUserDefaults setInteger:[self.countryCodePicker selectedRowInComponent:0] forKey:kICCountryCode];
-    [StandardUserDefaults setInteger:[self.currencyCodePicker selectedRowInComponent:0] forKey:kICCurrency];
-
+    NSString *countryCode = self.countryCodeTextField.text;
+    [StandardUserDefaults setObject:countryCode forKey:kICCountryCode];
+    NSString *currencyCode = self.currencyCodeTextField.text;
+    [StandardUserDefaults setObject:currencyCode forKey:kICCurrency];
+    
     // ***************************************************************************
     //
     // The IngenicoConnect SDK supports processing payments with instances of the
@@ -452,8 +412,7 @@
 
     self.session = [ICSession sessionWithClientSessionId:clientSessionId customerId:customerId baseURL:baseURL assetBaseURL:assetsBaseURL appIdentifier:kICApplicationIdentifier];
 
-    NSString *countryCode = [self.countryCodes objectAtIndex:[self.countryCodePicker selectedRowInComponent:0]];
-    NSString *currencyCode = [self.currencyCodes objectAtIndex:[self.currencyCodePicker selectedRowInComponent:0]];
+    
     BOOL isRecurring = self.isRecurringSwitch.on;
 
     // ***************************************************************************
