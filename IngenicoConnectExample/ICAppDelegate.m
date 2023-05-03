@@ -24,7 +24,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
-    [SVProgressHUD setBackgroundColor:[UIColor blackColor]];
 
     ICStartViewController *shop = [[ICStartViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:shop];

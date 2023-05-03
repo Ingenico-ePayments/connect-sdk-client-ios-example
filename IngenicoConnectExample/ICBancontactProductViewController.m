@@ -79,11 +79,17 @@
     [super updateTextFieldCell:cell row:row];
     if ([row.paymentProductField.identifier isEqualToString:@"cardNumber"]) {
         if([self.confirmedPaymentProducts containsObject:self.paymentItem.identifier]) {
-            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+            CGFloat productIconSize = 35.2;
+            CGFloat padding = 4.4;
+
+            UIView *outerView = [[UIView alloc]initWithFrame:CGRectMake(padding, padding, productIconSize, productIconSize)];
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, productIconSize, productIconSize)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
-            row.logo = self.paymentItem.displayHints.logoImage;
+            [outerView addSubview:imageView];
+            outerView.contentMode = UIViewContentModeScaleAspectFit;
+
             imageView.image = row.logo;
-            cell.rightView = imageView;
+            cell.rightView = outerView;
         }
         else {
             row.logo = nil;
@@ -93,16 +99,9 @@
 }
 -(ICTextFieldTableViewCell *)cellForTextField:(ICFormRowTextField *)row tableView:(UITableView *)tableView {
     ICTextFieldTableViewCell *cell = [super cellForTextField:row tableView:tableView];
-    
-    if ([row.paymentProductField.identifier isEqualToString:@"cardNumber"]) {
-        if([self.confirmedPaymentProducts containsObject:self.paymentItem.identifier]) {
-            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            imageView.image = row.logo;
-            cell.rightView = imageView;
-        }
-        
-    }
+
+    [self updateTextFieldCell:cell row:row];
+
     return cell;
 }
 

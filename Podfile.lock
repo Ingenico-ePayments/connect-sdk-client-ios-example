@@ -1,5 +1,5 @@
 PODS:
-  - IngenicoConnectSDK (5.3.0)
+  - IngenicoConnectSDK (5.16.0)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -12,9 +12,9 @@ SPEC REPOS:
     - SVProgressHUD
 
 SPEC CHECKSUMS:
-  IngenicoConnectSDK: af4934f6c8aed95a487956eb4ec00d212a1d3674
+  IngenicoConnectSDK: 04ef177ab0beceba6614ef312936dade93220aeb
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: d949810be004b09261a9974b27e10d16683128dd
+PODFILE CHECKSUM: e75c13497e5e2a4ed6a3ec1478ff1edcbc0636b4
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.3
