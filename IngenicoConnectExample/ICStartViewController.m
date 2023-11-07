@@ -410,9 +410,23 @@
         return;
     }
 
-    self.session = [ICSession sessionWithClientSessionId:clientSessionId customerId:customerId baseURL:baseURL assetBaseURL:assetsBaseURL appIdentifier:kICApplicationIdentifier];
+    // ***************************************************************************
+    //
+    // You can log of requests made to the server and responses received from the server by passing the `loggingEnabled` parameter to the Session constructor.
+    // In the constructor below, the logging is disabled.
+    // You are also able to disable / enable logging at a later stage by calling `[session setLoggingEnabled:]`, as shown below.
+    // Logging should be disabled in production.
+    // To use logging in debug, but not in production, you can set `loggingEnabled` within a DEBUG flag.
+    // In Objective-C the DEBUG flag is defined as a preprocessor macro. You can take a look at this app's build settings to see the setup you should apply to your own app.
+    //
+    // ***************************************************************************
 
-    
+    self.session = [ICSession sessionWithClientSessionId:clientSessionId customerId:customerId baseURL:baseURL assetBaseURL:assetsBaseURL appIdentifier:kICApplicationIdentifier loggingEnabled:NO];
+
+    #if DEBUG
+        [self.session setLoggingEnabled:YES];
+    #endif
+
     BOOL isRecurring = self.isRecurringSwitch.on;
 
     // ***************************************************************************

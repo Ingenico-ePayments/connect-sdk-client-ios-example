@@ -30,7 +30,6 @@
 		73814C501F1906DE00036D6F /* ICFormRowSmallLogo.m in Sources */ = {isa = PBXBuildFile; fileRef = 73814C4F1F1906DE00036D6F /* ICFormRowSmallLogo.m */; };
 		73814C531F190B3000036D6F /* ICSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73814C521F190B3000036D6F /* ICSeparatorView.m */; };
 		7399D4C31ECDA052005B888A /* ICCardProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7399D4C21ECDA052005B888A /* ICCardProductViewController.m */; };
-		73AABADD1F1F881600B76782 /* ICArvatoProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AABADC1F1F881600B76782 /* ICArvatoProductViewController.m */; };
 		73AC76571F33142900BA563C /* ICFormRowReadonlyReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AC76561F33142900BA563C /* ICFormRowReadonlyReview.m */; };
 		73AC765A1F3333AF00BA563C /* ICDetailedPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AC76591F3333AF00BA563C /* ICDetailedPickerViewCell.m */; };
 		73C6903E1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C6903D1F56EEC700560FD1 /* ICReadonlyReviewTableViewCell.m */; };
@@ -137,8 +136,6 @@
 		73814C521F190B3000036D6F /* ICSeparatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSeparatorView.m; sourceTree = "<group>"; };
 		7399D4C11ECDA052005B888A /* ICCardProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICCardProductViewController.h; sourceTree = "<group>"; };
 		7399D4C21ECDA052005B888A /* ICCardProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICCardProductViewController.m; sourceTree = "<group>"; };
-		73AABADB1F1F881600B76782 /* ICArvatoProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICArvatoProductViewController.h; sourceTree = "<group>"; };
-		73AABADC1F1F881600B76782 /* ICArvatoProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICArvatoProductViewController.m; sourceTree = "<group>"; };
 		73AC76551F33142900BA563C /* ICFormRowReadonlyReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFormRowReadonlyReview.h; sourceTree = "<group>"; };
 		73AC76561F33142900BA563C /* ICFormRowReadonlyReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFormRowReadonlyReview.m; sourceTree = "<group>"; };
 		73AC76581F3333AF00BA563C /* ICDetailedPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICDetailedPickerViewCell.h; sourceTree = "<group>"; };
@@ -410,8 +407,6 @@
 				7321EB9E1F18AF3D006B66C4 /* ICBancontactProductViewController.m */,
 				736155F61F18C47300D9DF6C /* ICExternalAppStatusViewController.h */,
 				736155F71F18C47300D9DF6C /* ICExternalAppStatusViewController.m */,
-				73AABADB1F1F881600B76782 /* ICArvatoProductViewController.h */,
-				73AABADC1F1F881600B76782 /* ICArvatoProductViewController.m */,
 				E9BB3D7A974964BBDD9E9644 /* ICJsonDialogViewController.m */,
 				E9BB324177C7E5E5173C7EC4 /* ICJsonDialogViewController.h */,
 			);
@@ -897,7 +892,6 @@
 				29CEFE47E7CE615D9DA6C57B /* ICCOBrandsExplanationTableViewCell.m in Sources */,
 				29CEFBDCF697210B2060494B /* ICFormRowCoBrandsExplanation.m in Sources */,
 				733256D91EDFF6660036F267 /* ICBoletoProductViewController.m in Sources */,
-				73AABADD1F1F881600B76782 /* ICArvatoProductViewController.m in Sources */,
 				7399D4C31ECDA052005B888A /* ICCardProductViewController.m in Sources */,
 				29CEF5197E26824532029C01 /* ICPaymentProductInputData.m in Sources */,
 				E9BB365853118C3D6D389EF7 /* ICStartPaymentParsedJsonData.m in Sources */,

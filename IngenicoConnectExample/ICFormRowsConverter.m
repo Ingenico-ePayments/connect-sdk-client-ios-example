@@ -246,7 +246,7 @@ static NSBundle * _sdkBundle;
     NSString *descriptionKey = [NSString stringWithFormat: @"gc.general.paymentProducts.%@.paymentProductFields.%@.label", paymentItem.identifier, field.identifier];
     NSString *descriptionValue = NSLocalizedStringWithDefaultValue(descriptionKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil, @"Accept {link}");
     NSString *labelKey = [NSString stringWithFormat: @"gc.general.paymentProducts.%@.paymentProductFields.%@.link.label", paymentItem.identifier, field.identifier];
-    NSString *labelValue = NSLocalizedStringWithDefaultValue(labelKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil, @"AfterPay");
+    NSString *labelValue = NSLocalizedStringWithDefaultValue(labelKey, kICSDKLocalizable, [ICFormRowsConverter sdkBundle], nil, @"");
     NSRange range = [descriptionValue rangeOfString:@"{link}"];
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:descriptionValue];
     NSAttributedString *linkString = [[NSAttributedString alloc]initWithString:labelValue attributes:@{NSLinkAttributeName:field.displayHints.link.absoluteString}];

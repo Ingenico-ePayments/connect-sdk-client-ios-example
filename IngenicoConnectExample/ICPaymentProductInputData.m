@@ -145,7 +145,6 @@
                 for (ICValidator *validator in field.dataRestrictions.validators.validators) {
                     if ([validator isKindOfClass:[ICValidatorFixedList class]]) {
                         // It's not possible to choose an empty string with a picker
-                        // If it is neccessary to choose an invalid value here (placeholder, see ArvatoViewController), choose a different value from ""
                         // Except if it is on the accountOnFile
                         hasFixedValidator = true;
                         ICValidatorFixedList *fixedListValidator = (ICValidatorFixedList *) validator;

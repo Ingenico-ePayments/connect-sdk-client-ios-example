@@ -22,6 +22,5 @@
 #define kICCurrency             @"kICCurrency"
 #define kICBoletoBancarioId     @"1503"
 #define kICBancontactId         @"3012"
-#define kICArvatoIds            [NSSet setWithArray:@[@"9000", @"9001"]]
-#define kICApplicationIdentifier @"iOS Example Application/v1.10.0"
+#define kICApplicationIdentifier @"iOS Example Application/v1.10.1"
 #endif
