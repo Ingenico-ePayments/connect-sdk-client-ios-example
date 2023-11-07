@@ -22,5 +22,5 @@
 #define kICCurrency             @"kICCurrency"
 #define kICBoletoBancarioId     @"1503"
 #define kICBancontactId         @"3012"
-#define kICApplicationIdentifier @"iOS Example Application/v1.10.1"
+#define kICApplicationIdentifier @"iOS Example Application/v1.10.2"
 #endif
